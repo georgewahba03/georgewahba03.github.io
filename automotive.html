@@ -288,6 +288,16 @@
             font-size: 0.8rem;
         }
 
+        /* Mobile Optimization */
+        @media (max-width: 600px) {
+            .nav-bar { padding: 1rem; }
+            .nav-links { gap: 1rem; }
+            .container { padding: 2rem 1rem; }
+            .item-header { flex-direction: column; }
+            .date { margin-bottom: 0.5rem; display: block; }
+            .tech-stack { display: block; margin-left: 0; margin-top: 0.5rem; }
+            h1 { font-size: 2.5rem; }
+        }
     </style>
 </head>
 <body>
@@ -343,9 +353,10 @@
                 <!-- Project 1 -->
                 <div class="project-card">
                     <div class="project-top">
-                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                        <!-- Icon: Network Signal (Server/Database style) -->
+                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
                     </div>
-                    <h4>Multi-Channel CAN FD Gateway</h4>
+                    <h4>Multi-Channel CAN FD Aggregator & Gateway</h4>
                     <p>Designed a high-throughput 8-to-2 CAN FD Gateway. Engineered a custom SPI-to-CAN FD driver stack from scratch and resolved "Interrupt Storm" failures using precision edge-triggered handling (GPIO XINT).</p>
                     <ul class="tech-list">
                         <li>C</li>
@@ -358,9 +369,10 @@
                 <!-- Project 2 -->
                 <div class="project-card">
                     <div class="project-top">
-                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                        <!-- Icon: Car/Gear -->
+                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17h7.2"/></svg>
                     </div>
-                    <h4>PCM Control Systems SME</h4>
+                    <h4>McMaster University EcoCAR - PCM Control Systems Subject Matter Expert</h4>
                     <p>Led a team of 15+ for McMaster EcoCAR. Developed control systems for a 2023 Cadillac Lyriq RWD using Model-Based Design (MBD) and conducted HIL testing for torque blending strategies.</p>
                     <ul class="tech-list">
                         <li>Simulink</li>
@@ -373,7 +385,8 @@
                 <!-- Project 3 -->
                 <div class="project-card">
                     <div class="project-top">
-                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                        <!-- Icon: Heartbeat/Activity -->
+                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                     </div>
                     <h4>Pacemaker Control System</h4>
                     <p>Collaborated to design a closed-loop pacemaker control system. Engineered a Simulink Stateflow model to track atrial/ventricular pulses and adapt pacing algorithms in real-time.</p>
