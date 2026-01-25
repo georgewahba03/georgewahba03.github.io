@@ -3,41 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>George Wahba | Automotive & Controls</title>
-    <!-- Favicon: Blue Car Icon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2358a6ff%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2%22/><circle cx=%226.5%22 cy=%2216.5%22 r=%222.5%22/><circle cx=%2216.5%22 cy=%2216.5%22 r=%222.5%22/></svg>">
+    <title>Automotive | GW</title>
+    <!-- Favicon: Car -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2364ffda%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2%22/><circle cx=%226.5%22 cy=%2216.5%22 r=%222.5%22/><circle cx=%2216.5%22 cy=%2216.5%22 r=%222.5%22/></svg>">
     <style>
         :root {
-            /* Color Palette - Dark Mode */
-            --bg-color: #0d1117;
-            --card-bg: #161b22;
-            --text-primary: #e6edf3;
-            --text-secondary: #8b949e;
-            --accent: #58a6ff;
-            --accent-hover: #1f6feb;
-            --border: #30363d;
-            --tag-bg: #1f6feb26;
-            --tag-text: #58a6ff;
-            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-        }
-
-        /* Print Styles */
-        @media print {
-            :root {
-                --bg-color: #ffffff;
-                --card-bg: #ffffff;
-                --text-primary: #000000;
-                --text-secondary: #555555;
-                --accent: #000000;
-                --border: #dddddd;
-                --tag-bg: #eeeeee;
-                --tag-text: #000000;
-            }
-            body { max-width: 100%; padding: 0; }
-            .nav-bar { display: none; }
-            a { text-decoration: none; color: black; }
-            .container { margin-top: 0; }
+            /* Consistent Palette */
+            --bg-color: #0a192f;
+            --text-primary: #ccd6f6;
+            --text-secondary: #8892b0;
+            --accent: #64ffda;
+            --card-bg: #112240;
+            --hover-bg: #233554;
+            --font-main: 'Calibre', 'Inter', 'San Francisco', 'SF Pro Text', -apple-system, system-ui, sans-serif;
+            --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+            --cursor-x: 50%;
+            --cursor-y: 50%;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -47,178 +28,377 @@
             color: var(--text-primary);
             font-family: var(--font-main);
             line-height: 1.6;
-            font-size: 16px;
+            overflow-x: hidden;
         }
 
+        /* Glow Effect */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                800px circle at var(--cursor-x) var(--cursor-y),
+                rgba(100, 255, 218, 0.03),
+                transparent 40%
+            );
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Nav */
         .nav-bar {
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 2rem;
             display: flex;
-            justify-content: center;
-            background: var(--bg-color);
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
-        .nav-links a {
-            margin: 0 1rem;
-            color: var(--text-secondary);
+        .logo {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-size: 1.2rem;
+            font-weight: 600;
             text-decoration: none;
-            font-weight: 500;
         }
 
-        .nav-links a:hover, .nav-links a.active {
+        .nav-links { display: flex; gap: 2rem; }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            z-index: 1;
+            position: relative;
+        }
+
+        /* Headers */
+        h1 {
+            font-size: clamp(30px, 5vw, 50px);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-top: 4rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+        }
+
+        h2::before {
+            content: "01.";
+            margin-right: 10px;
+            color: var(--accent);
+            font-family: var(--font-mono);
+            font-size: 1.2rem;
+            counter-increment: section;
+        }
+
+        h2::after {
+            content: "";
+            display: block;
+            width: 200px;
+            height: 1px;
+            background-color: #233554;
+            margin-left: 20px;
+        }
+
+        p.intro {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        /* Items (Experience) */
+        .item {
+            margin-bottom: 2.5rem;
+            animation: fadeUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.5rem;
+        }
+
+        .item h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .item span.company {
             color: var(--accent);
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 3rem 1.5rem;
+        .date {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
         }
 
-        /* Typography */
-        h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
-        h2 { font-size: 1.25rem; margin-top: 3rem; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; }
-        h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.2rem; }
-        h4 { font-size: 0.95rem; font-weight: 400; color: var(--text-secondary); font-family: var(--font-mono); margin-bottom: 0.8rem; }
-        p { margin-bottom: 1rem; color: var(--text-secondary); }
-        a { color: var(--accent); text-decoration: none; }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
 
-        /* Components */
-        .item { margin-bottom: 2.5rem; }
-        .item-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; }
-        .date { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-secondary); }
-        ul { list-style-type: none; padding-left: 0; }
-        li { position: relative; padding-left: 1.2rem; margin-bottom: 0.5rem; color: var(--text-secondary); }
-        li::before { content: "▹"; position: absolute; left: 0; color: var(--accent); }
+        li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
 
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
-        .tags { display: flex; flex-wrap: wrap; gap: 0.6rem; }
-        .tag { background-color: var(--tag-bg); color: var(--tag-text); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.85rem; font-family: var(--font-mono); }
-        .tech-stack { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent); margin-left: 0.5rem; }
+        li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
 
-        @media (max-width: 600px) { .item-header { flex-direction: column; } .tech-stack { display: block; margin-left: 0; } }
+        /* Project Cards Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 4px;
+            transition: transform 0.2s;
+            cursor: default;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .folder-icon {
+            color: var(--accent);
+            width: 40px;
+            height: 40px;
+        }
+
+        .project-card h4 {
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .tech-list li {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            padding: 0;
+            margin: 0;
+        }
+        .tech-list li::before { content: none; }
+
+        /* Skills */
+        .skills-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-group h4 {
+            color: var(--accent);
+            font-family: var(--font-mono);
+            margin-bottom: 1rem;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+        }
+
     </style>
 </head>
 <body>
 
     <nav class="nav-bar">
+        <a href="index.html" class="logo">GW</a>
         <div class="nav-links">
             <a href="index.html">Home</a>
-            <a href="automotive.html" class="active">Automotive & Controls</a>
-            <a href="hardware.html">Hardware & FPGA</a>
+            <a href="automotive.html" class="active">Automotive</a>
+            <a href="hardware.html">Hardware</a>
         </div>
     </nav>
 
-<div class="container">
-    <header>
-        <h1>George Wahba</h1>
-        <p style="font-size: 1.1rem;">
-            Computer Engineering Student specializing in <strong>Automotive Control Systems</strong>, <strong>Embedded Firmware</strong>, and <strong>Model-Based Design</strong>.
-        </p>
-        <p><a href="mailto:georgewahba03@outlook.com">georgewahba03@outlook.com</a> | <a href="https://linkedin.com/in/george-wahba-" target="_blank">LinkedIn</a> | <a href="https://github.com/georgewahba03" target="_blank">GitHub</a></p>
-    </header>
+    <div class="container">
+        <header>
+            <span style="font-family: var(--font-mono); color: var(--accent);">Featured Portfolio</span>
+            <h1>Automotive & Controls</h1>
+            <p class="intro">
+                Specialized experience in embedded firmware, CAN FD networks, and Model-Based Design for electric vehicles. Featuring work on the Cadillac Lyriq control systems.
+            </p>
+        </header>
 
-    <section>
-        <h2>Work Experience</h2>
+        <section>
+            <h2 style="counter-set: section 0;">Work Experience</h2>
 
-        <div class="item">
-            <div class="item-header">
-                <h3>Embedded Software/Electronics Engineer Coop</h3>
-                <span class="date">May 2024 — Aug 2025</span>
+            <div class="item" style="animation-delay: 0.1s;">
+                <div class="item-header">
+                    <h3>Embedded Software Engineer Coop <span class="company">@ Christie Digital</span></h3>
+                    <span class="date">May 2024 — Aug 2025</span>
+                </div>
+                <ul>
+                    <li>Executed Hardware-Software Co-design by integrating a MicroBlaze SoC into a System Verilog pipeline, enabling rapid firmware debugging.</li>
+                    <li>Upgraded and validated legacy IP blocks for compatibility, ensuring robust operation through comprehensive regression testing and UART protocol verification.</li>
+                </ul>
             </div>
-            <h4>Christie Digital Systems</h4>
-            <ul>
-                <li>Executed <strong>Hardware-Software Co-design</strong> by integrating a MicroBlaze SoC into a System Verilog pipeline, enabling rapid firmware debugging.</li>
-                <li>Upgraded and validated legacy IP blocks for compatibility, ensuring robust operation through comprehensive regression testing and UART protocol verification.</li>
-            </ul>
-        </div>
 
-        <div class="item">
-            <div class="item-header">
-                <h3>Research Assistant II</h3>
-                <span class="date">May 2023 — Aug 2023</span>
+            <div class="item" style="animation-delay: 0.2s;">
+                <div class="item-header">
+                    <h3>Research Assistant II <span class="company">@ Stellantis / McMaster</span></h3>
+                    <span class="date">May 2023 — Aug 2023</span>
+                </div>
+                <ul>
+                    <li>Performed Board Bring-up and Signal Verification on PCBs for DC Motor setups using multimeters and Altium design referencing.</li>
+                    <li>Developed automated MATLAB algorithms for Data Acquisition (DAQ) to output statistical metrics and validate inverter setup effectiveness.</li>
+                    <li>Conducted Root Cause Analysis on test failures, isolating mechanical and electrical faults in the 6-phase inverter setup.</li>
+                </ul>
             </div>
-            <h4>Stellantis / McMaster University</h4>
-            <ul>
-                <li>Performed <strong>Board Bring-up</strong> and Signal Verification on PCBs for DC Motor setups using multimeters and Altium design referencing.</li>
-                <li>Developed automated MATLAB algorithms for <strong>Data Acquisition (DAQ)</strong> to output statistical metrics and validate inverter setup effectiveness.</li>
-                <li>Conducted <strong>Root Cause Analysis</strong> on test failures, isolating mechanical and electrical faults in the 6-phase inverter setup.</li>
-            </ul>
-        </div>
-    </section>
+        </section>
 
-    <section>
-        <h2>Automotive & Control Projects</h2>
+        <section>
+            <h2 style="counter-set: section 1;">Key Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-top">
+                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                    </div>
+                    <h4>Multi-Channel CAN FD Gateway</h4>
+                    <p>Designed a high-throughput 8-to-2 CAN FD Gateway. Engineered a custom SPI-to-CAN FD driver stack from scratch and resolved "Interrupt Storm" failures using precision edge-triggered handling (GPIO XINT).</p>
+                    <ul class="tech-list">
+                        <li>C</li>
+                        <li>TI C2000</li>
+                        <li>SPI</li>
+                        <li>CAN FD</li>
+                    </ul>
+                </div>
 
-        <div class="item">
-            <div class="item-header">
-                <h3>Multi-Channel CAN FD Gateway <span class="tech-stack">C / TI C2000 / SPI</span></h3>
-                <span class="date">Sep 2025 — Present</span>
-            </div>
-            <ul>
-                <li>Designed a high-throughput 8-to-2 <strong>CAN FD Gateway</strong> to consolidate vehicle sub-networks for centralized telemetry.</li>
-                <li>Engineered a custom SPI-to-CAN FD driver stack from scratch, mapping hex-level initialization sequences for MCP2518FD transceivers.</li>
-                <li>Resolved "Interrupt Storm" failures by implementing precision edge-triggered handling (GPIO XINT) to sustain 2 Mbps data rates.</li>
-            </ul>
-        </div>
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-top">
+                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                    </div>
+                    <h4>PCM Control Systems SME</h4>
+                    <p>Led a team of 15+ for McMaster EcoCAR. Developed control systems for a 2023 Cadillac Lyriq RWD using Model-Based Design (MBD) and conducted HIL testing for torque blending strategies.</p>
+                    <ul class="tech-list">
+                        <li>Simulink</li>
+                        <li>Stateflow</li>
+                        <li>HIL</li>
+                        <li>EcoCAR</li>
+                    </ul>
+                </div>
 
-        <div class="item">
-            <div class="item-header">
-                <h3>PCM Control Systems SME <span class="tech-stack">McMaster EcoCAR</span></h3>
-                <span class="date">Oct 2022 — May 2024</span>
-            </div>
-            <ul>
-                <li>Led a team of 15+ to develop control systems for a 2023 Cadillac Lyriq RWD using <strong>Model-Based Design (MBD)</strong> in Simulink and Stateflow.</li>
-                <li>Conducted <strong>Hardware-in-the-Loop (HIL)</strong> testing to validate control strategies such as one-pedal driving, RWD to AWD conversion, and torque blending.</li>
-            </ul>
-        </div>
-
-        <div class="item">
-            <div class="item-header">
-                <h3>Pacemaker Control System <span class="tech-stack">Python / Simulink / NXP K64</span></h3>
-                <span class="date">Dec 2023</span>
-            </div>
-            <ul>
-                <li>Collaborated to design a closed-loop pacemaker control system receiving serial input from an NXP FRDM K64 board.</li>
-                <li>Engineered a <strong>Simulink Stateflow</strong> model to track atrial/ventricular pulses and adapt pacing algorithms in real-time based on operating modes.</li>
-                <li>Designed a Python GUI to interface with the hardware, enabling dynamic parameter adjustment for pacing speed and sensitivity.</li>
-            </ul>
-        </div>
-    </section>
-
-    <section>
-        <h2>Relevant Skills</h2>
-        <div class="skills-grid">
-            <div class="skill-category">
-                <h3>Languages & Tools</h3>
-                <div class="tags">
-                    <span class="tag">C/C++</span>
-                    <span class="tag">MATLAB</span>
-                    <span class="tag">Simulink/Stateflow</span>
-                    <span class="tag">Python</span>
-                    <span class="tag">Altium Designer</span>
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="project-top">
+                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                    </div>
+                    <h4>Pacemaker Control System</h4>
+                    <p>Collaborated to design a closed-loop pacemaker control system. Engineered a Simulink Stateflow model to track atrial/ventricular pulses and adapt pacing algorithms in real-time.</p>
+                    <ul class="tech-list">
+                        <li>Python</li>
+                        <li>Simulink</li>
+                        <li>NXP K64</li>
+                    </ul>
                 </div>
             </div>
-            <div class="skill-category">
-                <h3>Automotive Protocols</h3>
-                <div class="tags">
-                    <span class="tag">CAN / CAN FD</span>
-                    <span class="tag">SPI / I2C / UART</span>
-                    <span class="tag">Model-Based Design</span>
-                    <span class="tag">Hardware-in-the-Loop</span>
-                    <span class="tag">Board Bring-up</span>
+        </section>
+
+        <section>
+            <h2 style="counter-set: section 2;">Relevant Skills</h2>
+            <div class="skills-section">
+                <div class="skill-group">
+                    <h4>Languages & Tools</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>▹ C/C++</li>
+                        <li>▹ MATLAB</li>
+                        <li>▹ Simulink/Stateflow</li>
+                        <li>▹ Python</li>
+                        <li>▹ Altium Designer</li>
+                    </ul>
+                </div>
+                <div class="skill-group">
+                    <h4>Automotive Protocols</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>▹ CAN / CAN FD</li>
+                        <li>▹ SPI / I2C / UART</li>
+                        <li>▹ Model-Based Design</li>
+                        <li>▹ Hardware-in-the-Loop</li>
+                        <li>▹ Board Bring-up</li>
+                    </ul>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <footer style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center; color: var(--text-secondary); font-size: 0.9rem;">
-        <p>&copy; 2026 George Wahba</p>
+    <footer>
+        <p>Built by George Wahba</p>
     </footer>
-</div>
 
+    <script>
+        document.addEventListener('mousemove', e => {
+            document.documentElement.style.setProperty('--cursor-x', e.clientX + 'px');
+            document.documentElement.style.setProperty('--cursor-y', e.clientY + 'px');
+        });
+    </script>
 </body>
 </html>

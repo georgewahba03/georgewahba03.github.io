@@ -4,18 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GW | Portfolio</title>
-    <!-- Favicon: "GW" Initials -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2358a6ff%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><text x=%2250%25%22 y=%2250%25%22 dy=%22.35em%22 text-anchor=%22middle%22 font-family=%22Arial, sans-serif%22 font-weight=%22bold%22 font-size=%2214%22 fill=%22%2358a6ff%22 stroke=%22none%22>GW</text><rect x=%222%22 y=%222%22 width=%2220%22 height=%2220%22 rx=%224%22 ry=%224%22 stroke=%22%2358a6ff%22 fill=%22none%22/></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2364ffda%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><text x=%2250%25%22 y=%2250%25%22 dy=%22.35em%22 text-anchor=%22middle%22 font-family=%22Arial, sans-serif%22 font-weight=%22bold%22 font-size=%2214%22 fill=%22%2364ffda%22 stroke=%22none%22>GW</text><rect x=%222%22 y=%222%22 width=%2220%22 height=%2220%22 rx=%224%22 ry=%224%22 stroke=%22%2364ffda%22 fill=%22none%22/></svg>">
     <style>
         :root {
-            --bg-color: #0d1117;
-            --text-primary: #e6edf3;
-            --text-secondary: #8b949e;
-            --accent: #58a6ff;
-            --accent-hover: #1f6feb;
-            --border: #30363d;
-            --card-bg: #161b22;
-            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            /* Sam Gordon-inspired Palette */
+            --bg-color: #0a192f;
+            --text-primary: #ccd6f6;
+            --text-secondary: #8892b0;
+            --accent: #64ffda;
+            --card-bg: #112240;
+            --hover-bg: #233554;
+            --font-main: 'Calibre', 'Inter', 'San Francisco', 'SF Pro Text', -apple-system, system-ui, sans-serif;
+            --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+            --cursor-x: 50%;
+            --cursor-y: 50%;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -24,100 +26,285 @@
             background-color: var(--bg-color);
             color: var(--text-primary);
             font-family: var(--font-main);
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            text-align: center;
-            padding: 1rem;
+            align-items: center;
+            line-height: 1.3;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient Glow Background */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                800px circle at var(--cursor-x) var(--cursor-y),
+                rgba(100, 255, 218, 0.03),
+                transparent 40%
+            );
+            pointer-events: none;
+            z-index: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 0 2rem;
+            z-index: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 5rem;
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+
+        .mono-intro {
+            color: var(--accent);
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+            margin-left: 2px;
         }
 
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-        }
-
-        p {
-            color: var(--text-secondary);
-            margin-bottom: 3rem;
-            font-size: 1.1rem;
-            max-width: 600px;
-        }
-
-        .split-container {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .choice-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 2.5rem;
-            border-radius: 12px;
-            width: 300px;
-            text-decoration: none;
-            transition: transform 0.2s, border-color 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .choice-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-        }
-
-        .choice-card h2 {
+            font-size: clamp(40px, 8vw, 80px);
+            font-weight: 600;
             color: var(--text-primary);
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
+            margin: 0;
+            line-height: 1.1;
         }
 
-        .choice-card span {
+        h2 {
+            font-size: clamp(40px, 8vw, 80px);
+            font-weight: 600;
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        .icon {
-            color: var(--accent);
+            margin: 0;
+            line-height: 1.1;
             margin-bottom: 1.5rem;
         }
 
-        @media (max-width: 650px) {
-            .split-container { flex-direction: column; }
-            .choice-card { width: 100%; }
+        p {
+            max-width: 540px;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        /* Portfolio Selector Section */
+        .selection-area {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            width: 100%;
+            animation: fadeUp 0.8s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-header span {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-right: 1rem;
+        }
+
+        .section-header h3 {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            white-space: nowrap;
+        }
+
+        .section-header::after {
+            content: "";
+            display: block;
+            width: 300px;
+            height: 1px;
+            background-color: #233554;
+            margin-left: 20px;
+        }
+
+        /* Cards Layout */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 2rem 1.75rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+            border: 1px solid transparent;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            background-color: var(--hover-bg);
+            border-color: var(--accent);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .folder-icon {
+            color: var(--accent);
+            width: 40px;
+            height: 40px;
+        }
+
+        .external-icon {
+            color: var(--text-secondary);
+            width: 22px;
+            height: 22px;
+            transition: color 0.2s;
+        }
+
+        .card:hover .external-icon {
+            color: var(--accent);
+        }
+
+        .card h4 {
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+            transition: color 0.2s;
+        }
+
+        .card:hover h4 {
+            color: var(--accent);
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .tech-list li {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-right: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .section-header::after { width: 100%; }
+            .container { padding: 0 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <h1>George Wahba</h1>
-    <p>Computer Engineering Student. Select a portfolio to view relevant experience.</p>
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <span class="mono-intro">Hi, my name is</span>
+            <h1>George Wahba.</h1>
+            <h2>I build things for the physical world.</h2>
+            <p>
+                I'm a Computer Engineering student specializing in embedded systems, FPGA design, and automotive controls. Currently, I'm focused on real-time validation and hardware-software co-design.
+            </p>
+        </section>
 
-    <div class="split-container">
-        <!-- Automotive Link -->
-        <a href="automotive.html" class="choice-card">
-            <div class="icon">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17h7.2"/></svg>
+        <!-- Selection Area -->
+        <section class="selection-area">
+            <div class="section-header">
+                <span>01.</span>
+                <h3>Select Your Experience</h3>
             </div>
-            <h2>Automotive & Controls</h2>
-            <span>Embedded Systems, CAN FD, Model-Based Design, and Vehicle Control strategies.</span>
-        </a>
 
-        <!-- Hardware Link -->
-        <a href="hardware.html" class="choice-card">
-            <div class="icon">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            <div class="cards-grid">
+                <!-- Automotive Card -->
+                <a href="automotive.html" class="card">
+                    <div>
+                        <div class="card-top">
+                            <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                            <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        </div>
+                        <h4>Automotive & Controls</h4>
+                        <p>
+                            Focus on Embedded C, CAN FD networks, and Model-Based Design for electric vehicles. Featuring work on the Cadillac Lyriq control systems.
+                        </p>
+                    </div>
+                    <ul class="tech-list">
+                        <li>Simulink</li>
+                        <li>CAN FD</li>
+                        <li>Embedded C</li>
+                        <li>HIL</li>
+                    </ul>
+                </a>
+
+                <!-- Hardware Card -->
+                <a href="hardware.html" class="card">
+                    <div>
+                        <div class="card-top">
+                            <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+                            <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        </div>
+                        <h4>Hardware & FPGA</h4>
+                        <p>
+                            Deep dive into RTL design, SystemVerilog, and Digital Signal Processing. Featuring Real-Time SDR and Image Acceleration projects.
+                        </p>
+                    </div>
+                    <ul class="tech-list">
+                        <li>SystemVerilog</li>
+                        <li>FPGA</li>
+                        <li>DSP</li>
+                        <li>Vivado</li>
+                    </ul>
+                </a>
             </div>
-            <h2>Hardware & FPGA</h2>
-            <span>RTL Design, SystemVerilog, DSP, Board Bring-up, and Validation.</span>
-        </a>
+        </section>
     </div>
+
+    <script>
+        document.addEventListener('mousemove', e => {
+            document.documentElement.style.setProperty('--cursor-x', e.clientX + 'px');
+            document.documentElement.style.setProperty('--cursor-y', e.clientY + 'px');
+        });
+    </script>
 
 </body>
 </html>
