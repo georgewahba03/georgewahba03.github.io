@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>George Wahba | Hardware & FPGA</title>
+    <style>
+        :root {
+            /* Color Palette - Dark Mode */
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --accent: #58a6ff;
+            --accent-hover: #1f6feb;
+            --border: #30363d;
+            --tag-bg: #1f6feb26;
+            --tag-text: #58a6ff;
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+        }
+
+        /* Print Styles */
+        @media print {
+            :root {
+                --bg-color: #ffffff;
+                --card-bg: #ffffff;
+                --text-primary: #000000;
+                --text-secondary: #555555;
+                --accent: #000000;
+                --border: #dddddd;
+                --tag-bg: #eeeeee;
+                --tag-text: #000000;
+            }
+            body { max-width: 100%; padding: 0; }
+            .nav-bar { display: none; }
+            a { text-decoration: none; color: black; }
+            .container { margin-top: 0; }
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .nav-bar {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: center;
+            background: var(--bg-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-links a {
+            margin: 0 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        /* Typography */
+        h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+        h2 { font-size: 1.25rem; margin-top: 3rem; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; }
+        h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.2rem; }
+        h4 { font-size: 0.95rem; font-weight: 400; color: var(--text-secondary); font-family: var(--font-mono); margin-bottom: 0.8rem; }
+        p { margin-bottom: 1rem; color: var(--text-secondary); }
+        a { color: var(--accent); text-decoration: none; }
+
+        /* Components */
+        .item { margin-bottom: 2.5rem; }
+        .item-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; }
+        .date { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-secondary); }
+        ul { list-style-type: none; padding-left: 0; }
+        li { position: relative; padding-left: 1.2rem; margin-bottom: 0.5rem; color: var(--text-secondary); }
+        li::before { content: "▹"; position: absolute; left: 0; color: var(--accent); }
+
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
+        .tags { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+        .tag { background-color: var(--tag-bg); color: var(--tag-text); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.85rem; font-family: var(--font-mono); }
+        .tech-stack { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent); margin-left: 0.5rem; }
+
+        @media (max-width: 600px) { .item-header { flex-direction: column; } .tech-stack { display: block; margin-left: 0; } }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-bar">
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="automotive.html">Automotive & Controls</a>
+            <a href="hardware.html" class="active">Hardware & FPGA</a>
+        </div>
+    </nav>
+
+<div class="container">
+    <header>
+        <h1>George Wahba</h1>
+        <p style="font-size: 1.1rem;">
+            Computer Engineering Student specializing in <strong>FPGA Design</strong>, <strong>Digital Signal Processing</strong>, and <strong>Hardware Verification</strong>.
+        </p>
+        <p><a href="mailto:georgewahba03@outlook.com">georgewahba03@outlook.com</a> | <a href="https://linkedin.com/in/george-wahba-" target="_blank">LinkedIn</a> | <a href="https://github.com/georgewahba03" target="_blank">GitHub</a></p>
+    </header>
+
+    <section>
+        <h2>Work Experience</h2>
+
+        <div class="item">
+            <div class="item-header">
+                <h3>Embedded Software/Electronics Engineer Coop</h3>
+                <span class="date">May 2024 — Aug 2025</span>
+            </div>
+            <h4>Christie Digital Systems</h4>
+            <ul>
+                <li>Executed <strong>Hardware-Software Co-design</strong> by integrating a MicroBlaze soft-core processor via <strong>AXI4-Lite interconnect</strong> into a high-priority System Verilog pipeline, enabling rapid debugging in FPGA hardware.</li>
+                <li>Upgraded and validated legacy FPGA IP blocks for Ultrascale+ PCIe compatibility, analyzing utilization reports and ensuring <strong>Static Timing Analysis (STA)</strong> closure.</li>
+                <li>Designed, implemented, and verified RTL for a custom hardware block, creating a System Verilog testbench and using DVE waveform analysis for validation.</li>
+                <li>Rebuilt a critical simulation testbench from scratch, implementing comprehensive UART protocol tests for <strong>Regression Testing</strong> to verify data flow integrity.</li>
+            </ul>
+        </div>
+
+        <div class="item">
+            <div class="item-header">
+                <h3>Research Assistant II</h3>
+                <span class="date">May 2023 — Aug 2023</span>
+            </div>
+            <h4>Stellantis / McMaster University</h4>
+            <ul>
+                <li>Designed and installed mounts that were inserted into the 6-phase inverter setup using Autodesk Inventor.</li>
+                <li>Conducted continuity testing on different PCBs that were being installed into the DC Motor setup using multimeters as well as referencing their design on Altium and validated them.</li>
+                <li>Conducted test result analysis by developing MATLAB algorithms that would accept data across a time span and output different data values such as mean, max, and range to determine effectiveness of setup within different parameters.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>Hardware & FPGA Projects</h2>
+
+        <div class="item">
+            <div class="item-header">
+                <h3>Real-Time Software Defined Radio (SDR) Receiver <span class="tech-stack">C++ / DSP / Linux</span></h3>
+                <span class="date">Jan 2024 — Apr 2024</span>
+            </div>
+            <ul>
+                <li>Collaborated with a team of four to develop a multi-threaded C++ application that demodulates real-time FM mono and stereo audio from raw IQ samples while implementing digital filters and sample rate conversion.</li>
+                <li>Engineered the RDS processing path, including channel extraction, carrier recovery using PLLs, and symbol synchronization, successfully decoding digital bitstreams up to the demodulation stage.</li>
+            </ul>
+        </div>
+
+        <div class="item">
+            <div class="item-header">
+                <h3>Hardware-Accelerated Image Decompression System <span class="tech-stack">SystemVerilog / FPGA</span></h3>
+                <span class="date">Nov 2023</span>
+            </div>
+            <ul>
+                <li>Designed and implemented a pipelined architecture on an Altera DE2 FPGA to perform colour space conversion (YUV to RGB) and bilinear interpolation for image upsampling.</li>
+                <li>Developed the Inverse Discrete Cosine Transform module using resource-shared multipliers and dual-port RAMs, verifying functionality through extensive ModelSim simulation.</li>
+                <li>Designed a custom <strong>Memory Controller FSM</strong> to optimize memory access states, synchronizing high-speed data flow between external SRAM and the VGA controller for artifact-free display.</li>
+            </ul>
+        </div>
+
+        <div class="item">
+            <div class="item-header">
+                <h3>3D Spatial Measurement System (LiDAR) <span class="tech-stack">C / Keil / UART / I2C</span></h3>
+                <span class="date">Dec 2023</span>
+            </div>
+            <ul>
+                <li>Designed a firmware driver in C within the Keil IDE to interface with a LiDAR sensor via <strong>I2C</strong> and <strong>UART</strong> protocols.</li>
+                <li>Implemented control logic for a servo motor to perform 360-degree spatial scanning, capturing data in the y-z plane.</li>
+                <li>Developed MATLAB scripts to retrieve serial data in real-time and reconstruct 3D point cloud visualizations.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Languages</h3>
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">C/C++</span>
+                    <span class="tag">HTML</span>
+                    <span class="tag">RTL</span>
+                    <span class="tag">Verilog/VHDL/SystemVerilog</span>
+                    <span class="tag">MATLAB</span>
+                    <span class="tag">Simulink/Stateflow</span>
+                    <span class="tag">R</span>
+                    <span class="tag">Shell/Bash Script</span>
+                    <span class="tag">Tcl</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Technologies/Frameworks</h3>
+                <div class="tags">
+                    <span class="tag">GitHub</span>
+                    <span class="tag">Speedgoat</span>
+                    <span class="tag">dSpace</span>
+                    <span class="tag">PLC</span>
+                    <span class="tag">AutoCAD</span>
+                    <span class="tag">Cadence</span>
+                    <span class="tag">Synopsys</span>
+                    <span class="tag">Altium</span>
+                    <span class="tag">Subversion</span>
+                    <span class="tag">Xilinx SDK</span>
+                    <span class="tag">Linux</span>
+                    <span class="tag">Vitis</span>
+                    <span class="tag">Vivado</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Protocols</h3>
+                <div class="tags">
+                    <span class="tag">AXI4 / AXI-Stream</span>
+                    <span class="tag">CAN</span>
+                    <span class="tag">PCIe</span>
+                    <span class="tag">JTAG</span>
+                    <span class="tag">I2C</span>
+                    <span class="tag">UART</span>
+                    <span class="tag">SPI</span>
+                    <span class="tag">TCP/UDP</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center; color: var(--text-secondary); font-size: 0.9rem;">
+        <p>&copy; 2026 George Wahba</p>
+    </footer>
+</div>
+
+</body>
+</html>

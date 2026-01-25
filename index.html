@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>George Wahba | Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --accent: #58a6ff;
+            --accent-hover: #1f6feb;
+            --border: #30363d;
+            --card-bg: #161b22;
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            max-width: 600px;
+        }
+
+        .split-container {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .choice-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            border-radius: 12px;
+            width: 300px;
+            text-decoration: none;
+            transition: transform 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .choice-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .choice-card h2 {
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .choice-card span {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .icon {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 650px) {
+            .split-container { flex-direction: column; }
+            .choice-card { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>George Wahba</h1>
+    <p>Computer Engineering Student. Select a portfolio to view relevant experience.</p>
+
+    <div class="split-container">
+        <!-- Automotive Link -->
+        <a href="automotive.html" class="choice-card">
+            <div class="icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17h7.2"/></svg>
+            </div>
+            <h2>Automotive & Controls</h2>
+            <span>Embedded Systems, CAN FD, Model-Based Design, and Vehicle Control strategies.</span>
+        </a>
+
+        <!-- Hardware Link -->
+        <a href="hardware.html" class="choice-card">
+            <div class="icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            </div>
+            <h2>Hardware & FPGA</h2>
+            <span>RTL Design, SystemVerilog, DSP, Board Bring-up, and Validation.</span>
+        </a>
+    </div>
+
+</body>
+</html>
