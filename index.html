@@ -8,7 +8,6 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2358a6ff%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><text x=%2250%25%22 y=%2250%25%22 dy=%22.35em%22 text-anchor=%22middle%22 font-family=%22Arial, sans-serif%22 font-weight=%22bold%22 font-size=%2214%22 fill=%22%2358a6ff%22 stroke=%22none%22>GW</text><rect x=%222%22 y=%222%22 width=%2220%22 height=%2220%22 rx=%224%22 ry=%224%22 stroke=%22%2358a6ff%22 fill=%22none%22/></svg>">
     <style>
         :root {
-            /* Sam Gordon-inspired Palette */
             --bg-color: #0a192f;
             --text-primary: #ccd6f6;
             --text-secondary: #8892b0;
@@ -58,7 +57,7 @@
         .container {
             max-width: 1000px;
             width: 100%;
-            padding: 0 2rem;
+            padding: 0 2rem 5rem 2rem; /* Added bottom padding for more space */
             z-index: 1;
         }
 
@@ -119,8 +118,6 @@
             align-items: center;
             margin-bottom: 1rem;
         }
-
-        /* Removed numbering span style */
 
         .section-header h3 {
             font-size: 1.8rem;
@@ -227,7 +224,7 @@
 
         @media (max-width: 768px) {
             .section-header::after { width: 100%; }
-            .container { padding: 0 1.5rem; }
+            .container { padding: 0 1.5rem 4rem 1.5rem; }
         }
     </style>
 </head>
@@ -247,7 +244,6 @@
         <!-- Selection Area -->
         <section class="selection-area">
             <div class="section-header">
-                <!-- Removed the "01." span -->
                 <h3>Select Your Experience</h3>
             </div>
 
