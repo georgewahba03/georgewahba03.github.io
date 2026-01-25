@@ -29,6 +29,7 @@
             font-family: var(--font-main);
             line-height: 1.6;
             overflow-x: hidden;
+            counter-reset: section; /* Initialize section counter */
         }
 
         /* Glow Effect */
@@ -107,12 +108,12 @@
         }
 
         h2::before {
-            content: "01.";
+            counter-increment: section; /* Increment counter */
+            content: "0" counter(section) "."; /* Display 01., 02., etc. */
             margin-right: 10px;
             color: var(--accent);
             font-family: var(--font-mono);
             font-size: 1.2rem;
-            counter-increment: section;
         }
 
         h2::after {
@@ -237,7 +238,6 @@
             padding: 0;
             margin: 0;
         }
-        /* No bullet for tech list inside cards */
         .tech-list li::before { content: none; }
 
         /* Skills */
@@ -311,7 +311,7 @@
         </header>
 
         <section>
-            <h2 style="counter-set: section 0;">Work Experience</h2>
+            <h2>Work Experience</h2>
 
             <div class="item" style="animation-delay: 0.1s;">
                 <div class="item-header">
@@ -338,7 +338,7 @@
         </section>
 
         <section>
-            <h2 style="counter-set: section 1;">Key Projects</h2>
+            <h2>Key Projects</h2>
             <div class="projects-grid">
                 <!-- Project 1 -->
                 <div class="project-card">
@@ -387,7 +387,7 @@
         </section>
 
         <section>
-            <h2 style="counter-set: section 2;">Relevant Skills</h2>
+            <h2>Relevant Skills</h2>
             <div class="skills-section">
                 <div class="skill-group">
                     <h4>Languages & Tools</h4>
