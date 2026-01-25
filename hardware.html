@@ -249,6 +249,28 @@
             margin-bottom: 1rem;
         }
 
+        /* Specific style for skill lists to fix double bullet issue */
+        .skill-group ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .skill-group li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-family: var(--font-mono);
+        }
+
+        .skill-group li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -293,9 +315,9 @@
                     <span class="date">May 2024 — Aug 2025</span>
                 </div>
                 <ul>
-                    <li>Executed Hardware-Software Co-design by integrating a MicroBlaze soft-core processor via AXI4-Lite interconnect into a high-priority System Verilog pipeline.</li>
+                    <li>Executed Hardware-Software Co-design by integrating a MicroBlaze soft-core processor via AXI4-Lite interconnect into a high-priority System Verilog pipeline, enabling rapid debugging in FPGA hardware.</li>
                     <li>Upgraded and validated legacy FPGA IP blocks for Ultrascale+ PCIe compatibility, analyzing utilization reports and ensuring Static Timing Analysis (STA) closure.</li>
-                    <li>Designed, implemented, and verified RTL for a custom hardware block, independently creating a System Verilog testbench, using DVE waveform analysis for validation.</li>
+                    <li>Designed, implemented, and verified RTL for a custom hardware block, independently creating a System Verilog testbench, using DVE waveform analysis for validation, and resolving functional bugs and lint errors to meet production standards.</li>
                     <li>Rebuilt a critical simulation testbench from scratch, implementing comprehensive UART protocol tests for Regression Testing to verify data flow integrity.</li>
                 </ul>
             </div>
@@ -308,7 +330,7 @@
                 <ul>
                     <li>Designed and installed mounts that were inserted into the 6-phase inverter setup using Autodesk Inventor.</li>
                     <li>Conducted continuity testing on different PCBs that were being installed into the DC Motor setup using multimeters as well as referencing their design on Altium and validated them.</li>
-                    <li>Conducted test result analysis by developing MATLAB algorithms that would accept data across a time span and output different data values such as mean, max, and range.</li>
+                    <li>Conducted test result analysis by developing MATLAB algorithms that would accept data across a time span and output different data values such as mean, max, and range to determine effectiveness of setup within different parameters.</li>
                 </ul>
             </div>
         </section>
@@ -368,32 +390,32 @@
             <div class="skills-section">
                 <div class="skill-group">
                     <h4>Languages</h4>
-                    <ul style="list-style: none; padding: 0;">
-                        <li>▹ Python</li>
-                        <li>▹ C/C++</li>
-                        <li>▹ SystemVerilog</li>
-                        <li>▹ Verilog/VHDL</li>
-                        <li>▹ MATLAB</li>
-                        <li>▹ Tcl</li>
+                    <ul>
+                        <li>Python</li>
+                        <li>C/C++</li>
+                        <li>SystemVerilog</li>
+                        <li>Verilog/VHDL</li>
+                        <li>MATLAB</li>
+                        <li>Tcl</li>
                     </ul>
                 </div>
                 <div class="skill-group">
                     <h4>Technologies</h4>
-                    <ul style="list-style: none; padding: 0;">
-                        <li>▹ Xilinx Vivado</li>
-                        <li>▹ Speedgoat/dSpace</li>
-                        <li>▹ Altium Designer</li>
-                        <li>▹ Linux</li>
-                        <li>▹ Git/Subversion</li>
+                    <ul>
+                        <li>Xilinx Vivado</li>
+                        <li>Speedgoat/dSpace</li>
+                        <li>Altium Designer</li>
+                        <li>Linux</li>
+                        <li>Git/Subversion</li>
                     </ul>
                 </div>
                 <div class="skill-group">
                     <h4>Protocols</h4>
-                    <ul style="list-style: none; padding: 0;">
-                        <li>▹ AXI4 / AXI-Stream</li>
-                        <li>▹ CAN / PCIe</li>
-                        <li>▹ JTAG / I2C / SPI</li>
-                        <li>▹ TCP/UDP</li>
+                    <ul>
+                        <li>AXI4 / AXI-Stream</li>
+                        <li>CAN / PCIe</li>
+                        <li>JTAG / I2C / SPI</li>
+                        <li>TCP/UDP</li>
                     </ul>
                 </div>
             </div>

@@ -237,6 +237,7 @@
             padding: 0;
             margin: 0;
         }
+        /* No bullet for tech list inside cards */
         .tech-list li::before { content: none; }
 
         /* Skills */
@@ -250,6 +251,28 @@
             color: var(--accent);
             font-family: var(--font-mono);
             margin-bottom: 1rem;
+        }
+
+        /* Specific style for skill lists to fix double bullet issue */
+        .skill-group ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .skill-group li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-family: var(--font-mono);
+        }
+
+        .skill-group li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
         }
 
         @keyframes fadeUp {
@@ -368,22 +391,22 @@
             <div class="skills-section">
                 <div class="skill-group">
                     <h4>Languages & Tools</h4>
-                    <ul style="list-style: none; padding: 0;">
-                        <li>▹ C/C++</li>
-                        <li>▹ MATLAB</li>
-                        <li>▹ Simulink/Stateflow</li>
-                        <li>▹ Python</li>
-                        <li>▹ Altium Designer</li>
+                    <ul>
+                        <li>C/C++</li>
+                        <li>MATLAB</li>
+                        <li>Simulink/Stateflow</li>
+                        <li>Python</li>
+                        <li>Altium Designer</li>
                     </ul>
                 </div>
                 <div class="skill-group">
                     <h4>Automotive Protocols</h4>
-                    <ul style="list-style: none; padding: 0;">
-                        <li>▹ CAN / CAN FD</li>
-                        <li>▹ SPI / I2C / UART</li>
-                        <li>▹ Model-Based Design</li>
-                        <li>▹ Hardware-in-the-Loop</li>
-                        <li>▹ Board Bring-up</li>
+                    <ul>
+                        <li>CAN / CAN FD</li>
+                        <li>SPI / I2C / UART</li>
+                        <li>Model-Based Design</li>
+                        <li>Hardware-in-the-Loop</li>
+                        <li>Board Bring-up</li>
                     </ul>
                 </div>
             </div>
