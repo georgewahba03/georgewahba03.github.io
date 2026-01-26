@@ -46,8 +46,8 @@
             width: 100%;
             height: 100%;
             background: radial-gradient(
-                800px circle at var(--cursor-x) var(--cursor-y),
-                rgba(100, 255, 218, 0.03),
+                800px circle at var(--cursor-x) var(--cursor-y), 
+                rgba(100, 255, 218, 0.03), 
                 transparent 40%
             );
             pointer-events: none;
@@ -58,7 +58,7 @@
         .container {
             max-width: 1000px;
             width: 100%;
-            padding: 0 2rem 5rem 2rem; /* Added bottom padding for more space */
+            padding: 0 2rem 5rem 2rem;
             z-index: 1;
         }
 
@@ -69,7 +69,7 @@
             align-items: flex-start;
             margin-bottom: 5rem;
             animation: fadeUp 0.8s ease-out forwards;
-            padding-top: 5rem; /* Added whitespace above the greeting */
+            padding-top: 5rem;
         }
 
         .mono-intro {
@@ -219,6 +219,45 @@
             margin-bottom: 0.5rem;
         }
 
+        /* Contact Section */
+        .contact-section {
+            text-align: center;
+            margin-top: 6rem;
+            margin-bottom: 2rem;
+            animation: fadeUp 0.8s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+
+        .contact-title {
+            color: var(--text-primary);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-desc {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto 2.5rem auto;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            color: var(--accent);
+            background-color: transparent;
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            padding: 1.25rem 1.75rem;
+            font-size: 1rem;
+            font-family: var(--font-mono);
+            text-decoration: none;
+            transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        .contact-btn:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+        }
+
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -254,7 +293,7 @@
                 <a href="automotive.html" class="card">
                     <div>
                         <div class="card-top">
-                            <!-- Car Icon (Matches Automotive Tab Icon) -->
+                            <!-- Car Icon -->
                             <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/><circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg>
                             <!-- External Link Icon -->
                             <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
@@ -276,7 +315,7 @@
                 <a href="hardware.html" class="card">
                     <div>
                         <div class="card-top">
-                            <!-- Microchip Icon (Matches Hardware Tab Icon) -->
+                            <!-- Microchip Icon -->
                             <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
                             <!-- External Link Icon -->
                             <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
@@ -295,7 +334,20 @@
                 </a>
             </div>
         </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <h2 class="contact-title" style="font-size: 2.5rem; margin-bottom: 1rem;">Get In Touch</h2>
+            <p class="contact-desc">
+                I'm always open to opportunities to work on either automotive or FPGA designs. Whether you have a question or just want to say hi, my inbox is always open!
+            </p>
+            <a href="mailto:georgewahba03@outlook.com" class="contact-btn">Say Hello</a>
+        </section>
     </div>
+
+    <footer>
+        <p>Built by George Wahba</p>
+    </footer>
 
     <script>
         document.addEventListener('mousemove', e => {

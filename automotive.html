@@ -41,8 +41,8 @@
             width: 100%;
             height: 100%;
             background: radial-gradient(
-                800px circle at var(--cursor-x) var(--cursor-y),
-                rgba(100, 255, 218, 0.03),
+                800px circle at var(--cursor-x) var(--cursor-y), 
+                rgba(100, 255, 218, 0.03), 
                 transparent 40%
             );
             pointer-events: none;
@@ -258,7 +258,7 @@
             list-style: none;
             padding: 0;
         }
-
+        
         .skill-group li {
             position: relative;
             padding-left: 1.5rem;
@@ -273,6 +273,45 @@
             position: absolute;
             left: 0;
             color: var(--accent);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            text-align: center;
+            margin-top: 6rem;
+            margin-bottom: 2rem;
+            animation: fadeUp 0.8s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+
+        .contact-title {
+            color: var(--text-primary);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-desc {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto 2.5rem auto;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            color: var(--accent);
+            background-color: transparent;
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            padding: 1.25rem 1.75rem;
+            font-size: 1rem;
+            font-family: var(--font-mono);
+            text-decoration: none;
+            transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        .contact-btn:hover {
+            background-color: rgba(100, 255, 218, 0.1);
         }
 
         @keyframes fadeUp {
@@ -423,6 +462,15 @@
                     </ul>
                 </div>
             </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <h2 class="contact-title">Get In Touch</h2>
+            <p class="contact-desc">
+                I'm always open to opportunities to work on automotive designs. Whether you have a question or just want to say hi, my inbox is always open!
+            </p>
+            <a href="mailto:georgewahba03@outlook.com" class="contact-btn">Say Hello</a>
         </section>
     </div>
 
