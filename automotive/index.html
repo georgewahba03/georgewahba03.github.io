@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hardware | GW</title>
-    <!-- Favicon: Microchip -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2364ffda%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><rect x=%224%22 y=%224%22 width=%2216%22 height=%2216%22 rx=%222%22 ry=%222%22></rect><rect x=%229%22 y=%229%22 width=%226%22 height=%226%22></rect><line x1=%229%22 y1=%221%22 x2=%229%22 y2=%224%22></line><line x1=%2215%22 y1=%221%22 x2=%2215%22 y2=%224%22></line><line x1=%229%22 y1=%2220%22 x2=%229%22 y2=%2223%22></line><line x1=%2215%22 y1=%2220%22 x2=%2215%22 y2=%2223%22></line><line x1=%2220%22 y1=%229%22 x2=%2223%22 y2=%229%22></line><line x1=%2220%22 y1=%2214%22 x2=%2223%22 y2=%2214%22></line><line x1=%221%22 y1=%229%22 x2=%224%22 y2=%229%22></line><line x1=%221%22 y1=%2214%22 x2=%224%22 y2=%2214%22></line></svg>">
+    <title>Automotive | GW</title>
+    <!-- Favicon: Car -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2364ffda%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2%22/><circle cx=%226.5%22 cy=%2216.5%22 r=%222.5%22/><circle cx=%2216.5%22 cy=%2216.5%22 r=%222.5%22/></svg>">
     <style>
         :root {
             /* Consistent Palette */
@@ -32,6 +32,7 @@
             counter-reset: section; /* Initialize section counter */
         }
 
+        /* Glow Effect */
         body::before {
             content: "";
             position: fixed;
@@ -48,6 +49,7 @@
             z-index: 0;
         }
 
+        /* Nav */
         .nav-bar {
             padding: 1.5rem 2rem;
             display: flex;
@@ -88,6 +90,7 @@
             position: relative;
         }
 
+        /* Headers */
         h1 {
             font-size: clamp(30px, 5vw, 50px);
             font-weight: 600;
@@ -342,17 +345,17 @@
         <a href="index.html" class="logo">GW</a>
         <div class="nav-links">
             <a href="index.html">Home</a>
-            <a href="automotive.html">Automotive</a>
-            <a href="hardware.html" class="active">Hardware</a>
+            <a href="automotive.html" class="active">Automotive</a>
+            <a href="hardware.html">Hardware</a>
         </div>
     </nav>
 
     <div class="container">
         <header>
             <span style="font-family: var(--font-mono); color: var(--accent);">Featured Portfolio</span>
-            <h1>Hardware & FPGA</h1>
+            <h1>Automotive & Controls</h1>
             <p class="intro">
-                Deep dive into RTL design, SystemVerilog, and Digital Signal Processing. Featuring Real-Time SDR and Image Acceleration projects.
+                Specialized experience in embedded firmware, CAN FD networks, and Model-Based Design for electric vehicles. Featuring work on the Cadillac Lyriq control systems.
             </p>
         </header>
 
@@ -365,10 +368,8 @@
                     <span class="date">May 2024 — Aug 2025</span>
                 </div>
                 <ul>
-                    <li>Executed Hardware-Software Co-design by integrating a MicroBlaze soft-core processor via AXI4-Lite interconnect into a high-priority System Verilog pipeline, enabling rapid debugging in FPGA hardware.</li>
-                    <li>Upgraded and validated legacy FPGA IP blocks for Ultrascale+ PCIe compatibility, analyzing utilization reports and ensuring Static Timing Analysis (STA) closure.</li>
-                    <li>Designed, implemented, and verified RTL for a custom hardware block, independently creating a System Verilog testbench, using DVE waveform analysis for validation, and resolving functional bugs and lint errors to meet production standards.</li>
-                    <li>Rebuilt a critical simulation testbench from scratch, implementing comprehensive UART protocol tests for Regression Testing to verify data flow integrity.</li>
+                    <li>Executed Hardware-Software Co-design by integrating a MicroBlaze SoC into a System Verilog pipeline, enabling rapid firmware debugging.</li>
+                    <li>Upgraded and validated legacy IP blocks for compatibility, ensuring robust operation through comprehensive regression testing and UART protocol verification.</li>
                 </ul>
             </div>
 
@@ -378,9 +379,9 @@
                     <span class="date">May 2023 — Aug 2023</span>
                 </div>
                 <ul>
-                    <li>Designed and installed mounts that were inserted into the 6-phase inverter setup using Autodesk Inventor.</li>
-                    <li>Conducted continuity testing on different PCBs that were being installed into the DC Motor setup using multimeters as well as referencing their design on Altium and validated them.</li>
-                    <li>Conducted test result analysis by developing MATLAB algorithms that would accept data across a time span and output different data values such as mean, max, and range to determine effectiveness of setup within different parameters.</li>
+                    <li>Performed Board Bring-up and Signal Verification on PCBs for DC Motor setups using multimeters and Altium design referencing.</li>
+                    <li>Developed automated MATLAB algorithms for Data Acquisition (DAQ) to output statistical metrics and validate inverter setup effectiveness.</li>
+                    <li>Conducted Root Cause Analysis on test failures, isolating mechanical and electrical faults in the 6-phase inverter setup.</li>
                 </ul>
             </div>
         </section>
@@ -391,48 +392,47 @@
                 <!-- Project 1 -->
                 <div class="project-card">
                     <div class="project-top">
-                        <!-- Icon: Radio Signal/Waves -->
-                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"></circle><path d="M16.24 7.76a6 6 0 0 1 0 8.49"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path><path d="M7.76 16.24a6 6 0 0 1 0-8.49"></path><path d="M4.93 19.07a10 10 0 0 1 0-14.14"></path></svg>
+                        <!-- Icon: Network Signal (Server/Database style) -->
+                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
                     </div>
-                    <h4>Real-Time SDR Receiver</h4>
-                    <p>Developed a multi-threaded C++ application to demodulate real-time FM mono and stereo audio from raw IQ samples. Engineered the RDS processing path, including channel extraction and carrier recovery.</p>
+                    <h4>Multi-Channel CAN FD Aggregator & Gateway</h4>
+                    <p>Designed a high-throughput 8-to-2 CAN FD Gateway. Engineered a custom SPI-to-CAN FD driver stack from scratch and resolved "Interrupt Storm" failures using precision edge-triggered handling (GPIO XINT).</p>
                     <ul class="tech-list">
-                        <li>C++</li>
-                        <li>DSP</li>
-                        <li>Linux</li>
-                        <li>Multithreading</li>
+                        <li>C</li>
+                        <li>TI C2000</li>
+                        <li>SPI</li>
+                        <li>CAN FD</li>
                     </ul>
                 </div>
 
                 <!-- Project 2 -->
                 <div class="project-card">
                     <div class="project-top">
-                        <!-- Icon: Image/Picture -->
-                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                        <!-- Icon: Car/Gear -->
+                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17h7.2"/></svg>
                     </div>
-                    <h4>Hardware-Accelerated Image Decompression System</h4>
-                    <p>Designed a pipelined architecture on an Altera DE2 FPGA to perform colour space conversion and bilinear interpolation. Implemented IDCT using resource-shared multipliers.</p>
+                    <h4>McMaster University EcoCAR - PCM Control Systems Subject Matter Expert</h4>
+                    <p>Led a team of 15+ for McMaster EcoCAR. Developed control systems for a 2023 Cadillac Lyriq RWD using Model-Based Design (MBD) and conducted HIL testing for torque blending strategies.</p>
                     <ul class="tech-list">
-                        <li>SystemVerilog</li>
-                        <li>FPGA</li>
-                        <li>ModelSim</li>
-                        <li>SRAM</li>
+                        <li>Simulink</li>
+                        <li>Stateflow</li>
+                        <li>HIL</li>
+                        <li>EcoCAR</li>
                     </ul>
                 </div>
 
                 <!-- Project 3 -->
                 <div class="project-card">
                     <div class="project-top">
-                        <!-- Icon: Radar/Target (LiDAR) -->
-                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                        <!-- Icon: Heartbeat/Activity -->
+                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                     </div>
-                    <h4>3D Spatial Measurement System</h4>
-                    <p>Designed a firmware driver in C within the Keil IDE to interface with a LiDAR sensor via I2C and UART. Implemented servo motor control logic for 360-degree scanning.</p>
+                    <h4>Pacemaker Control System</h4>
+                    <p>Collaborated to design a closed-loop pacemaker control system. Engineered a Simulink Stateflow model to track atrial/ventricular pulses and adapt pacing algorithms in real-time.</p>
                     <ul class="tech-list">
-                        <li>C</li>
-                        <li>Keil</li>
-                        <li>UART/I2C</li>
-                        <li>MATLAB</li>
+                        <li>Python</li>
+                        <li>Simulink</li>
+                        <li>NXP K64</li>
                     </ul>
                 </div>
             </div>
@@ -442,33 +442,23 @@
             <h2>Relevant Skills</h2>
             <div class="skills-section">
                 <div class="skill-group">
-                    <h4>Languages</h4>
+                    <h4>Languages & Tools</h4>
                     <ul>
-                        <li>Python</li>
                         <li>C/C++</li>
-                        <li>SystemVerilog</li>
-                        <li>Verilog/VHDL</li>
                         <li>MATLAB</li>
-                        <li>Tcl</li>
-                    </ul>
-                </div>
-                <div class="skill-group">
-                    <h4>Technologies</h4>
-                    <ul>
-                        <li>Xilinx Vivado</li>
-                        <li>Speedgoat/dSpace</li>
+                        <li>Simulink/Stateflow</li>
+                        <li>Python</li>
                         <li>Altium Designer</li>
-                        <li>Linux</li>
-                        <li>Git/Subversion</li>
                     </ul>
                 </div>
                 <div class="skill-group">
-                    <h4>Protocols</h4>
+                    <h4>Automotive Protocols</h4>
                     <ul>
-                        <li>AXI4 / AXI-Stream</li>
-                        <li>CAN / PCIe</li>
-                        <li>JTAG / I2C / SPI</li>
-                        <li>TCP/UDP</li>
+                        <li>CAN / CAN FD</li>
+                        <li>SPI / I2C / UART</li>
+                        <li>Model-Based Design</li>
+                        <li>Hardware-in-the-Loop</li>
+                        <li>Board Bring-up</li>
                     </ul>
                 </div>
             </div>
@@ -478,7 +468,7 @@
         <section class="contact-section">
             <h2 class="contact-title">Get In Touch</h2>
             <p class="contact-desc">
-                I'm always open to opportunities to work on FPGA designs. Whether you have a question or just want to say hi, my inbox is always open!
+                I'm always open to opportunities to work on automotive designs. Whether you have a question or just want to say hi, my inbox is always open!
             </p>
             <a href="mailto:georgewahba03@outlook.com" class="contact-btn">Say Hello</a>
         </section>
