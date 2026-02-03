@@ -76,6 +76,18 @@
             position: relative;
         }
 
+        /* Matrix Rain Canvas */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.15;
+        }
+
         /* Ambient Glow Background - Optimized for performance */
         body::before {
             content: "";
@@ -206,6 +218,7 @@
         .card:focus-visible {
             outline: 2px solid var(--accent);
             outline-offset: 4px;
+            border-radius: 4px;
         }
 
         .card-top {
@@ -216,15 +229,15 @@
         }
 
         .folder-icon {
-            color: var(--accent);
             width: 40px;
             height: 40px;
+            color: var(--accent);
         }
 
         .external-icon {
-            color: var(--text-secondary);
             width: 22px;
             height: 22px;
+            color: var(--text-secondary);
             transition: color 0.2s;
         }
 
@@ -234,44 +247,36 @@
         }
 
         .card h4 {
+            font-size: 1.5rem;
             color: var(--text-primary);
-            font-size: 1.4rem;
-            margin-bottom: 0.75rem;
-            transition: color 0.2s;
-        }
-
-        .card:hover h4,
-        .card:focus h4 {
-            color: var(--accent);
+            margin-bottom: 1rem;
         }
 
         .card p {
             color: var(--text-secondary);
             font-size: 1rem;
-            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            flex-grow: 1;
         }
 
         .tech-list {
             display: flex;
             flex-wrap: wrap;
-            padding: 0;
-            margin: 0;
+            gap: 0.75rem;
             list-style: none;
         }
 
         .tech-list li {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
             color: var(--text-secondary);
-            margin-right: 1.25rem;
-            margin-bottom: 0.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
         }
 
         /* Contact Section */
         .contact-section {
             text-align: center;
-            margin-top: 6rem;
-            margin-bottom: 2rem;
+            margin-top: 8rem;
             animation: fadeUp 0.8s ease-out 0.4s both;
         }
 
@@ -324,6 +329,85 @@
             z-index: 1;
         }
 
+        /* Developer Console Easter Egg */
+        .dev-console {
+            position: fixed;
+            bottom: -400px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 800px;
+            height: 350px;
+            background: rgba(17, 34, 64, 0.98);
+            border: 2px solid var(--accent);
+            border-radius: 8px 8px 0 0;
+            z-index: 1000;
+            transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .dev-console.active {
+            bottom: 0;
+        }
+
+        .console-header {
+            background: var(--card-bg);
+            padding: 0.75rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--accent);
+        }
+
+        .console-title {
+            color: var(--accent);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .console-close {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .console-close:hover {
+            background: rgba(100, 255, 218, 0.1);
+        }
+
+        .console-content {
+            padding: 1rem;
+            height: calc(100% - 50px);
+            overflow-y: auto;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        .console-line {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .console-line.success {
+            color: var(--accent);
+        }
+
+        .console-line.error {
+            color: #ff6b6b;
+        }
+
+        .console-prompt {
+            color: var(--accent);
+        }
+
         @keyframes fadeUp {
             from { 
                 opacity: 0; 
@@ -368,6 +452,33 @@
 </head>
 <body>
     <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+    <!-- Matrix Rain Canvas -->
+    <canvas id="matrix-canvas"></canvas>
+
+    <!-- Developer Console Easter Egg -->
+    <div class="dev-console" id="devConsole">
+        <div class="console-header">
+            <span class="console-title">// Developer Console</span>
+            <button class="console-close" id="closeConsole">Close</button>
+        </div>
+        <div class="console-content" id="consoleContent">
+            <div class="console-line success">$ ./access_dev_mode.sh</div>
+            <div class="console-line">Initializing developer environment...</div>
+            <div class="console-line success">✓ System check complete</div>
+            <div class="console-line success">✓ Loading portfolio modules</div>
+            <div class="console-line">
+                <br>
+                <span style="color: var(--accent);">Welcome, Developer!</span><br>
+                You've discovered the secret console. 🎉<br>
+                <br>
+                <span style="color: var(--text-primary);">Fun fact:</span> This site is built with vanilla HTML, CSS, and JavaScript.<br>
+                No frameworks, no build tools - just the fundamentals.<br>
+                <br>
+                Type <span style="color: var(--accent);">'debug'</span> three times anywhere on the page to open this console again!
+            </div>
+        </div>
+    </div>
 
     <div class="container" id="main-content">
         <!-- Hero Section -->
@@ -469,7 +580,107 @@
     </footer>
 
     <script>
-        // Throttled mousemove for performance
+        // ===== MATRIX RAIN EFFECT =====
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Matrix characters - mix of numbers, hex, and symbols
+        const chars = '0123456789ABCDEF><+-*/=[]{}();:';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        // Initialize drops
+        for (let i = 0; i < columns; i++) {
+            drops[i] = Math.random() * -100;
+        }
+
+        function drawMatrix() {
+            // Semi-transparent black to create trail effect
+            ctx.fillStyle = 'rgba(10, 25, 47, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#64ffda';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                // Reset drop to top randomly
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 50);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.height;
+        });
+
+        // ===== DEVELOPER CONSOLE EASTER EGG =====
+        let debugCount = 0;
+        let debugTimer = null;
+        const devConsole = document.getElementById('devConsole');
+
+        document.addEventListener('keypress', (e) => {
+            // Reset timer on each keypress
+            clearTimeout(debugTimer);
+            debugTimer = setTimeout(() => {
+                debugCount = 0;
+            }, 2000);
+
+            // Check for 'd' key
+            if (e.key === 'd' || e.key === 'D') {
+                debugCount++;
+                
+                if (debugCount === 1) {
+                    // First 'd' - show hint in console
+                    console.log('%c🔍 Debug mode initializing...', 'color: #64ffda; font-size: 14px;');
+                } else if (debugCount === 2) {
+                    console.log('%c🔍🔍 Almost there...', 'color: #64ffda; font-size: 14px;');
+                } else if (debugCount >= 3) {
+                    // Third 'd' - activate console
+                    activateDevConsole();
+                    debugCount = 0;
+                }
+            } else {
+                // Reset if any other key is pressed
+                debugCount = 0;
+            }
+        });
+
+        function activateDevConsole() {
+            devConsole.classList.add('active');
+            
+            // Add typing animation to console content
+            const content = document.getElementById('consoleContent');
+            const lines = content.querySelectorAll('.console-line');
+            
+            lines.forEach((line, index) => {
+                line.style.opacity = '0';
+                setTimeout(() => {
+                    line.style.transition = 'opacity 0.3s';
+                    line.style.opacity = '1';
+                }, index * 200);
+            });
+
+            console.log('%c✓ Developer Console Activated!', 'color: #64ffda; font-size: 16px; font-weight: bold;');
+        }
+
+        document.getElementById('closeConsole').addEventListener('click', () => {
+            devConsole.classList.remove('active');
+        });
+
+        // ===== ORIGINAL GLOW EFFECT =====
         let ticking = false;
         document.addEventListener('mousemove', (e) => {
             if (!ticking) {
@@ -481,6 +692,10 @@
                 ticking = true;
             }
         });
+
+        // Console hints
+        console.log('%c👋 Welcome to georgewahba.me', 'color: #64ffda; font-size: 20px; font-weight: bold;');
+        console.log('%cLooking for easter eggs? Try typing "debug" three times...', 'color: #a8b2d1; font-size: 12px;');
     </script>
 </body>
 </html>

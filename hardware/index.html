@@ -66,6 +66,18 @@
             counter-reset: section;
         }
 
+        /* Circuit Board Canvas */
+        #circuit-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.08;
+        }
+
         body::before {
             content: "";
             position: fixed;
@@ -192,142 +204,157 @@
             margin-bottom: 3rem;
         }
 
-        /* Items (Experience) */
         .item {
-            margin-bottom: 2.5rem;
-            animation: fadeUp 0.8s ease-out both;
+            margin-bottom: 3rem;
+            padding: 1.5rem;
+            background: var(--card-bg);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .item:hover {
+            transform: translateY(-5px);
+            background: var(--hover-bg);
         }
 
         .item-header {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
         }
 
-        .item h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
+        h3 {
             color: var(--text-primary);
+            font-size: 1.1rem;
         }
 
-        .item span.company {
+        .company {
             color: var(--accent);
         }
 
         .date {
+            color: var(--text-secondary);
             font-family: var(--font-mono);
             font-size: 0.85rem;
-            color: var(--text-secondary);
         }
 
-        ul {
+        .item ul {
             list-style: none;
-            padding: 0;
+            margin-top: 1rem;
         }
 
-        li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.8rem;
+        .item li {
             color: var(--text-secondary);
-            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
         }
 
-        li::before {
+        .item li::before {
             content: "▹";
             position: absolute;
             left: 0;
             color: var(--accent);
         }
 
-        /* Project Cards Grid */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
+            margin-top: 2rem;
         }
 
         .project-card {
-            background-color: var(--card-bg);
-            padding: 2rem;
+            background: var(--card-bg);
+            padding: 2rem 1.5rem;
             border-radius: 4px;
-            transition: transform 0.2s, background-color 0.2s;
-            cursor: default;
-            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
-        .project-card:hover,
-        .project-card:focus-within {
-            transform: translateY(-5px);
-            background-color: var(--hover-bg);
-            border-color: var(--accent);
+        .project-card:hover {
+            transform: translateY(-7px);
+            background: var(--hover-bg);
         }
 
         .project-top {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             margin-bottom: 1.5rem;
         }
 
         .folder-icon {
-            color: var(--accent);
             width: 40px;
             height: 40px;
+            color: var(--accent);
         }
 
         .project-card h4 {
-            color: var(--text-primary);
-            font-size: 1.4rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .project-card p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .tech-list {
-            display: flex;
-            flex-wrap: wrap;
-            padding: 0;
-            margin: 0;
-            list-style: none;
-        }
-
-        .tech-list li {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            margin-right: 1.25rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .tech-list li::before {
-            content: none;
-        }
-
-        /* Skills Section */
-        .skills-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-group h4 {
             color: var(--text-primary);
             font-size: 1.2rem;
             margin-bottom: 1rem;
         }
 
-        .skill-group li {
-            padding-left: 1.5rem;
-            margin-bottom: 0.5rem;
+        .project-card p {
             color: var(--text-secondary);
             font-size: 0.95rem;
+            line-height: 1.6;
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            list-style: none;
+            margin-top: auto;
+        }
+
+        .tech-list li {
+            color: var(--text-secondary);
             font-family: var(--font-mono);
+            font-size: 0.75rem;
+        }
+
+        .skills-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-group h4 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .skill-group ul {
+            list-style: none;
+        }
+
+        .skill-group li {
+            color: var(--text-secondary);
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
         }
 
         .skill-group li::before {
@@ -337,43 +364,46 @@
             color: var(--accent);
         }
 
-        /* Contact Section */
         .contact-section {
             text-align: center;
             margin-top: 6rem;
-            margin-bottom: 2rem;
-            animation: fadeUp 0.8s ease-out 0.4s both;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .contact-title {
-            color: var(--text-primary);
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
+            justify-content: center;
+        }
+
+        .contact-title::before {
+            margin-right: 10px;
+        }
+
+        .contact-title::after {
+            display: none;
         }
 
         .contact-desc {
             color: var(--text-secondary);
-            font-size: 1.1rem;
-            max-width: 500px;
-            margin: 0 auto 2.5rem auto;
+            margin-bottom: 3rem;
         }
 
         .contact-btn {
             display: inline-block;
             color: var(--accent);
-            background-color: transparent;
             border: 1px solid var(--accent);
+            padding: 1rem 2rem;
             border-radius: 4px;
-            padding: 1.25rem 1.75rem;
-            font-size: 1rem;
-            font-family: var(--font-mono);
             text-decoration: none;
-            transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+            font-family: var(--font-mono);
+            transition: all 0.3s ease;
         }
 
         .contact-btn:hover,
         .contact-btn:focus {
-            background-color: rgba(100, 255, 218, 0.1);
+            background: rgba(100, 255, 218, 0.1);
+            transform: translateY(-3px);
             outline: none;
         }
 
@@ -382,27 +412,97 @@
             outline-offset: 4px;
         }
 
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         footer {
             text-align: center;
             padding: 2rem;
             color: var(--text-secondary);
             font-family: var(--font-mono);
             font-size: 0.85rem;
-            background-color: var(--bg-color);
-            position: relative;
-            z-index: 1;
         }
 
-        /* Mobile Optimization */
+        /* Binary Message Easter Egg */
+        .binary-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: var(--card-bg);
+            border: 2px solid var(--accent);
+            border-radius: 8px;
+            padding: 3rem;
+            z-index: 1000;
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .binary-message.active {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        .binary-message h2 {
+            color: var(--accent);
+            margin: 0 0 1.5rem 0;
+            font-size: 1.5rem;
+        }
+
+        .binary-message h2::before,
+        .binary-message h2::after {
+            display: none;
+        }
+
+        .binary-text {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .binary-message p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 100%;
+        }
+
+        .binary-message button {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: var(--font-mono);
+            transition: all 0.3s ease;
+        }
+
+        .binary-message button:hover {
+            background: rgba(100, 255, 218, 0.1);
+        }
+
+        .binary-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .binary-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
         @media (max-width: 768px) {
-            .nav-bar { padding: 1rem; }
-            .nav-links { gap: 1rem; }
-            .container { padding: 2rem 1rem; }
             .item-header { flex-direction: column; }
             .date { margin-bottom: 0.5rem; display: block; }
             h2::after { width: 100%; }
@@ -417,7 +517,6 @@
             }
         }
 
-        /* Reduced motion support */
         @media (prefers-reduced-motion: reduce) {
             *,
             *::before,
@@ -435,6 +534,23 @@
 </head>
 <body>
     <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+    <!-- Circuit Board Canvas -->
+    <canvas id="circuit-canvas"></canvas>
+
+    <!-- Binary Easter Egg Modal -->
+    <div class="binary-overlay" id="binaryOverlay"></div>
+    <div class="binary-message" id="binaryMessage">
+        <h2>01001000 01100101 01101100 01101100 01101111</h2>
+        <div class="binary-text">
+            01001000 01100101 01101100 01101100 01101111<br>
+            01000110 01110010 01101111 01101101<br>
+            01001000 01100001 01110010 01100100 01110111 01100001 01110010 01100101
+        </div>
+        <p><strong>Decoded:</strong> "Hello From Hardware"</p>
+        <p>You've discovered the binary easter egg! 🎉<br>Click on any project card 5 times to see this message again.</p>
+        <button id="closeBinary">Close</button>
+    </div>
 
     <nav class="nav-bar">
         <a href="/" class="logo">GW</a>
@@ -487,7 +603,7 @@
             <h2>Key Projects</h2>
             <div class="projects-grid">
                 <!-- Project 1 -->
-                <div class="project-card">
+                <div class="project-card" data-click-count="0">
                     <div class="project-top">
                         <!-- Icon: Radio Signal/Waves -->
                         <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -509,7 +625,7 @@
                 </div>
 
                 <!-- Project 2 -->
-                <div class="project-card">
+                <div class="project-card" data-click-count="0">
                     <div class="project-top">
                         <!-- Icon: Image/Picture -->
                         <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -529,7 +645,7 @@
                 </div>
 
                 <!-- Project 3 -->
-                <div class="project-card">
+                <div class="project-card" data-click-count="0">
                     <div class="project-top">
                         <!-- Icon: Radar/Target (LiDAR) -->
                         <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -602,7 +718,144 @@
     </footer>
 
     <script>
-        // Throttled mousemove for performance
+        // ===== CIRCUIT BOARD TRACE ANIMATION =====
+        const canvas = document.getElementById('circuit-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class CircuitNode {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.connections = [];
+                this.pulseProgress = Math.random();
+            }
+
+            connect(node) {
+                this.connections.push(node);
+            }
+
+            draw() {
+                // Draw node
+                ctx.fillStyle = 'rgba(100, 255, 218, 0.5)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Draw connections with pulse
+                this.connections.forEach(node => {
+                    const dx = node.x - this.x;
+                    const dy = node.y - this.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    // Draw trace
+                    ctx.strokeStyle = 'rgba(100, 255, 218, 0.15)';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(this.x, this.y);
+                    ctx.lineTo(node.x, node.y);
+                    ctx.stroke();
+
+                    // Draw pulse
+                    const pulseX = this.x + dx * this.pulseProgress;
+                    const pulseY = this.y + dy * this.pulseProgress;
+
+                    ctx.fillStyle = 'rgba(100, 255, 218, 0.8)';
+                    ctx.beginPath();
+                    ctx.arc(pulseX, pulseY, 2, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+
+                // Update pulse
+                this.pulseProgress += 0.005;
+                if (this.pulseProgress > 1) {
+                    this.pulseProgress = 0;
+                }
+            }
+        }
+
+        // Create circuit grid
+        const nodes = [];
+        const gridSize = 150;
+        const cols = Math.ceil(canvas.width / gridSize);
+        const rows = Math.ceil(canvas.height / gridSize);
+
+        for (let i = 0; i < cols; i++) {
+            for (let j = 0; j < rows; j++) {
+                const x = i * gridSize + Math.random() * 50;
+                const y = j * gridSize + Math.random() * 50;
+                nodes.push(new CircuitNode(x, y));
+            }
+        }
+
+        // Connect nearby nodes
+        nodes.forEach(node => {
+            const nearby = nodes.filter(other => {
+                if (other === node) return false;
+                const dx = other.x - node.x;
+                const dy = other.y - node.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                return distance < gridSize * 1.5 && Math.random() > 0.6;
+            });
+            
+            nearby.slice(0, 2).forEach(other => {
+                node.connect(other);
+            });
+        });
+
+        function animateCircuit() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            nodes.forEach(node => node.draw());
+            requestAnimationFrame(animateCircuit);
+        }
+
+        animateCircuit();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // ===== BINARY EASTER EGG =====
+        const projectCards = document.querySelectorAll('.project-card');
+        const binaryMessage = document.getElementById('binaryMessage');
+        const binaryOverlay = document.getElementById('binaryOverlay');
+
+        projectCards.forEach(card => {
+            card.addEventListener('click', () => {
+                let count = parseInt(card.getAttribute('data-click-count'));
+                count++;
+                card.setAttribute('data-click-count', count);
+
+                if (count === 5) {
+                    activateBinaryEasterEgg();
+                    // Reset all counters
+                    projectCards.forEach(c => c.setAttribute('data-click-count', '0'));
+                }
+            });
+        });
+
+        function activateBinaryEasterEgg() {
+            binaryMessage.classList.add('active');
+            binaryOverlay.classList.add('active');
+
+            console.log('%c01001000 01100101 01101100 01101100 01101111', 'color: #64ffda; font-size: 16px; font-family: monospace;');
+            console.log('%cBinary easter egg activated!', 'color: #64ffda; font-size: 14px;');
+        }
+
+        document.getElementById('closeBinary').addEventListener('click', () => {
+            binaryMessage.classList.remove('active');
+            binaryOverlay.classList.remove('active');
+        });
+
+        binaryOverlay.addEventListener('click', () => {
+            binaryMessage.classList.remove('active');
+            binaryOverlay.classList.remove('active');
+        });
+
+        // ===== ORIGINAL GLOW EFFECT =====
         let ticking = false;
         document.addEventListener('mousemove', (e) => {
             if (!ticking) {
@@ -614,6 +867,10 @@
                 ticking = true;
             }
         });
+
+        // Console hints
+        console.log('%c⚡ Hardware & FPGA Portfolio', 'color: #64ffda; font-size: 20px; font-weight: bold;');
+        console.log('%cTry clicking on any project card 5 times... 🔢', 'color: #a8b2d1; font-size: 12px;');
     </script>
 </body>
 </html>
