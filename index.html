@@ -3,25 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GW | Portfolio</title>
+    <meta name="description" content="George Wahba - Computer Engineering student specializing in embedded systems, FPGA design, and automotive controls. Portfolio showcasing real-time validation and hardware-software co-design projects.">
+    <meta name="author" content="George Wahba">
+    <meta name="keywords" content="George Wahba, Computer Engineering, Embedded Systems, FPGA, Automotive Controls, RTL Design, SystemVerilog">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://georgewahba.me/">
+    <meta property="og:title" content="George Wahba | Computer Engineering Portfolio">
+    <meta property="og:description" content="Specializing in embedded systems, FPGA design, and automotive controls">
+    <meta property="og:site_name" content="George Wahba Portfolio">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="George Wahba | Computer Engineering Portfolio">
+    <meta name="twitter:description" content="Specializing in embedded systems, FPGA design, and automotive controls">
+    
+    <title>George Wahba | Portfolio</title>
+    
     <!-- Favicon: "GW" Initials in Teal -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2364ffda%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><text x=%2250%25%22 y=%2250%25%22 dy=%22.35em%22 text-anchor=%22middle%22 font-family=%22Arial, sans-serif%22 font-weight=%22bold%22 font-size=%2214%22 fill=%22%2364ffda%22 stroke=%22none%22>GW</text><rect x=%222%22 y=%222%22 width=%2220%22 height=%2220%22 rx=%224%22 ry=%224%22 stroke=%22%2364ffda%22 fill=%22none%22/></svg>">
+    
     <style>
         :root {
             /* Sam Gordon-inspired Palette */
             --bg-color: #0a192f;
             --text-primary: #ccd6f6;
-            --text-secondary: #8892b0;
+            --text-secondary: #a8b2d1;
             --accent: #64ffda;
             --card-bg: #112240;
             --hover-bg: #233554;
-            --font-main: 'Calibre', 'Inter', 'San Francisco', 'SF Pro Text', -apple-system, system-ui, sans-serif;
-            --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+            --font-main: 'Inter', 'San Francisco', 'SF Pro Text', -apple-system, system-ui, sans-serif;
+            --font-mono: 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
             --cursor-x: 50%;
             --cursor-y: 50%;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+
+        /* Skip to content for accessibility */
+        .skip-to-content {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent);
+            color: var(--bg-color);
+            padding: 8px;
+            text-decoration: none;
+            z-index: 1000;
+            font-weight: 600;
+        }
+
+        .skip-to-content:focus {
+            top: 0;
+        }
 
         body {
             background-color: var(--bg-color);
@@ -37,7 +76,7 @@
             position: relative;
         }
 
-        /* Ambient Glow Background */
+        /* Ambient Glow Background - Optimized for performance */
         body::before {
             content: "";
             position: fixed;
@@ -46,13 +85,14 @@
             width: 100%;
             height: 100%;
             background: radial-gradient(
-                800px circle at var(--cursor-x) var(--cursor-y), 
+                min(800px, 50vw) circle at var(--cursor-x) var(--cursor-y), 
                 rgba(100, 255, 218, 0.03), 
                 transparent 40%
             );
             pointer-events: none;
             z-index: 0;
             transition: opacity 0.5s ease;
+            will-change: background;
         }
 
         .container {
@@ -111,8 +151,7 @@
             flex-direction: column;
             gap: 2rem;
             width: 100%;
-            animation: fadeUp 0.8s ease-out 0.2s forwards;
-            opacity: 0;
+            animation: fadeUp 0.8s ease-out 0.2s both;
         }
 
         .section-header {
@@ -139,7 +178,7 @@
         /* Cards Layout */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
             gap: 1.5rem;
         }
 
@@ -153,13 +192,20 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 100%;
+            min-height: 320px;
         }
 
-        .card:hover {
+        .card:hover,
+        .card:focus {
             transform: translateY(-7px);
             background-color: var(--hover-bg);
             border-color: var(--accent);
+            outline: none;
+        }
+
+        .card:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 4px;
         }
 
         .card-top {
@@ -182,7 +228,8 @@
             transition: color 0.2s;
         }
 
-        .card:hover .external-icon {
+        .card:hover .external-icon,
+        .card:focus .external-icon {
             color: var(--accent);
         }
 
@@ -193,7 +240,8 @@
             transition: color 0.2s;
         }
 
-        .card:hover h4 {
+        .card:hover h4,
+        .card:focus h4 {
             color: var(--accent);
         }
 
@@ -224,13 +272,12 @@
             text-align: center;
             margin-top: 6rem;
             margin-bottom: 2rem;
-            animation: fadeUp 0.8s ease-out 0.4s forwards;
-            opacity: 0;
+            animation: fadeUp 0.8s ease-out 0.4s both;
         }
 
         .contact-title {
             color: var(--text-primary);
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 1.5rem;
         }
 
@@ -254,24 +301,75 @@
             transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
         }
 
-        .contact-btn:hover {
+        .contact-btn:hover,
+        .contact-btn:focus {
             background-color: rgba(100, 255, 218, 0.1);
+            outline: none;
+        }
+
+        .contact-btn:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 4px;
+        }
+
+        /* Footer Styles */
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            margin-top: auto;
+            z-index: 1;
         }
 
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
         }
 
         @media (max-width: 768px) {
-            .section-header::after { width: 100%; }
-            .container { padding: 0 1.5rem 4rem 1.5rem; }
+            .section-header::after { 
+                width: 100%; 
+            }
+            .container { 
+                padding: 0 1.5rem 4rem 1.5rem; 
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            body::before {
+                animation: none;
+            }
         }
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
 
-    <div class="container">
+    <div class="container" id="main-content">
         <!-- Hero Section -->
         <section class="hero">
             <span class="mono-intro">Hi, my name is</span>
@@ -290,13 +388,21 @@
 
             <div class="cards-grid">
                 <!-- Automotive Card -->
-                <a href="automotive.html" class="card">
+                <a href="/automotive" class="card" aria-label="View automotive and controls portfolio">
                     <div>
                         <div class="card-top">
                             <!-- Car Icon -->
-                            <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/><circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg>
+                            <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/>
+                                <circle cx="6.5" cy="16.5" r="2.5"/>
+                                <circle cx="16.5" cy="16.5" r="2.5"/>
+                            </svg>
                             <!-- External Link Icon -->
-                            <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
                         </div>
                         <h4>Automotive & Controls</h4>
                         <p>
@@ -312,13 +418,26 @@
                 </a>
 
                 <!-- Hardware Card -->
-                <a href="hardware.html" class="card">
+                <a href="/hardware" class="card" aria-label="View hardware and FPGA portfolio">
                     <div>
                         <div class="card-top">
                             <!-- Microchip Icon -->
-                            <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+                            <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+                                <line x1="7" y1="2" x2="7" y2="22"></line>
+                                <line x1="17" y1="2" x2="17" y2="22"></line>
+                                <line x1="2" y1="12" x2="22" y2="12"></line>
+                                <line x1="2" y1="7" x2="7" y2="7"></line>
+                                <line x1="2" y1="17" x2="7" y2="17"></line>
+                                <line x1="17" y1="17" x2="22" y2="17"></line>
+                                <line x1="17" y1="7" x2="22" y2="7"></line>
+                            </svg>
                             <!-- External Link Icon -->
-                            <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
                         </div>
                         <h4>Hardware & FPGA</h4>
                         <p>
@@ -337,11 +456,11 @@
 
         <!-- Contact Section -->
         <section class="contact-section">
-            <h2 class="contact-title" style="font-size: 2.5rem; margin-bottom: 1rem;">Get In Touch</h2>
+            <h2 class="contact-title">Get In Touch</h2>
             <p class="contact-desc">
                 I'm always open to opportunities to work on either automotive or FPGA designs. Whether you have a question or just want to say hi, my inbox is always open!
             </p>
-            <a href="mailto:georgewahba03@outlook.com" class="contact-btn">Say Hello</a>
+            <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#103;&#101;&#111;&#114;&#103;&#101;&#119;&#97;&#104;&#98;&#97;&#48;&#51;&#64;&#111;&#117;&#116;&#108;&#111;&#111;&#107;&#46;&#99;&#111;&#109;" class="contact-btn">Say Hello</a>
         </section>
     </div>
 
@@ -350,11 +469,18 @@
     </footer>
 
     <script>
-        document.addEventListener('mousemove', e => {
-            document.documentElement.style.setProperty('--cursor-x', e.clientX + 'px');
-            document.documentElement.style.setProperty('--cursor-y', e.clientY + 'px');
+        // Throttled mousemove for performance
+        let ticking = false;
+        document.addEventListener('mousemove', (e) => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    document.documentElement.style.setProperty('--cursor-x', e.clientX + 'px');
+                    document.documentElement.style.setProperty('--cursor-y', e.clientY + 'px');
+                    ticking = false;
+                });
+                ticking = true;
+            }
         });
     </script>
-
 </body>
 </html>

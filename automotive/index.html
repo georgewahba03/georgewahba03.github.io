@@ -3,25 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automotive | GW</title>
+    <meta name="description" content="George Wahba's Automotive & Controls portfolio - Embedded C, CAN FD networks, and Model-Based Design for electric vehicles including Cadillac Lyriq control systems.">
+    <meta name="author" content="George Wahba">
+    <meta name="keywords" content="Automotive Controls, CAN FD, Embedded C, Model-Based Design, HIL, Simulink, EcoCAR, Cadillac Lyriq">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://georgewahba.me/automotive">
+    <meta property="og:title" content="Automotive & Controls | George Wahba">
+    <meta property="og:description" content="Embedded C, CAN FD networks, and Model-Based Design for electric vehicles">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Automotive & Controls | George Wahba">
+    <meta name="twitter:description" content="Embedded C, CAN FD networks, and Model-Based Design for electric vehicles">
+    
+    <title>Automotive & Controls | George Wahba</title>
+    
     <!-- Favicon: Car -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2364ffda%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2%22/><circle cx=%226.5%22 cy=%2216.5%22 r=%222.5%22/><circle cx=%2216.5%22 cy=%2216.5%22 r=%222.5%22/></svg>">
+    
     <style>
         :root {
             /* Consistent Palette */
             --bg-color: #0a192f;
             --text-primary: #ccd6f6;
-            --text-secondary: #8892b0;
+            --text-secondary: #a8b2d1;
             --accent: #64ffda;
             --card-bg: #112240;
             --hover-bg: #233554;
-            --font-main: 'Calibre', 'Inter', 'San Francisco', 'SF Pro Text', -apple-system, system-ui, sans-serif;
-            --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+            --font-main: 'Inter', 'San Francisco', 'SF Pro Text', -apple-system, system-ui, sans-serif;
+            --font-mono: 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
             --cursor-x: 50%;
             --cursor-y: 50%;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* Skip to content for accessibility */
+        .skip-to-content {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent);
+            color: var(--bg-color);
+            padding: 8px;
+            text-decoration: none;
+            z-index: 1000;
+            font-weight: 600;
+        }
+
+        .skip-to-content:focus {
+            top: 0;
+        }
 
         body {
             background-color: var(--bg-color);
@@ -29,10 +63,10 @@
             font-family: var(--font-main);
             line-height: 1.6;
             overflow-x: hidden;
-            counter-reset: section; /* Initialize section counter */
+            counter-reset: section;
         }
 
-        /* Glow Effect */
+        /* Glow Effect - Optimized */
         body::before {
             content: "";
             position: fixed;
@@ -41,12 +75,13 @@
             width: 100%;
             height: 100%;
             background: radial-gradient(
-                800px circle at var(--cursor-x) var(--cursor-y), 
+                min(800px, 50vw) circle at var(--cursor-x) var(--cursor-y), 
                 rgba(100, 255, 218, 0.03), 
                 transparent 40%
             );
             pointer-events: none;
             z-index: 0;
+            will-change: background;
         }
 
         /* Nav */
@@ -68,9 +103,25 @@
             font-size: 1.2rem;
             font-weight: 600;
             text-decoration: none;
+            transition: color 0.2s;
         }
 
-        .nav-links { display: flex; gap: 2rem; }
+        .logo:hover,
+        .logo:focus {
+            color: var(--text-primary);
+            outline: none;
+        }
+
+        .logo:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+
+        .nav-links { 
+            display: flex; 
+            gap: 2rem; 
+        }
 
         .nav-links a {
             color: var(--text-primary);
@@ -78,9 +129,21 @@
             font-family: var(--font-mono);
             font-size: 0.85rem;
             transition: color 0.2s;
+            padding: 0.5rem;
         }
 
-        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+        .nav-links a:hover, 
+        .nav-links a:focus,
+        .nav-links a.active { 
+            color: var(--accent); 
+            outline: none;
+        }
+
+        .nav-links a:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
 
         .container {
             max-width: 1000px;
@@ -108,8 +171,8 @@
         }
 
         h2::before {
-            counter-increment: section; /* Increment counter */
-            content: "0" counter(section) "."; /* Display 01., 02., etc. */
+            counter-increment: section;
+            content: "0" counter(section) ".";
             margin-right: 10px;
             color: var(--accent);
             font-family: var(--font-mono);
@@ -135,8 +198,7 @@
         /* Items (Experience) */
         .item {
             margin-bottom: 2.5rem;
-            animation: fadeUp 0.8s ease-out forwards;
-            opacity: 0;
+            animation: fadeUp 0.8s ease-out both;
         }
 
         .item-header {
@@ -185,7 +247,7 @@
         /* Project Cards Grid */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
             gap: 1.5rem;
         }
 
@@ -193,12 +255,16 @@
             background-color: var(--card-bg);
             padding: 2rem;
             border-radius: 4px;
-            transition: transform 0.2s;
+            transition: transform 0.2s, background-color 0.2s;
             cursor: default;
+            border: 1px solid transparent;
         }
 
-        .project-card:hover {
+        .project-card:hover,
+        .project-card:focus-within {
             transform: translateY(-5px);
+            background-color: var(--hover-bg);
+            border-color: var(--accent);
         }
 
         .project-top {
@@ -223,44 +289,43 @@
             color: var(--text-secondary);
             font-size: 1rem;
             margin-bottom: 1.5rem;
+            line-height: 1.6;
         }
 
         .tech-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
+            padding: 0;
+            margin: 0;
+            list-style: none;
         }
 
         .tech-list li {
             font-family: var(--font-mono);
             font-size: 0.8rem;
             color: var(--text-secondary);
-            padding: 0;
-            margin: 0;
+            margin-right: 1.25rem;
+            margin-bottom: 0.5rem;
         }
-        .tech-list li::before { content: none; }
 
-        /* Skills */
+        .tech-list li::before {
+            content: none;
+        }
+
+        /* Skills Section */
         .skills-section {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
         }
 
         .skill-group h4 {
-            color: var(--accent);
-            font-family: var(--font-mono);
+            color: var(--text-primary);
+            font-size: 1.2rem;
             margin-bottom: 1rem;
         }
 
-        /* Specific style for skill lists to fix double bullet issue */
-        .skill-group ul {
-            list-style: none;
-            padding: 0;
-        }
-        
         .skill-group li {
-            position: relative;
             padding-left: 1.5rem;
             margin-bottom: 0.5rem;
             color: var(--text-secondary);
@@ -280,8 +345,7 @@
             text-align: center;
             margin-top: 6rem;
             margin-bottom: 2rem;
-            animation: fadeUp 0.8s ease-out 0.4s forwards;
-            opacity: 0;
+            animation: fadeUp 0.8s ease-out 0.4s both;
         }
 
         .contact-title {
@@ -310,8 +374,15 @@
             transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
         }
 
-        .contact-btn:hover {
+        .contact-btn:hover,
+        .contact-btn:focus {
             background-color: rgba(100, 255, 218, 0.1);
+            outline: none;
+        }
+
+        .contact-btn:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 4px;
         }
 
         @keyframes fadeUp {
@@ -324,33 +395,60 @@
             padding: 2rem;
             color: var(--text-secondary);
             font-family: var(--font-mono);
-            font-size: 0.8rem;
+            font-size: 0.85rem;
+            background-color: var(--bg-color);
+            position: relative;
+            z-index: 1;
         }
 
         /* Mobile Optimization */
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             .nav-bar { padding: 1rem; }
             .nav-links { gap: 1rem; }
             .container { padding: 2rem 1rem; }
             .item-header { flex-direction: column; }
             .date { margin-bottom: 0.5rem; display: block; }
-            .tech-stack { display: block; margin-left: 0; margin-top: 0.5rem; }
-            h1 { font-size: 2.5rem; }
+            h2::after { width: 100%; }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links a {
+                font-size: 0.75rem;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            body::before {
+                animation: none;
+            }
         }
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
 
     <nav class="nav-bar">
-        <a href="index.html" class="logo">GW</a>
+        <a href="/" class="logo">GW</a>
         <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="automotive.html" class="active">Automotive</a>
-            <a href="hardware.html">Hardware</a>
+            <a href="/">Home</a>
+            <a href="/automotive" class="active" aria-current="page">Automotive</a>
+            <a href="/hardware">Hardware</a>
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container" id="main-content">
         <header>
             <span style="font-family: var(--font-mono); color: var(--accent);">Featured Portfolio</span>
             <h1>Automotive & Controls</h1>
@@ -393,7 +491,12 @@
                 <div class="project-card">
                     <div class="project-top">
                         <!-- Icon: Network Signal (Server/Database style) -->
-                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                            <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                            <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                            <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                        </svg>
                     </div>
                     <h4>Multi-Channel CAN FD Aggregator & Gateway</h4>
                     <p>Designed a high-throughput 8-to-2 CAN FD Gateway. Engineered a custom SPI-to-CAN FD driver stack from scratch and resolved "Interrupt Storm" failures using precision edge-triggered handling (GPIO XINT).</p>
@@ -409,7 +512,12 @@
                 <div class="project-card">
                     <div class="project-top">
                         <!-- Icon: Car/Gear -->
-                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17h7.2"/></svg>
+                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/>
+                            <circle cx="7" cy="17" r="2"/>
+                            <circle cx="17" cy="17" r="2"/>
+                            <path d="M5 17h7.2"/>
+                        </svg>
                     </div>
                     <h4>McMaster University EcoCAR - PCM Control Systems Subject Matter Expert</h4>
                     <p>Led a team of 15+ for McMaster EcoCAR. Developed control systems for a 2023 Cadillac Lyriq RWD using Model-Based Design (MBD) and conducted HIL testing for torque blending strategies.</p>
@@ -425,7 +533,9 @@
                 <div class="project-card">
                     <div class="project-top">
                         <!-- Icon: Heartbeat/Activity -->
-                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
                     </div>
                     <h4>Pacemaker Control System</h4>
                     <p>Collaborated to design a closed-loop pacemaker control system. Engineered a Simulink Stateflow model to track atrial/ventricular pulses and adapt pacing algorithms in real-time.</p>
@@ -470,7 +580,7 @@
             <p class="contact-desc">
                 I'm always open to opportunities to work on automotive designs. Whether you have a question or just want to say hi, my inbox is always open!
             </p>
-            <a href="mailto:georgewahba03@outlook.com" class="contact-btn">Say Hello</a>
+            <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#103;&#101;&#111;&#114;&#103;&#101;&#119;&#97;&#104;&#98;&#97;&#48;&#51;&#64;&#111;&#117;&#116;&#108;&#111;&#111;&#107;&#46;&#99;&#111;&#109;" class="contact-btn">Say Hello</a>
         </section>
     </div>
 
@@ -479,9 +589,17 @@
     </footer>
 
     <script>
-        document.addEventListener('mousemove', e => {
-            document.documentElement.style.setProperty('--cursor-x', e.clientX + 'px');
-            document.documentElement.style.setProperty('--cursor-y', e.clientY + 'px');
+        // Throttled mousemove for performance
+        let ticking = false;
+        document.addEventListener('mousemove', (e) => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    document.documentElement.style.setProperty('--cursor-x', e.clientX + 'px');
+                    document.documentElement.style.setProperty('--cursor-y', e.clientY + 'px');
+                    ticking = false;
+                });
+                ticking = true;
+            }
         });
     </script>
 </body>
