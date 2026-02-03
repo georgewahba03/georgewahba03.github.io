@@ -548,7 +548,7 @@
             01001000 01100001 01110010 01100100 01110111 01100001 01110010 01100101
         </div>
         <p><strong>Decoded:</strong> "Hello From Hardware"</p>
-        <p>You've discovered the binary easter egg! 🎉<br>Click on any project card 5 times to see this message again.</p>
+        <p> Nice detective skills, you found the hidden message! 🎉<br>Click on any project card 5 times to see this message again.</p>
         <button id="closeBinary">Close</button>
     </div>
 
@@ -818,7 +818,7 @@
             canvas.height = window.innerHeight;
         });
 
-        // ===== BINARY EASTER EGG =====
+        // Fun Easter Egg: Binary Message on 5 Clicks
         const projectCards = document.querySelectorAll('.project-card');
         const binaryMessage = document.getElementById('binaryMessage');
         const binaryOverlay = document.getElementById('binaryOverlay');
@@ -855,7 +855,7 @@
             binaryOverlay.classList.remove('active');
         });
 
-        // ===== ORIGINAL GLOW EFFECT =====
+        // Glow affect following cursor
         let ticking = false;
         document.addEventListener('mousemove', (e) => {
             if (!ticking) {
