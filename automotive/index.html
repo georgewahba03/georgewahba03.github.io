@@ -609,7 +609,7 @@
                         </svg>
                     </div>
                     <h4>Multi-Channel CAN FD Aggregator & Gateway</h4>
-                    <p>Designed a high-throughput 8-to-2 CAN FD Gateway. Engineered a custom SPI-to-CAN FD driver stack from scratch and resolved "Interrupt Storm" failures using precision edge-triggered handling (GPIO XINT).</p>
+                    <p>Designed a high-throughput 8-to-2 CAN FD Gateway on TI C2000 microcontroller. Engineered a custom SPI-to-CAN FD driver stack from scratch, implementing edge-triggered GPIO interrupts for precise frame synchronization and implementing message filtering and routing algorithms for multi-channel arbitration.</p>
                     <ul class="tech-list">
                         <li>C</li>
                         <li>TI C2000</li>
@@ -678,7 +678,7 @@
     </footer>
 
     <script>
-        // Particle System with Mouse Interaction
+        // Particle System
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         
@@ -842,7 +842,7 @@
             document.getElementById('easterEggOverlay').classList.remove('active');
         });
 
-        // Original Glow Effect Mouse Tracking
+        // Glow Effect Cursor Tracking
         let ticking = false;
         document.addEventListener('mousemove', (e) => {
             if (!ticking) {
