@@ -383,7 +383,8 @@
         }
 
         .contact-title::before {
-            margin-right: 10px;
+            content: none !important;
+            display: none;
         }
 
         .contact-title::after {
@@ -842,7 +843,7 @@
             document.getElementById('easterEggOverlay').classList.remove('active');
         });
 
-        // Glow Effect Cursor Tracking
+        // Glow Effect
         let ticking = false;
         document.addEventListener('mousemove', (e) => {
             if (!ticking) {
