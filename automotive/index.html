@@ -383,10 +383,7 @@
         }
 
         .contact-title::before {
-            content: "";
-            counter-increment: none;
-            margin-right: 0;
-            display: none;
+            margin-right: 10px;
         }
 
         .contact-title::after {
@@ -543,7 +540,7 @@
     <div class="easter-egg-overlay" id="easterEggOverlay"></div>
     <div class="easter-egg-modal" id="easterEggModal">
         <h2>🎮 Konami Code Activated!</h2>
-        <p>Wow! Nice work activating the throwback mode!</p>
+        <p>You've unlocked the secret developer mode! You clearly know your way around a controller... or keyboard.</p>
         <p style="font-family: var(--font-mono); color: var(--accent); font-size: 0.9rem;">
             ↑ ↑ ↓ ↓ ← → ← → B A
         </p>
@@ -577,7 +574,10 @@
                     <span class="date">Sep 2022 — Apr 2024</span>
                 </div>
                 <ul>
-                    <li>Led a team of 15+ for McMaster EcoCAR. Developed control systems for a 2023 Cadillac Lyriq RWD using Model-Based Design (MBD) and conducted HIL testing for torque blending strategies.</li>
+                    <li>Developed control systems for a 2023 Cadillac Lyriq RWD using Model-Based Design in Simulink and Stateflow, implementing torque blending strategies validated through Hardware-in-the-Loop (HIL) testing.</li>
+                    <li>Coordinated with a sub-team of 15+ members through weekly progress meetings, facilitating development of essential control system components and ensuring alignment with project milestones.</li>
+                    <li>Contributed to technical research documentation outlining advanced control strategies including one-pedal driving algorithms, RWD to AWD conversion architecture, and torque distribution methodologies.</li>
+                    <li>Performed MATLAB-based data analysis for drivetrain architecture optimization and motor selection, evaluating performance metrics to determine optimal AWD configuration.</li>
                 </ul>
             </div>
 
@@ -678,7 +678,7 @@
     </footer>
 
     <script>
-        // ===== PARTICLE SYSTEM =====
+        // Particle System with Mouse Interaction
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         
@@ -792,7 +792,7 @@
         init();
         animate();
 
-        // ===== KONAMI CODE EASTER EGG =====
+        // Konami Code Easter Egg
         const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
         let konamiIndex = 0;
 
@@ -842,7 +842,7 @@
             document.getElementById('easterEggOverlay').classList.remove('active');
         });
 
-        // ===== ORIGINAL GLOW EFFECT =====
+        // Original Glow Effect Mouse Tracking
         let ticking = false;
         document.addEventListener('mousemove', (e) => {
             if (!ticking) {
