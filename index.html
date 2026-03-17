@@ -6,457 +6,294 @@
     <meta name="description" content="George Wahba - Computer Engineering student specializing in embedded systems, FPGA design, and automotive controls. Portfolio showcasing real-time validation and hardware-software co-design projects.">
     <meta name="author" content="George Wahba">
     <meta name="keywords" content="George Wahba, Computer Engineering, Embedded Systems, FPGA, Automotive Controls, RTL Design, SystemVerilog">
-    
-    <!-- Open Graph / Social Media -->
+
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://georgewahba.me/">
     <meta property="og:title" content="George Wahba | Computer Engineering Portfolio">
     <meta property="og:description" content="Specializing in embedded systems, FPGA design, and automotive controls">
     <meta property="og:site_name" content="George Wahba Portfolio">
-    
-    <!-- Twitter Card -->
+
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="George Wahba | Computer Engineering Portfolio">
     <meta name="twitter:description" content="Specializing in embedded systems, FPGA design, and automotive controls">
-    
+
     <title>George Wahba | Portfolio</title>
-    
-    <!-- Favicon: "GW" Initials in Teal -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2364ffda%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><text x=%2250%25%22 y=%2250%25%22 dy=%22.35em%22 text-anchor=%22middle%22 font-family=%22Arial, sans-serif%22 font-weight=%22bold%22 font-size=%2214%22 fill=%22%2364ffda%22 stroke=%22none%22>GW</text><rect x=%222%22 y=%222%22 width=%2220%22 height=%2220%22 rx=%224%22 ry=%224%22 stroke=%22%2364ffda%22 fill=%22none%22/></svg>">
-    
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><text x=%2250%25%22 y=%2250%25%22 dy=%22.35em%22 text-anchor=%22middle%22 font-family=%22monospace%22 font-weight=%22bold%22 font-size=%2214%22 fill=%22%23f5a623%22>GW</text><rect x=%222%22 y=%222%22 width=%2220%22 height=%2220%22 rx=%224%22 ry=%224%22 stroke=%22%23f5a623%22 fill=%22none%22 stroke-width=%222%22/></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            /* Sam Gordon-inspired Palette */
-            --bg-color: #0a192f;
-            --text-primary: #ccd6f6;
-            --text-secondary: #a8b2d1;
-            --accent: #64ffda;
-            --card-bg: #112240;
-            --hover-bg: #233554;
-            --font-main: 'Inter', 'San Francisco', 'SF Pro Text', -apple-system, system-ui, sans-serif;
-            --font-mono: 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+            --bg-color: #0a0a0f;
+            --bg-subtle: #111118;
+            --text-primary: #e0ddd5;
+            --text-secondary: #8a8578;
+            --accent: #f5a623;
+            --accent-dim: rgba(245, 166, 35, 0.15);
+            --accent-glow: rgba(245, 166, 35, 0.4);
+            --card-bg: #141418;
+            --hover-bg: #1e1e24;
+            --border: #2a2a32;
+            --font-main: 'Outfit', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
             --cursor-x: 50%;
             --cursor-y: 50%;
         }
 
-        * { 
-            box-sizing: border-box; 
-            margin: 0; 
-            padding: 0; 
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* Skip to content for accessibility */
         .skip-to-content {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: var(--accent);
-            color: var(--bg-color);
-            padding: 8px;
-            text-decoration: none;
-            z-index: 1000;
-            font-weight: 600;
+            position: absolute; top: -40px; left: 0;
+            background: var(--accent); color: var(--bg-color);
+            padding: 8px; text-decoration: none; z-index: 1000; font-weight: 600;
         }
-
-        .skip-to-content:focus {
-            top: 0;
-        }
+        .skip-to-content:focus { top: 0; }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-primary);
             font-family: var(--font-main);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
             line-height: 1.3;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* Matrix Rain Canvas */
-        #matrix-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.15;
+        /* CRT scanline overlay */
+        body::after {
+            content: "";
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+            pointer-events: none; z-index: 9999;
         }
 
-        /* Ambient Glow Background - Optimized for performance */
+        #matrix-canvas {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0;
+        }
+
         body::before {
             content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(
-                min(800px, 50vw) circle at var(--cursor-x) var(--cursor-y), 
-                rgba(100, 255, 218, 0.03), 
-                transparent 40%
-            );
-            pointer-events: none;
-            z-index: 0;
-            transition: opacity 0.5s ease;
-            will-change: background;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(min(600px,40vw) circle at var(--cursor-x) var(--cursor-y), rgba(245,166,35,0.04), transparent 40%);
+            pointer-events: none; z-index: 0; will-change: background;
         }
 
-        .container {
-            max-width: 1000px;
-            width: 100%;
-            padding: 0 2rem 5rem 2rem;
-            z-index: 1;
-        }
+        .container { max-width: 1000px; width: 100%; padding: 0 2rem 5rem 2rem; z-index: 1; }
 
-        /* Hero Section */
         .hero {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            margin-bottom: 5rem;
-            animation: fadeUp 0.8s ease-out forwards;
-            padding-top: 5rem;
+            display: flex; flex-direction: column; align-items: flex-start;
+            margin-bottom: 6rem; animation: fadeUp 0.8s ease-out forwards; padding-top: 5rem;
         }
 
         .mono-intro {
-            color: var(--accent);
-            font-family: var(--font-mono);
-            font-size: 1rem;
-            margin-bottom: 1.2rem;
-            margin-left: 2px;
+            color: var(--accent); font-family: var(--font-mono);
+            font-size: 0.9rem; margin-bottom: 1.2rem; margin-left: 2px; letter-spacing: 0.5px;
         }
 
         h1 {
-            font-size: clamp(40px, 8vw, 80px);
-            font-weight: 600;
-            color: var(--text-primary);
-            margin: 0;
-            line-height: 1.1;
+            font-size: clamp(44px, 8vw, 80px); font-weight: 700;
+            color: var(--text-primary); margin: 0; line-height: 1.05; letter-spacing: -1px;
         }
 
-        h2 {
-            font-size: clamp(40px, 8vw, 80px);
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin: 0;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
+        h2.subtitle {
+            font-size: clamp(36px, 6vw, 64px); font-weight: 300;
+            color: var(--text-secondary); margin: 0 0 1.5rem 0; line-height: 1.1;
         }
 
-        p {
-            max-width: 540px;
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 3rem;
-            line-height: 1.6;
+        p.hero-desc {
+            max-width: 540px; font-size: 1.05rem; color: var(--text-secondary);
+            margin-bottom: 3rem; line-height: 1.7; font-weight: 300;
         }
 
-        /* Portfolio Selector Section */
-        .selection-area {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            width: 100%;
-            animation: fadeUp 0.8s ease-out 0.2s both;
-        }
+        .pcb-section { animation: fadeUp 0.8s ease-out 0.2s both; }
 
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .section-header h3 {
-            font-size: 1.8rem;
-            color: var(--text-primary);
-            white-space: nowrap;
-        }
-
+        .section-header { display: flex; align-items: center; margin-bottom: 2.5rem; }
+        .section-header h3 { font-size: 1.6rem; color: var(--text-primary); white-space: nowrap; font-weight: 500; }
         .section-header::after {
-            content: "";
-            display: block;
-            width: 300px;
-            height: 1px;
-            background-color: #233554;
-            margin-left: 20px;
+            content: ""; display: block; width: 300px; height: 1px;
+            background: linear-gradient(90deg, var(--border), transparent); margin-left: 20px;
         }
 
-        /* Cards Layout */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-            gap: 1.5rem;
+        /* PCB Board */
+        .pcb-board {
+            position: relative; width: 100%; min-height: 420px;
+            background: radial-gradient(circle at 20% 50%, rgba(245,166,35,0.02), transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(245,166,35,0.02), transparent 50%),
+                        var(--bg-subtle);
+            border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
         }
 
-        .card {
-            background-color: var(--card-bg);
-            padding: 2rem 1.75rem;
-            border-radius: 4px;
-            text-decoration: none;
-            transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
-            border: 1px solid transparent;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 320px;
+        .pcb-traces {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;
         }
 
-        .card:hover,
-        .card:focus {
-            transform: translateY(-7px);
-            background-color: var(--hover-bg);
+        .trace-line { stroke: var(--border); stroke-width: 2; fill: none; transition: stroke 0.6s ease; }
+        .trace-line.glow { stroke: var(--accent); stroke-width: 2.5; filter: drop-shadow(0 0 6px var(--accent-glow)); }
+
+        .trace-pulse { fill: var(--accent); r: 4; opacity: 0; filter: drop-shadow(0 0 4px var(--accent)); }
+        .trace-pulse.active { opacity: 1; }
+
+        .pcb-layout {
+            display: flex; align-items: center; justify-content: center;
+            gap: 0; width: 100%; padding: 2rem; position: relative; z-index: 2;
+        }
+
+        .ic-package {
+            display: flex; flex-direction: column; align-items: center; gap: 1rem;
+            cursor: pointer; text-decoration: none; transition: transform 0.3s ease; padding: 1.5rem;
+        }
+        .ic-package:hover { transform: translateY(-4px); }
+
+        .ic-body {
+            width: 160px; height: 160px; background: var(--card-bg); border: 2px solid var(--border);
+            border-radius: 6px; display: flex; flex-direction: column; align-items: center;
+            justify-content: center; gap: 0.75rem; position: relative;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .ic-package:hover .ic-body {
             border-color: var(--accent);
-            outline: none;
+            box-shadow: 0 0 30px rgba(245,166,35,0.1), inset 0 0 30px rgba(245,166,35,0.03);
         }
 
-        .card:focus-visible {
-            outline: 2px solid var(--accent);
-            outline-offset: 4px;
-            border-radius: 4px;
+        .ic-pins-top, .ic-pins-bottom { display: flex; justify-content: center; gap: 12px; }
+        .ic-pin {
+            width: 3px; height: 14px; background: var(--border); border-radius: 1px;
+            transition: background 0.4s ease, box-shadow 0.4s ease;
+        }
+        .ic-package:hover .ic-pin { background: var(--accent); box-shadow: 0 0 6px var(--accent-glow); }
+
+        .ic-pins-left, .ic-pins-right {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            display: flex; flex-direction: column; gap: 12px;
+        }
+        .ic-pins-left { left: -14px; }
+        .ic-pins-right { right: -14px; }
+
+        .ic-pin-h {
+            width: 14px; height: 3px; background: var(--border); border-radius: 1px;
+            transition: background 0.4s ease, box-shadow 0.4s ease;
+        }
+        .ic-package:hover .ic-pin-h { background: var(--accent); box-shadow: 0 0 6px var(--accent-glow); }
+
+        .ic-icon { width: 40px; height: 40px; color: var(--accent); opacity: 0.8; }
+
+        .ic-label {
+            font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-secondary);
+            text-transform: uppercase; letter-spacing: 1.5px; text-align: center;
         }
 
-        .card-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
+        .ic-name {
+            font-family: var(--font-main); font-size: 1rem; color: var(--text-primary);
+            font-weight: 500; text-align: center; margin-top: 1rem;
         }
 
-        .folder-icon {
-            width: 40px;
-            height: 40px;
-            color: var(--accent);
+        .ic-desc {
+            font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-secondary);
+            text-align: center; max-width: 180px; line-height: 1.5; margin-top: 0.25rem;
         }
 
-        .external-icon {
-            width: 22px;
-            height: 22px;
-            color: var(--text-secondary);
-            transition: color 0.2s;
+        .central-die {
+            width: 80px; height: 80px; background: var(--card-bg); border: 2px solid var(--accent);
+            border-radius: 4px; display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-mono); font-size: 1.4rem; font-weight: 700; color: var(--accent);
+            position: relative; z-index: 3; box-shadow: 0 0 40px rgba(245,166,35,0.08); flex-shrink: 0;
+        }
+        .central-die::before {
+            content: ""; position: absolute; inset: 4px;
+            border: 1px solid rgba(245,166,35,0.2); border-radius: 2px;
         }
 
-        .card:hover .external-icon,
-        .card:focus .external-icon {
-            color: var(--accent);
-        }
-
-        .card h4 {
-            font-size: 1.5rem;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-        }
-
-        .card p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-            flex-grow: 1;
-        }
-
-        .tech-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            list-style: none;
-        }
-
-        .tech-list li {
-            color: var(--text-secondary);
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-        }
-
-        /* Contact Section */
         .contact-section {
-            text-align: center;
-            margin-top: 8rem;
-            animation: fadeUp 0.8s ease-out 0.4s both;
+            text-align: center; margin-top: 8rem; animation: fadeUp 0.8s ease-out 0.4s both;
         }
-
-        .contact-title {
-            color: var(--text-primary);
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
+        .contact-title { color: var(--text-primary); font-size: 2.2rem; margin-bottom: 1.5rem; font-weight: 500; }
         .contact-desc {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            max-width: 500px;
-            margin: 0 auto 2.5rem auto;
+            color: var(--text-secondary); font-size: 1.05rem; max-width: 500px;
+            margin: 0 auto 2.5rem auto; line-height: 1.7; font-weight: 300;
         }
 
         .contact-btn {
-            display: inline-block;
-            color: var(--accent);
-            background-color: transparent;
-            border: 1px solid var(--accent);
-            border-radius: 4px;
-            padding: 1.25rem 1.75rem;
-            font-size: 1rem;
-            font-family: var(--font-mono);
-            text-decoration: none;
-            transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+            display: inline-block; color: var(--accent); background-color: transparent;
+            border: 1px solid var(--accent); border-radius: 4px;
+            padding: 1.1rem 1.75rem; font-size: 0.9rem; font-family: var(--font-mono);
+            text-decoration: none; transition: all 0.25s cubic-bezier(0.645,0.045,0.355,1);
+            letter-spacing: 0.5px;
         }
-
-        .contact-btn:hover,
-        .contact-btn:focus {
-            background-color: rgba(100, 255, 218, 0.1);
-            outline: none;
+        .contact-btn:hover, .contact-btn:focus {
+            background-color: var(--accent-dim);
+            box-shadow: 0 0 20px rgba(245,166,35,0.1); outline: none;
         }
+        .contact-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 
-        .contact-btn:focus-visible {
-            outline: 2px solid var(--accent);
-            outline-offset: 4px;
-        }
-
-        /* Footer Styles */
         footer {
-            width: 100%;
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-secondary);
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            margin-top: auto;
-            z-index: 1;
+            width: 100%; text-align: center; padding: 2rem;
+            color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.8rem;
+            margin-top: auto; z-index: 1;
         }
 
-        /* Developer Console Easter Egg */
+        /* Dev Console */
         .dev-console {
-            position: fixed;
-            bottom: -400px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 800px;
-            height: 350px;
-            background: rgba(17, 34, 64, 0.98);
-            border: 2px solid var(--accent);
-            border-radius: 8px 8px 0 0;
-            z-index: 1000;
-            transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+            position: fixed; bottom: -400px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 800px; height: 350px;
+            background: rgba(20,20,24,0.98); border: 2px solid var(--accent);
+            border-radius: 8px 8px 0 0; z-index: 10000;
+            transition: bottom 0.5s cubic-bezier(0.68,-0.55,0.265,1.55);
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.5); backdrop-filter: blur(20px);
         }
-
-        .dev-console.active {
-            bottom: 0;
-        }
-
+        .dev-console.active { bottom: 0; }
         .console-header {
-            background: var(--card-bg);
-            padding: 0.75rem 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background: var(--bg-subtle); padding: 0.75rem 1rem;
+            display: flex; justify-content: space-between; align-items: center;
             border-bottom: 1px solid var(--accent);
         }
-
-        .console-title {
-            color: var(--accent);
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
+        .console-title { color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; }
         .console-close {
-            background: transparent;
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            padding: 0.25rem 0.75rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            transition: all 0.2s;
+            background: transparent; border: 1px solid var(--accent); color: var(--accent);
+            padding: 0.25rem 0.75rem; border-radius: 4px; cursor: pointer;
+            font-family: var(--font-mono); font-size: 0.8rem; transition: all 0.2s;
         }
-
-        .console-close:hover {
-            background: rgba(100, 255, 218, 0.1);
-        }
-
+        .console-close:hover { background: var(--accent-dim); }
         .console-content {
-            padding: 1rem;
-            height: calc(100% - 50px);
-            overflow-y: auto;
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            line-height: 1.6;
+            padding: 1rem; height: calc(100% - 50px); overflow-y: auto;
+            font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.6;
         }
-
-        .console-line {
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        .console-line.success {
-            color: var(--accent);
-        }
-
-        .console-line.error {
-            color: #ff6b6b;
-        }
-
-        .console-prompt {
-            color: var(--accent);
-        }
+        .console-line { color: var(--text-secondary); margin-bottom: 0.5rem; }
+        .console-line.success { color: var(--accent); }
 
         @keyframes fadeUp {
-            from { 
-                opacity: 0; 
-                transform: translateY(20px); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @media (max-width: 768px) {
-            .section-header::after { 
-                width: 100%; 
-            }
-            .container { 
-                padding: 0 1.5rem 4rem 1.5rem; 
-            }
+            .section-header::after { width: 100%; }
+            .container { padding: 0 1.5rem 4rem 1.5rem; }
+            .pcb-layout { flex-direction: column; gap: 1.5rem; }
+            .ic-body { width: 140px; height: 140px; }
+            .central-die { width: 60px; height: 60px; font-size: 1.1rem; }
+            .pcb-traces { display: none; }
         }
 
-        @media (max-width: 480px) {
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Reduced motion support */
         @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
+            *, *::before, *::after {
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
-            }
-            
-            body::before {
-                animation: none;
             }
         }
     </style>
 </head>
 <body>
     <a href="#main-content" class="skip-to-content">Skip to main content</a>
-
-    <!-- Matrix Rain Canvas -->
     <canvas id="matrix-canvas"></canvas>
 
-    <!-- Developer Console Easter Egg -->
     <div class="dev-console" id="devConsole">
         <div class="console-header">
             <span class="console-title">// Developer Console</span>
@@ -468,104 +305,101 @@
             <div class="console-line success">✓ System check complete</div>
             <div class="console-line success">✓ Loading portfolio modules</div>
             <div class="console-line">
-                <br>
-                <span style="color: var(--accent);">Welcome, Developer!</span><br>
-                You've discovered my secret console. 🎉<br>
-                <br>
+                <br><span style="color: var(--accent);">Welcome, Developer!</span><br>
+                You've discovered the secret console. 🎉<br><br>
                 <span style="color: var(--text-primary);">Fun fact:</span> This site is built with vanilla HTML, CSS, and JavaScript.<br>
-                No frameworks, no build tools, just the good old-fashioned web tech.<br>
-                <br>
-                Type <span style="color: var(--accent);">'debug'</span> three times anywhere on the page to open this console again!
+                No frameworks, no build tools — just the fundamentals.<br><br>
+                Type <span style="color: var(--accent);">'d'</span> three times to open this console again!
             </div>
         </div>
     </div>
 
     <div class="container" id="main-content">
-        <!-- Hero Section -->
         <section class="hero">
             <span class="mono-intro">Hi, my name is</span>
             <h1>George Wahba.</h1>
-            <h2>I build things for the physical world.</h2>
-            <p>
+            <h2 class="subtitle">I build things for the physical world.</h2>
+            <p class="hero-desc">
                 I'm a Computer Engineering student specializing in embedded systems, FPGA design, and automotive controls. Currently, I'm focused on real-time validation and hardware-software co-design.
             </p>
         </section>
 
-        <!-- Selection Area -->
-        <section class="selection-area">
+        <section class="pcb-section">
             <div class="section-header">
                 <h3>Select Your Experience</h3>
             </div>
+            <div class="pcb-board">
+                <svg class="pcb-traces" viewBox="0 0 1000 420" preserveAspectRatio="xMidYMid meet">
+                    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <circle cx="10" cy="10" r="0.5" fill="rgba(255,255,255,0.04)"/>
+                    </pattern>
+                    <rect width="100%" height="100%" fill="url(#grid)"/>
 
-            <div class="cards-grid">
-                <!-- Automotive Card -->
-                <a href="/automotive" class="card" aria-label="View automotive and controls portfolio">
-                    <div>
-                        <div class="card-top">
-                            <!-- Car Icon -->
-                            <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline class="trace-line" id="trace-left-1" points="280,170 340,170 400,170 440,190 470,210"/>
+                    <polyline class="trace-line" id="trace-left-2" points="280,210 340,210 470,210"/>
+                    <polyline class="trace-line" id="trace-left-3" points="280,250 340,250 400,250 440,230 470,210"/>
+
+                    <polyline class="trace-line" id="trace-right-1" points="530,210 560,190 600,170 660,170 720,170"/>
+                    <polyline class="trace-line" id="trace-right-2" points="530,210 660,210 720,210"/>
+                    <polyline class="trace-line" id="trace-right-3" points="530,210 560,230 600,250 660,250 720,250"/>
+
+                    <circle class="trace-pulse" id="pulse-l1" cx="280" cy="170"/>
+                    <circle class="trace-pulse" id="pulse-l2" cx="280" cy="210"/>
+                    <circle class="trace-pulse" id="pulse-l3" cx="280" cy="250"/>
+                    <circle class="trace-pulse" id="pulse-r1" cx="530" cy="210"/>
+                    <circle class="trace-pulse" id="pulse-r2" cx="530" cy="210"/>
+                    <circle class="trace-pulse" id="pulse-r3" cx="530" cy="210"/>
+
+                    <circle cx="340" cy="170" r="4" fill="none" stroke="var(--border)" stroke-width="1"/>
+                    <circle cx="340" cy="210" r="4" fill="none" stroke="var(--border)" stroke-width="1"/>
+                    <circle cx="340" cy="250" r="4" fill="none" stroke="var(--border)" stroke-width="1"/>
+                    <circle cx="660" cy="170" r="4" fill="none" stroke="var(--border)" stroke-width="1"/>
+                    <circle cx="660" cy="210" r="4" fill="none" stroke="var(--border)" stroke-width="1"/>
+                    <circle cx="660" cy="250" r="4" fill="none" stroke="var(--border)" stroke-width="1"/>
+                </svg>
+
+                <div class="pcb-layout">
+                    <a href="/automotive" class="ic-package" id="ic-automotive" aria-label="View automotive and controls portfolio">
+                        <div class="ic-pins-top"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
+                        <div class="ic-body">
+                            <div class="ic-pins-left"><div class="ic-pin-h"></div><div class="ic-pin-h"></div><div class="ic-pin-h"></div></div>
+                            <svg class="ic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/>
-                                <circle cx="6.5" cy="16.5" r="2.5"/>
-                                <circle cx="16.5" cy="16.5" r="2.5"/>
+                                <circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/>
                             </svg>
-                            <!-- External Link Icon -->
-                            <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
+                            <span class="ic-label">Automotive<br>& Controls</span>
+                            <div class="ic-pins-right"><div class="ic-pin-h"></div><div class="ic-pin-h"></div><div class="ic-pin-h"></div></div>
                         </div>
-                        <h4>Automotive & Controls</h4>
-                        <p>
-                            Focus on Embedded C, CAN FD networks, and Model-Based Design for electric vehicles. Featuring work on the Cadillac Lyriq control systems.
-                        </p>
-                    </div>
-                    <ul class="tech-list">
-                        <li>Simulink</li>
-                        <li>CAN FD</li>
-                        <li>Embedded C</li>
-                        <li>HIL</li>
-                    </ul>
-                </a>
+                        <div class="ic-pins-bottom"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
+                        <span class="ic-name">Automotive & Controls</span>
+                        <span class="ic-desc">Embedded C · CAN FD · Simulink · HIL</span>
+                    </a>
 
-                <!-- Hardware Card -->
-                <a href="/hardware" class="card" aria-label="View hardware and FPGA portfolio">
-                    <div>
-                        <div class="card-top">
-                            <!-- Microchip Icon -->
-                            <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
-                                <line x1="7" y1="2" x2="7" y2="22"></line>
-                                <line x1="17" y1="2" x2="17" y2="22"></line>
-                                <line x1="2" y1="12" x2="22" y2="12"></line>
-                                <line x1="2" y1="7" x2="7" y2="7"></line>
-                                <line x1="2" y1="17" x2="7" y2="17"></line>
-                                <line x1="17" y1="17" x2="22" y2="17"></line>
-                                <line x1="17" y1="7" x2="22" y2="7"></line>
+                    <div class="central-die">GW</div>
+
+                    <a href="/hardware" class="ic-package" id="ic-hardware" aria-label="View hardware and FPGA portfolio">
+                        <div class="ic-pins-top"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
+                        <div class="ic-body">
+                            <div class="ic-pins-left"><div class="ic-pin-h"></div><div class="ic-pin-h"></div><div class="ic-pin-h"></div></div>
+                            <svg class="ic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                                <rect x="9" y="9" width="6" height="6"></rect>
+                                <line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line>
+                                <line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line>
+                                <line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line>
+                                <line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line>
                             </svg>
-                            <!-- External Link Icon -->
-                            <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
+                            <span class="ic-label">Hardware<br>& FPGA</span>
+                            <div class="ic-pins-right"><div class="ic-pin-h"></div><div class="ic-pin-h"></div><div class="ic-pin-h"></div></div>
                         </div>
-                        <h4>Hardware & FPGA</h4>
-                        <p>
-                            Deep dive into RTL design, SystemVerilog, and Digital Signal Processing. Featuring Real-Time SDR and Image Acceleration projects.
-                        </p>
-                    </div>
-                    <ul class="tech-list">
-                        <li>SystemVerilog</li>
-                        <li>FPGA</li>
-                        <li>DSP</li>
-                        <li>Vivado</li>
-                    </ul>
-                </a>
+                        <div class="ic-pins-bottom"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
+                        <span class="ic-name">Hardware & FPGA</span>
+                        <span class="ic-desc">SystemVerilog · DSP · Vivado · RTL</span>
+                    </a>
+                </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
         <section class="contact-section">
             <h2 class="contact-title">Get In Touch</h2>
             <p class="contact-desc">
@@ -575,116 +409,104 @@
         </section>
     </div>
 
-    <footer>
-        <p>Built by George Wahba</p>
-    </footer>
+    <footer><p>Built by George Wahba</p></footer>
 
     <script>
-        // ===== MATRIX RAIN EFFECT =====
+        // ===== SCROLL-REACTIVE MATRIX RAIN =====
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
-
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        // Matrix characters - mix of numbers, hex, and symbols
         const chars = '0123456789ABCDEF><+-*/=[]{}();:';
         const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        const drops = [];
+        let columns = Math.floor(canvas.width / fontSize);
+        let drops = [];
+        let scrollProgress = 0;
 
-        // Initialize drops
-        for (let i = 0; i < columns; i++) {
-            drops[i] = Math.random() * -100;
-        }
+        for (let i = 0; i < columns; i++) drops[i] = Math.random() * -100;
+
+        window.addEventListener('scroll', () => {
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            scrollProgress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+        });
 
         function drawMatrix() {
-            // Semi-transparent black to create trail effect
-            ctx.fillStyle = 'rgba(10, 25, 47, 0.05)';
+            canvas.style.opacity = 0.06 + scrollProgress * 0.14;
+            ctx.fillStyle = `rgba(10, 10, 15, ${0.05 + scrollProgress * 0.03})`;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = '#64ffda';
+            ctx.fillStyle = `hsl(${35 + scrollProgress * 10}, 90%, 55%)`;
             ctx.font = fontSize + 'px monospace';
-
+            const speed = 1 + scrollProgress * 2;
             for (let i = 0; i < drops.length; i++) {
-                const text = chars[Math.floor(Math.random() * chars.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                // Reset drop to top randomly
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-
-                drops[i]++;
+                ctx.fillText(chars[Math.floor(Math.random() * chars.length)], i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > (0.98 - scrollProgress * 0.02)) drops[i] = 0;
+                drops[i] += speed * (0.5 + Math.random() * 0.5);
             }
         }
-
         setInterval(drawMatrix, 50);
 
         window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.height;
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            columns = Math.floor(canvas.width / fontSize);
+            drops = []; for (let i = 0; i < columns; i++) drops[i] = Math.random() * -100;
         });
 
-        // ===== DEVELOPER CONSOLE EASTER EGG =====
-        let debugCount = 0;
-        let debugTimer = null;
-        const devConsole = document.getElementById('devConsole');
-
-        document.addEventListener('keypress', (e) => {
-            // Reset timer on each keypress
-            clearTimeout(debugTimer);
-            debugTimer = setTimeout(() => {
-                debugCount = 0;
-            }, 2000);
-
-            // Check for 'd' key
-            if (e.key === 'd' || e.key === 'D') {
-                debugCount++;
-                
-                if (debugCount === 1) {
-                    // First 'd' - show hint in console
-                    console.log('%c🔍 Debug mode initializing...', 'color: #64ffda; font-size: 14px;');
-                } else if (debugCount === 2) {
-                    console.log('%c🔍🔍 Almost there...', 'color: #64ffda; font-size: 14px;');
-                } else if (debugCount >= 3) {
-                    // Third 'd' - activate console
-                    activateDevConsole();
-                    debugCount = 0;
-                }
-            } else {
-                // Reset if any other key is pressed
-                debugCount = 0;
+        // ===== PCB TRACE HOVER =====
+        function animatePulses(pulseIds, traceIds) {
+            const pulses = pulseIds.map(id => document.getElementById(id));
+            const traces = traceIds.map(id => document.getElementById(id));
+            traces.forEach(t => t.classList.add('glow'));
+            pulses.forEach(p => p.classList.add('active'));
+            let progress = 0;
+            function step() {
+                progress += 0.015;
+                if (progress > 1) progress = 0;
+                pulses.forEach((pulse, i) => {
+                    const pts = traces[i].getAttribute('points').split(' ').map(p => {
+                        const [x, y] = p.split(',').map(Number); return { x, y };
+                    });
+                    const seg = progress * (pts.length - 1);
+                    const idx = Math.min(Math.floor(seg), pts.length - 2);
+                    const frac = seg - idx;
+                    pulse.setAttribute('cx', pts[idx].x + (pts[idx+1].x - pts[idx].x) * frac);
+                    pulse.setAttribute('cy', pts[idx].y + (pts[idx+1].y - pts[idx].y) * frac);
+                });
+                return requestAnimationFrame(step);
             }
-        });
-
-        function activateDevConsole() {
-            devConsole.classList.add('active');
-            
-            // Add typing animation to console content
-            const content = document.getElementById('consoleContent');
-            const lines = content.querySelectorAll('.console-line');
-            
-            lines.forEach((line, index) => {
-                line.style.opacity = '0';
-                setTimeout(() => {
-                    line.style.transition = 'opacity 0.3s';
-                    line.style.opacity = '1';
-                }, index * 200);
-            });
-
-            console.log('%c✓ Developer Console Activated!', 'color: #64ffda; font-size: 16px; font-weight: bold;');
+            return step();
+        }
+        function stopPulses(pulseIds, traceIds, animId) {
+            cancelAnimationFrame(animId);
+            pulseIds.forEach(id => document.getElementById(id).classList.remove('active'));
+            traceIds.forEach(id => document.getElementById(id).classList.remove('glow'));
         }
 
-        document.getElementById('closeConsole').addEventListener('click', () => {
-            devConsole.classList.remove('active');
-        });
+        let leftAnim, rightAnim;
+        const icA = document.getElementById('ic-automotive');
+        const icH = document.getElementById('ic-hardware');
+        icA.addEventListener('mouseenter', () => { leftAnim = animatePulses(['pulse-l1','pulse-l2','pulse-l3'], ['trace-left-1','trace-left-2','trace-left-3']); });
+        icA.addEventListener('mouseleave', () => { stopPulses(['pulse-l1','pulse-l2','pulse-l3'], ['trace-left-1','trace-left-2','trace-left-3'], leftAnim); });
+        icH.addEventListener('mouseenter', () => { rightAnim = animatePulses(['pulse-r1','pulse-r2','pulse-r3'], ['trace-right-1','trace-right-2','trace-right-3']); });
+        icH.addEventListener('mouseleave', () => { stopPulses(['pulse-r1','pulse-r2','pulse-r3'], ['trace-right-1','trace-right-2','trace-right-3'], rightAnim); });
 
-        // Glow effect following cursor
+        // ===== DEBUG CONSOLE =====
+        let debugCount = 0, debugTimer = null;
+        document.addEventListener('keypress', (e) => {
+            clearTimeout(debugTimer);
+            debugTimer = setTimeout(() => debugCount = 0, 2000);
+            if (e.key === 'd' || e.key === 'D') {
+                debugCount++;
+                if (debugCount >= 3) { document.getElementById('devConsole').classList.add('active'); debugCount = 0; }
+            } else debugCount = 0;
+        });
+        document.getElementById('closeConsole').addEventListener('click', () => document.getElementById('devConsole').classList.remove('active'));
+
+        // ===== GLOW =====
         let ticking = false;
         document.addEventListener('mousemove', (e) => {
             if (!ticking) {
-                window.requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
                     document.documentElement.style.setProperty('--cursor-x', e.clientX + 'px');
                     document.documentElement.style.setProperty('--cursor-y', e.clientY + 'px');
                     ticking = false;
@@ -693,9 +515,8 @@
             }
         });
 
-        // Console hints
-        console.log('%c👋 Welcome to georgewahba.me', 'color: #64ffda; font-size: 20px; font-weight: bold;');
-        console.log('%cLooking for easter eggs? Try typing "debug" three times...', 'color: #a8b2d1; font-size: 12px;');
+        console.log('%c👋 Welcome to georgewahba.me', 'color: #f5a623; font-size: 20px; font-weight: bold;');
+        console.log('%cTry pressing "d" three times...', 'color: #8a8578; font-size: 12px;');
     </script>
 </body>
 </html>
