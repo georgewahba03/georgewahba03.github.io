@@ -63,7 +63,6 @@
             position: relative;
         }
 
-        /* CRT scanline overlay */
         body::after {
             content: "";
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -119,7 +118,6 @@
             background: linear-gradient(90deg, var(--border), transparent); margin-left: 20px;
         }
 
-        /* PCB Board */
         .pcb-board {
             position: relative; width: 100%; min-height: 420px;
             background: radial-gradient(circle at 20% 50%, rgba(245,166,35,0.02), transparent 50%),
@@ -162,13 +160,24 @@
             box-shadow: 0 0 30px rgba(245,166,35,0.1), inset 0 0 30px rgba(245,166,35,0.03);
         }
 
-        .ic-pins-top, .ic-pins-bottom { display: flex; justify-content: center; gap: 12px; }
+        /* UPDATED: Top and Bottom Pins */
+        .ic-pins-top, .ic-pins-bottom { 
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex; 
+            gap: 12px; 
+        }
+        .ic-pins-top { top: -14px; }
+        .ic-pins-bottom { bottom: -14px; }
+
         .ic-pin {
             width: 3px; height: 14px; background: var(--border); border-radius: 1px;
             transition: background 0.4s ease, box-shadow 0.4s ease;
         }
         .ic-package:hover .ic-pin { background: var(--accent); box-shadow: 0 0 6px var(--accent-glow); }
 
+        /* Left and Right Pins */
         .ic-pins-left, .ic-pins-right {
             position: absolute; top: 50%; transform: translateY(-50%);
             display: flex; flex-direction: column; gap: 12px;
@@ -238,7 +247,6 @@
             margin-top: auto; z-index: 1;
         }
 
-        /* Dev Console */
         .dev-console {
             position: fixed; bottom: -400px; left: 50%; transform: translateX(-50%);
             width: 90%; max-width: 800px; height: 350px;
@@ -360,17 +368,19 @@
 
                 <div class="pcb-layout">
                     <a href="/automotive" class="ic-package" id="ic-automotive" aria-label="View automotive and controls portfolio">
-                        <div class="ic-pins-top"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
                         <div class="ic-body">
+                            <div class="ic-pins-top"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
                             <div class="ic-pins-left"><div class="ic-pin-h"></div><div class="ic-pin-h"></div><div class="ic-pin-h"></div></div>
+                            
                             <svg class="ic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/>
                                 <circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/>
                             </svg>
                             <span class="ic-label">Automotive<br>& Controls</span>
+                            
                             <div class="ic-pins-right"><div class="ic-pin-h"></div><div class="ic-pin-h"></div><div class="ic-pin-h"></div></div>
+                            <div class="ic-pins-bottom"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
                         </div>
-                        <div class="ic-pins-bottom"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
                         <span class="ic-name">Automotive & Controls</span>
                         <span class="ic-desc">Embedded C · CAN FD · Simulink · HIL</span>
                     </a>
@@ -378,9 +388,10 @@
                     <div class="central-die">GW</div>
 
                     <a href="/hardware" class="ic-package" id="ic-hardware" aria-label="View hardware and FPGA portfolio">
-                        <div class="ic-pins-top"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
                         <div class="ic-body">
+                            <div class="ic-pins-top"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
                             <div class="ic-pins-left"><div class="ic-pin-h"></div><div class="ic-pin-h"></div><div class="ic-pin-h"></div></div>
+                            
                             <svg class="ic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
                                 <rect x="9" y="9" width="6" height="6"></rect>
@@ -390,9 +401,10 @@
                                 <line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line>
                             </svg>
                             <span class="ic-label">Hardware<br>& FPGA</span>
+                            
                             <div class="ic-pins-right"><div class="ic-pin-h"></div><div class="ic-pin-h"></div><div class="ic-pin-h"></div></div>
+                            <div class="ic-pins-bottom"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
                         </div>
-                        <div class="ic-pins-bottom"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
                         <span class="ic-name">Hardware & FPGA</span>
                         <span class="ic-desc">SystemVerilog · DSP · Vivado · RTL</span>
                     </a>
