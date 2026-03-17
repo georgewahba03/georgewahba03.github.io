@@ -6,573 +6,151 @@
     <meta name="description" content="George Wahba's Hardware & FPGA portfolio - RTL design, SystemVerilog, and Digital Signal Processing featuring Real-Time SDR and Image Acceleration projects.">
     <meta name="author" content="George Wahba">
     <meta name="keywords" content="FPGA, RTL Design, SystemVerilog, Verilog, VHDL, DSP, Vivado, Hardware Design, Image Processing">
-
-    <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://georgewahba.me/hardware">
     <meta property="og:title" content="Hardware & FPGA | George Wahba">
     <meta property="og:description" content="RTL design, SystemVerilog, and Digital Signal Processing projects">
-
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Hardware & FPGA | George Wahba">
     <meta name="twitter:description" content="RTL design, SystemVerilog, and Digital Signal Processing projects">
-
     <title>Hardware & FPGA | George Wahba</title>
-
-    <!-- Favicon: Microchip -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2364ffda%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><rect x=%224%22 y=%224%22 width=%2216%22 height=%2216%22 rx=%222%22 ry=%222%22></rect><rect x=%229%22 y=%229%22 width=%226%22 height=%226%22></rect><line x1=%229%22 y1=%221%22 x2=%229%22 y2=%224%22></line><line x1=%2215%22 y1=%221%22 x2=%2215%22 y2=%224%22></line><line x1=%229%22 y1=%2220%22 x2=%229%22 y2=%2223%22></line><line x1=%2215%22 y1=%2220%22 x2=%2215%22 y2=%2223%22></line><line x1=%2220%22 y1=%229%22 x2=%2223%22 y2=%229%22></line><line x1=%2220%22 y1=%2214%22 x2=%2223%22 y2=%2214%22></line><line x1=%221%22 y1=%229%22 x2=%224%22 y2=%229%22></line><line x1=%221%22 y1=%2214%22 x2=%224%22 y2=%2214%22></line></svg>">
-
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23f5a623%22 stroke-width=%222%22><rect x=%224%22 y=%224%22 width=%2216%22 height=%2216%22 rx=%222%22/><rect x=%229%22 y=%229%22 width=%226%22 height=%226%22/><line x1=%229%22 y1=%221%22 x2=%229%22 y2=%224%22/><line x1=%2215%22 y1=%221%22 x2=%2215%22 y2=%224%22/><line x1=%229%22 y1=%2220%22 x2=%229%22 y2=%2223%22/><line x1=%2215%22 y1=%2220%22 x2=%2215%22 y2=%2223%22/><line x1=%2220%22 y1=%229%22 x2=%2223%22 y2=%229%22/><line x1=%2220%22 y1=%2214%22 x2=%2223%22 y2=%2214%22/><line x1=%221%22 y1=%229%22 x2=%224%22 y2=%229%22/><line x1=%221%22 y1=%2214%22 x2=%224%22 y2=%2214%22/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Consistent Palette */
-            --bg-color: #0a192f;
-            --text-primary: #ccd6f6;
-            --text-secondary: #a8b2d1;
-            --accent: #64ffda;
-            --card-bg: #112240;
-            --hover-bg: #233554;
-            --font-main: 'Inter', 'San Francisco', 'SF Pro Text', -apple-system, system-ui, sans-serif;
-            --font-mono: 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
-            --cursor-x: 50%;
-            --cursor-y: 50%;
+            --bg-color: #0a0a0f; --bg-subtle: #111118; --text-primary: #e0ddd5;
+            --text-secondary: #8a8578; --accent: #f5a623; --accent-dim: rgba(245,166,35,0.15);
+            --accent-glow: rgba(245,166,35,0.4); --card-bg: #141418; --hover-bg: #1e1e24;
+            --border: #2a2a32;
+            --font-main: 'Outfit', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+            --cursor-x: 50%; --cursor-y: 50%;
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        /* Skip to content for accessibility */
-        .skip-to-content {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: var(--accent);
-            color: var(--bg-color);
-            padding: 8px;
-            text-decoration: none;
-            z-index: 1000;
-            font-weight: 600;
-        }
-
-        .skip-to-content:focus {
-            top: 0;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            font-family: var(--font-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-            counter-reset: section;
-        }
-
-        /* Circuit Board Canvas */
-        #circuit-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.08;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(
-                min(800px, 50vw) circle at var(--cursor-x) var(--cursor-y),
-                rgba(100, 255, 218, 0.03),
-                transparent 40%
-            );
-            pointer-events: none;
-            z-index: 0;
-            will-change: background;
-        }
-
-        .nav-bar {
-            padding: 1.5rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(10, 25, 47, 0.85);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo {
-            font-family: var(--font-mono);
-            color: var(--accent);
-            font-size: 1.2rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .logo:hover,
-        .logo:focus {
-            color: var(--text-primary);
-            outline: none;
-        }
-
-        .logo:focus-visible {
-            outline: 2px solid var(--accent);
-            outline-offset: 4px;
-            border-radius: 4px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            transition: color 0.2s;
-            padding: 0.5rem;
-        }
-
-        .nav-links a:hover,
-        .nav-links a:focus,
-        .nav-links a.active {
-            color: var(--accent);
-            outline: none;
-        }
-
-        .nav-links a:focus-visible {
-            outline: 2px solid var(--accent);
-            outline-offset: 4px;
-            border-radius: 4px;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-            z-index: 1;
-            position: relative;
-        }
-
-        h1 {
-            font-size: clamp(30px, 5vw, 50px);
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            color: var(--text-primary);
-            margin-top: 4rem;
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-        }
-
-        h2::before {
-            counter-increment: section;
-            content: "0" counter(section) ".";
-            margin-right: 10px;
-            color: var(--accent);
-            font-family: var(--font-mono);
-            font-size: 1.2rem;
-        }
-
-        h2::after {
-            content: "";
-            display: block;
-            width: 200px;
-            height: 1px;
-            background-color: #233554;
-            margin-left: 20px;
-        }
-
-        p.intro {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin-bottom: 3rem;
-        }
-
-        .item {
-            margin-bottom: 3rem;
-            padding: 1.5rem;
-            background: var(--card-bg);
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .item:hover {
-            transform: translateY(-5px);
-            background: var(--hover-bg);
-        }
-
-        .item-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        h3 {
-            color: var(--text-primary);
-            font-size: 1.1rem;
-        }
-
-        .company {
-            color: var(--accent);
-        }
-
-        .date {
-            color: var(--text-secondary);
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-        }
-
-        .item ul {
-            list-style: none;
-            margin-top: 1rem;
-        }
-
-        .item li {
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .item li::before {
-            content: "▹";
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .project-card {
-            background: var(--card-bg);
-            padding: 2rem 1.5rem;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .project-card:hover {
-            transform: translateY(-7px);
-            background: var(--hover-bg);
-        }
-
-        .project-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .folder-icon {
-            width: 40px;
-            height: 40px;
-            color: var(--accent);
-        }
-
-        .project-card h4 {
-            color: var(--text-primary);
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            flex-grow: 1;
-            margin-bottom: 1.5rem;
-        }
-
-        .tech-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            list-style: none;
-            margin-top: auto;
-        }
-
-        .tech-list li {
-            color: var(--text-secondary);
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-        }
-
-        .skills-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .skill-group h4 {
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-        }
-
-        .skill-group ul {
-            list-style: none;
-        }
-
-        .skill-group li {
-            color: var(--text-secondary);
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .skill-group li::before {
-            content: "▹";
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-        }
-
-        .contact-section {
-            text-align: center;
-            margin-top: 6rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .contact-title {
-            justify-content: center;
-        }
-
-        .contact-title::before {
-            margin-right: 10px;
-        }
-
-        .contact-title::after {
-            display: none;
-        }
-
-        .contact-desc {
-            color: var(--text-secondary);
-            margin-bottom: 3rem;
-        }
-
-        .contact-btn {
-            display: inline-block;
-            color: var(--accent);
-            border: 1px solid var(--accent);
-            padding: 1rem 2rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-family: var(--font-mono);
-            transition: all 0.3s ease;
-        }
-
-        .contact-btn:hover,
-        .contact-btn:focus {
-            background: rgba(100, 255, 218, 0.1);
-            transform: translateY(-3px);
-            outline: none;
-        }
-
-        .contact-btn:focus-visible {
-            outline: 2px solid var(--accent);
-            outline-offset: 4px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-secondary);
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-        }
-
-        /* Binary Message Easter Egg */
-        .binary-message {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            background: var(--card-bg);
-            border: 2px solid var(--accent);
-            border-radius: 8px;
-            padding: 3rem;
-            z-index: 1000;
-            text-align: center;
-            max-width: 600px;
-            width: 90%;
-            opacity: 0;
-            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        .binary-message.active {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 1;
-        }
-
-        .binary-message h2 {
-            color: var(--accent);
-            margin: 0 0 1.5rem 0;
-            font-size: 1.5rem;
-        }
-
-        .binary-message h2::before,
-        .binary-message h2::after {
-            display: none;
-        }
-
-        .binary-text {
-            font-family: var(--font-mono);
-            color: var(--accent);
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
-        .binary-message p {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            max-width: 100%;
-        }
-
-        .binary-message button {
-            background: transparent;
-            color: var(--accent);
-            border: 1px solid var(--accent);
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: var(--font-mono);
-            transition: all 0.3s ease;
-        }
-
-        .binary-message button:hover {
-            background: rgba(100, 255, 218, 0.1);
-        }
-
-        .binary-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 999;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .binary-overlay.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        @media (max-width: 768px) {
-            .item-header { flex-direction: column; }
-            .date { margin-bottom: 0.5rem; display: block; }
-            h2::after { width: 100%; }
-        }
-
-        @media (max-width: 480px) {
-            .nav-links a {
-                font-size: 0.75rem;
-            }
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-
-            body::before {
-                animation: none;
-            }
-        }
+        .skip-to-content { position: absolute; top: -40px; left: 0; background: var(--accent); color: var(--bg-color); padding: 8px; text-decoration: none; z-index: 1000; font-weight: 600; }
+        .skip-to-content:focus { top: 0; }
+        body { background-color: var(--bg-color); color: var(--text-primary); font-family: var(--font-main); line-height: 1.6; overflow-x: hidden; counter-reset: section; }
+        body::after { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px); pointer-events: none; z-index: 9999; }
+        #circuit-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        body::before { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(min(600px,40vw) circle at var(--cursor-x) var(--cursor-y), rgba(245,166,35,0.04), transparent 40%); pointer-events: none; z-index: 0; will-change: background; }
+        .nav-bar { padding: 1.25rem 2rem; display: flex; justify-content: space-between; align-items: center; background: rgba(10,10,15,0.85); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border); }
+        .logo { font-family: var(--font-mono); color: var(--accent); font-size: 1.1rem; font-weight: 600; text-decoration: none; transition: color 0.2s; }
+        .logo:hover, .logo:focus { color: var(--text-primary); outline: none; }
+        .logo:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-family: var(--font-mono); font-size: 0.8rem; transition: color 0.2s; padding: 0.5rem; letter-spacing: 0.3px; }
+        .nav-links a:hover, .nav-links a:focus, .nav-links a.active { color: var(--accent); outline: none; }
+        .nav-links a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 4rem 2rem; z-index: 1; position: relative; }
+        h1 { font-size: clamp(30px,5vw,50px); font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; letter-spacing: -0.5px; }
+        h2 { font-size: 1.4rem; color: var(--text-primary); margin-top: 4rem; margin-bottom: 2rem; display: flex; align-items: center; font-weight: 500; }
+        h2::before { counter-increment: section; content: "0" counter(section) "."; margin-right: 10px; color: var(--accent); font-family: var(--font-mono); font-size: 1.1rem; }
+        h2::after { content: ""; display: block; width: 200px; height: 24px; margin-left: 20px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='24' viewBox='0 0 200 24'%3E%3Cpolyline points='0,18 10,18 10,6 20,6 20,18 30,18 30,6 40,6 40,18 50,18 55,6 60,18 70,18 70,6 80,6 80,18 90,18 95,12 100,6 105,12 110,18 120,18 120,6 130,6 130,18 140,18 140,6 150,6 150,18 160,18 165,6 170,18 180,18 180,6 190,6 190,18 200,18' fill='none' stroke='%23f5a623' stroke-width='1.5' opacity='0.3'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: center; flex-shrink: 0; }
+        p.intro { font-size: 1.05rem; color: var(--text-secondary); max-width: 600px; margin-bottom: 3rem; font-weight: 300; line-height: 1.7; }
+        .item { margin-bottom: 3rem; padding: 1.5rem; background: var(--card-bg); border-radius: 4px; border: 1px solid transparent; transition: all 0.3s ease; opacity: 0; animation: fadeInUp 0.6s ease forwards; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .item:hover { transform: translateY(-5px); background: var(--hover-bg); border-color: var(--border); }
+        .item-header { display: flex; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; }
+        h3 { color: var(--text-primary); font-size: 1.05rem; font-weight: 500; }
+        .company { color: var(--accent); }
+        .date { color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.8rem; }
+        .item ul { list-style: none; margin-top: 1rem; }
+        .item li { color: var(--text-secondary); margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative; font-size: 0.95rem; line-height: 1.6; }
+        .item li::before { content: "▹"; position: absolute; left: 0; color: var(--accent); }
+        .pipeline-section { margin-top: 4rem; }
+        .pipeline-title { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 1rem; letter-spacing: 0.5px; }
+        .pipeline-container { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; overflow-x: auto; }
+        .pipeline-svg { width: 100%; min-width: 700px; }
+        .pipeline-stage { fill: var(--card-bg); stroke: var(--border); stroke-width: 1.5; transition: fill 0.3s ease, stroke 0.3s ease; }
+        .pipeline-stage.active { fill: var(--accent-dim); stroke: var(--accent); }
+        .pipeline-stage-text { fill: var(--text-secondary); font-family: 'JetBrains Mono', monospace; font-size: 11px; text-anchor: middle; transition: fill 0.3s ease; }
+        .pipeline-stage-text.active { fill: var(--accent); font-weight: 600; }
+        .pipeline-reg-text { fill: var(--text-secondary); font-family: 'JetBrains Mono', monospace; font-size: 9px; text-anchor: middle; opacity: 0.6; }
+        .pipeline-arrow { stroke: var(--border); stroke-width: 1.5; fill: none; marker-end: url(#arrowhead); }
+        .pipeline-arrow.active { stroke: var(--accent); }
+        .pipeline-controls { display: flex; gap: 1rem; margin-top: 1.5rem; align-items: center; flex-wrap: wrap; }
+        .pipe-btn { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 0.5rem 1.25rem; border-radius: 4px; cursor: pointer; font-family: var(--font-mono); font-size: 0.8rem; transition: all 0.2s; }
+        .pipe-btn:hover { background: var(--accent-dim); }
+        .pipe-info { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-secondary); margin-left: auto; }
+        .pipe-info span { color: var(--accent); }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .project-card { background: var(--card-bg); padding: 2rem 1.5rem; border-radius: 4px; border: 1px solid transparent; transition: all 0.3s ease; display: flex; flex-direction: column; height: 100%; }
+        .project-card:hover { transform: translateY(-7px); background: var(--hover-bg); border-color: var(--border); }
+        .project-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+        .folder-icon { width: 40px; height: 40px; color: var(--accent); }
+        .project-card h4 { color: var(--text-primary); font-size: 1.15rem; margin-bottom: 1rem; font-weight: 500; }
+        .project-card p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; flex-grow: 1; margin-bottom: 1.5rem; }
+        .tech-list { display: flex; flex-wrap: wrap; gap: 0.75rem; list-style: none; margin-top: auto; }
+        .tech-list li { color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.7rem; }
+        .skills-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .skill-group h4 { color: var(--text-primary); margin-bottom: 1rem; font-weight: 500; }
+        .skill-group ul { list-style: none; }
+        .skill-group li { color: var(--text-secondary); padding: 0.5rem 0; padding-left: 1.5rem; position: relative; font-size: 0.95rem; }
+        .skill-group li::before { content: "▹"; position: absolute; left: 0; color: var(--accent); }
+        .terminal-section { margin-top: 4rem; }
+        .terminal { background: var(--bg-color); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; font-family: var(--font-mono); font-size: 0.8rem; }
+        .terminal-bar { background: var(--bg-subtle); padding: 0.6rem 1rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--border); }
+        .terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .terminal-dot.r { background: #e74c3c; } .terminal-dot.y { background: #f5a623; } .terminal-dot.g { background: #2ecc71; }
+        .terminal-title { color: var(--text-secondary); font-size: 0.75rem; margin-left: 0.5rem; }
+        .terminal-body { padding: 1rem; max-height: 300px; overflow-y: auto; line-height: 1.6; }
+        .terminal-line { color: var(--text-secondary); margin-bottom: 0.25rem; white-space: pre-wrap; word-break: break-word; }
+        .terminal-line .prompt { color: var(--accent); }
+        .terminal-line .cmd { color: var(--text-primary); }
+        .terminal-line .out { color: var(--text-secondary); }
+        .terminal-line .highlight { color: var(--accent); }
+        .terminal-input-row { display: flex; align-items: center; margin-top: 0.5rem; }
+        .terminal-input-row .prompt { color: var(--accent); margin-right: 0.5rem; white-space: nowrap; }
+        #terminalInput { background: transparent; border: none; color: var(--text-primary); font-family: var(--font-mono); font-size: 0.8rem; outline: none; flex: 1; caret-color: var(--accent); }
+        .contact-section { text-align: center; margin-top: 6rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .contact-title { justify-content: center; }
+        .contact-title::before { margin-right: 10px; }
+        .contact-title::after { display: none; }
+        .contact-desc { color: var(--text-secondary); margin-bottom: 3rem; font-weight: 300; }
+        .contact-btn { display: inline-block; color: var(--accent); border: 1px solid var(--accent); padding: 1rem 2rem; border-radius: 4px; text-decoration: none; font-family: var(--font-mono); transition: all 0.3s ease; font-size: 0.9rem; }
+        .contact-btn:hover, .contact-btn:focus { background: var(--accent-dim); transform: translateY(-3px); outline: none; box-shadow: 0 0 20px rgba(245,166,35,0.1); }
+        .contact-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+        footer { text-align: center; padding: 2rem; color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.8rem; }
+        .binary-message { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(0); background: var(--card-bg); border: 2px solid var(--accent); border-radius: 8px; padding: 3rem; z-index: 10000; text-align: center; max-width: 600px; width: 90%; opacity: 0; transition: all 0.5s cubic-bezier(0.68,-0.55,0.265,1.55); }
+        .binary-message.active { transform: translate(-50%,-50%) scale(1); opacity: 1; }
+        .binary-message h2 { color: var(--accent); margin: 0 0 1.5rem 0; font-size: 1.3rem; }
+        .binary-message h2::before, .binary-message h2::after { display: none; }
+        .binary-text { font-family: var(--font-mono); color: var(--accent); font-size: 1rem; letter-spacing: 2px; margin-bottom: 1.5rem; line-height: 1.8; }
+        .binary-message p { color: var(--text-secondary); margin-bottom: 2rem; max-width: 100%; }
+        .binary-message button { background: transparent; color: var(--accent); border: 1px solid var(--accent); padding: 0.75rem 1.5rem; border-radius: 4px; cursor: pointer; font-family: var(--font-mono); transition: all 0.3s ease; }
+        .binary-message button:hover { background: var(--accent-dim); }
+        .binary-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        .binary-overlay.active { opacity: 1; pointer-events: all; }
+        @media (max-width: 768px) { .item-header { flex-direction: column; } .date { margin-bottom: 0.5rem; display: block; } h2::after { display: none; } }
+        @media (max-width: 480px) { .nav-links a { font-size: 0.7rem; } .projects-grid { grid-template-columns: 1fr; } }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } }
     </style>
 </head>
 <body>
     <a href="#main-content" class="skip-to-content">Skip to main content</a>
-
-    <!-- Circuit Board Canvas -->
     <canvas id="circuit-canvas"></canvas>
-
-    <!-- Binary Easter Egg Modal -->
     <div class="binary-overlay" id="binaryOverlay"></div>
     <div class="binary-message" id="binaryMessage">
         <h2>01001000 01100101 01101100 01101100 01101111</h2>
-        <div class="binary-text">
-            01001000 01100101 01101100 01101100 01101111<br>
-            01000110 01110010 01101111 01101101<br>
-            01001000 01100001 01110010 01100100 01110111 01100001 01110010 01100101
-        </div>
+        <div class="binary-text">01001000 01100101 01101100 01101100 01101111<br>01000110 01110010 01101111 01101101<br>01001000 01100001 01110010 01100100 01110111 01100001 01110010 01100101</div>
         <p><strong>Decoded:</strong> "Hello From Hardware"</p>
         <p>You've discovered the binary easter egg! 🎉<br>Click on any project card 5 times to see this message again.</p>
         <button id="closeBinary">Close</button>
     </div>
-
     <nav class="nav-bar">
         <a href="/" class="logo">GW</a>
-        <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/automotive">Automotive</a>
-            <a href="/hardware" class="active" aria-current="page">Hardware</a>
-        </div>
+        <div class="nav-links"><a href="/">Home</a><a href="/automotive">Automotive</a><a href="/hardware" class="active" aria-current="page">Hardware</a></div>
     </nav>
-
     <div class="container" id="main-content">
         <header>
-            <span style="font-family: var(--font-mono); color: var(--accent);">Featured Portfolio</span>
+            <span style="font-family: var(--font-mono); color: var(--accent); font-size: 0.85rem;">Featured Portfolio</span>
             <h1>Hardware & FPGA</h1>
-            <p class="intro">
-                Deep dive into RTL design, SystemVerilog, and Digital Signal Processing. Featuring Real-Time SDR and Image Acceleration projects.
-            </p>
+            <p class="intro">Deep dive into RTL design, SystemVerilog, and Digital Signal Processing. Featuring Real-Time SDR and Image Acceleration projects.</p>
         </header>
-
         <section>
             <h2>Work Experience</h2>
-
             <div class="item" style="animation-delay: 0.1s;">
                 <div class="item-header">
                     <h3>Embedded Software/Electronics Engineer Coop <span class="company">@ Christie Digital Systems</span></h3>
@@ -583,10 +161,9 @@
                     <li>Debugged complex FPGA designs using JTAG-based hardware debugging, Xilinx SDK for real-time register access, and Virtual I/O cores for in-system signal probing, significantly reducing hardware iteration time.</li>
                     <li>Migrated and synthesized legacy RTL IP cores to the Xilinx UltraScale+ architecture, achieving timing closure at target frequencies and optimizing logic utilization for future-generation production boards.</li>
                     <li>Designed, implemented, and verified RTL for a custom hardware block, independently creating a SystemVerilog testbench, using DVE waveform analysis for validation, and resolving functional bugs and lint errors to meet production standards.</li>
-                    <li>Engineered a self-checking SystemVerilog testbench for UART protocol verification, designing constrained-random test vectors to identify critical corner cases (parity/framing errors). Validated RTL functionality through DVE waveform analysis and code coverage metrics.</li>
+                    <li>Engineered a self-checking SystemVerilog testbench for UART protocol verification, designing constrained-random test vectors to identify critical corner cases (parity/framing errors).</li>
                 </ul>
             </div>
-
             <div class="item" style="animation-delay: 0.2s;">
                 <div class="item-header">
                     <h3>Research Assistant II <span class="company">@ McMaster University - Stellantis</span></h3>
@@ -594,284 +171,225 @@
                 </div>
                 <ul>
                     <li>Designed and fabricated mounting hardware in Autodesk Inventor to integrate Hall effect current transducers into a 6-phase inverter setup, enabling non-invasive phase current measurement across HV lines.</li>
-                    <li>Executed incremental board bring-up of high-power DC motor control PCBs, validating HV rail connections from a safety box to the 6-phase inverter using oscilloscopes and multimeters, verifying voltage levels and signal integrity against Altium schematics.</li>
+                    <li>Executed incremental board bring-up of high-power DC motor control PCBs, validating HV rail connections from a safety box to the 6-phase inverter using oscilloscopes and multimeters.</li>
                     <li>Developed MATLAB scripts to analyze time-series test data, extracting key metrics (mean, max, range) to evaluate inverter setup performance across varying operating parameters.</li>
                 </ul>
             </div>
         </section>
-
+        <!-- MIPS Pipeline -->
+        <section class="pipeline-section">
+            <div class="pipeline-title">// Interactive: Multi-Cycle MIPS Datapath</div>
+            <div class="pipeline-container">
+                <svg class="pipeline-svg" viewBox="0 0 750 200" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2a2a32"/></marker>
+                        <marker id="arrowhead-active" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#f5a623"/></marker>
+                    </defs>
+                    <rect class="pipeline-stage" id="stage-if" x="20" y="40" width="120" height="60" rx="4"/>
+                    <text class="pipeline-stage-text" id="text-if" x="80" y="65">IF</text>
+                    <text class="pipeline-stage-text" id="sub-if" x="80" y="82" style="font-size:8px;">Fetch</text>
+                    <rect class="pipeline-stage" id="stage-id" x="170" y="40" width="120" height="60" rx="4"/>
+                    <text class="pipeline-stage-text" id="text-id" x="230" y="65">ID</text>
+                    <text class="pipeline-stage-text" id="sub-id" x="230" y="82" style="font-size:8px;">Decode</text>
+                    <rect class="pipeline-stage" id="stage-ex" x="320" y="40" width="120" height="60" rx="4"/>
+                    <text class="pipeline-stage-text" id="text-ex" x="380" y="65">EX</text>
+                    <text class="pipeline-stage-text" id="sub-ex" x="380" y="82" style="font-size:8px;">Execute</text>
+                    <rect class="pipeline-stage" id="stage-mem" x="470" y="40" width="120" height="60" rx="4"/>
+                    <text class="pipeline-stage-text" id="text-mem" x="530" y="65">MEM</text>
+                    <text class="pipeline-stage-text" id="sub-mem" x="530" y="82" style="font-size:8px;">Memory</text>
+                    <rect class="pipeline-stage" id="stage-wb" x="620" y="40" width="110" height="60" rx="4"/>
+                    <text class="pipeline-stage-text" id="text-wb" x="675" y="65">WB</text>
+                    <text class="pipeline-stage-text" id="sub-wb" x="675" y="82" style="font-size:8px;">WriteBack</text>
+                    <line class="pipeline-arrow" id="arrow-1" x1="140" y1="70" x2="168" y2="70"/>
+                    <line class="pipeline-arrow" id="arrow-2" x1="290" y1="70" x2="318" y2="70"/>
+                    <line class="pipeline-arrow" id="arrow-3" x1="440" y1="70" x2="468" y2="70"/>
+                    <line class="pipeline-arrow" id="arrow-4" x1="590" y1="70" x2="618" y2="70"/>
+                    <text class="pipeline-reg-text" x="155" y="30">PC</text>
+                    <text class="pipeline-reg-text" x="305" y="30">A, B</text>
+                    <text class="pipeline-reg-text" x="455" y="30">ALUOut</text>
+                    <text class="pipeline-reg-text" x="605" y="30">MDR</text>
+                    <text id="pipeline-instr" x="375" y="150" text-anchor="middle" fill="#f5a623" font-family="JetBrains Mono, monospace" font-size="11" opacity="0.8"></text>
+                    <text id="pipeline-detail" x="375" y="170" text-anchor="middle" fill="#8a8578" font-family="JetBrains Mono, monospace" font-size="9"></text>
+                </svg>
+                <div class="pipeline-controls">
+                    <button class="pipe-btn" id="pipeReset">Reset</button>
+                    <button class="pipe-btn" id="pipeStep">Step ▶</button>
+                    <button class="pipe-btn" id="pipeAuto">Auto ▶▶</button>
+                    <span class="pipe-info">Cycle: <span id="pipeCycle">0</span> / 5 &nbsp;|&nbsp; <span id="pipeInstrName">—</span></span>
+                </div>
+            </div>
+        </section>
         <section>
             <h2>Key Projects</h2>
             <div class="projects-grid">
-                <!-- Project 1 -->
                 <div class="project-card" data-click-count="0">
                     <div class="project-top">
-                        <!-- Icon: Radio Signal/Waves -->
-                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <circle cx="12" cy="12" r="2"></circle>
-                            <path d="M16.24 7.76a6 6 0 0 1 0 8.49"></path>
-                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
-                            <path d="M7.76 16.24a6 6 0 0 1 0-8.49"></path>
-                            <path d="M4.93 19.07a10 10 0 0 1 0-14.14"></path>
-                        </svg>
+                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"></circle><path d="M16.24 7.76a6 6 0 0 1 0 8.49"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path><path d="M7.76 16.24a6 6 0 0 1 0-8.49"></path><path d="M4.93 19.07a10 10 0 0 1 0-14.14"></path></svg>
                     </div>
                     <h4>Real-Time Software Defined Radio (SDR) Receiver</h4>
                     <p>Developed a multi-threaded C++ pipeline to demodulate real-time FM mono/stereo audio from raw 8-bit IQ samples, implementing FIR filters, block convolution, and fractional resampling. Implemented Radio Data System digital decoding path including carrier recovery via squaring nonlinearity, matched filtering, and Manchester decoding.</p>
-                    <ul class="tech-list">
-                        <li>C++</li>
-                        <li>DSP</li>
-                        <li>Linux</li>
-                        <li>Multithreading</li>
-                    </ul>
+                    <ul class="tech-list"><li>C++</li><li>DSP</li><li>Linux</li><li>Multithreading</li></ul>
                 </div>
-
-                <!-- Project 2 -->
                 <div class="project-card" data-click-count="0">
                     <div class="project-top">
-                        <!-- Icon: Image/Picture -->
-                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                            <polyline points="21 15 16 10 5 21"></polyline>
-                        </svg>
+                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
                     </div>
                     <h4>Hardware-Accelerated Image Decompression System</h4>
-                    <p>Architected a SystemVerilog upsampling and colorspace conversion pipeline on an Altera DE2 FPGA, implementing a 6-tap FIR filter using shared Multiply-Accumulate blocks with ≥75% multiplier utilization. Implemented fixed-point block IDCT module using dual-port RAMs and 4 shared multipliers at ≥95% utilization, verified cycle-accurately against a C software model in ModelSim.</p>
-                    <ul class="tech-list">
-                        <li>SystemVerilog</li>
-                        <li>FPGA</li>
-                        <li>ModelSim</li>
-                        <li>SRAM</li>
-                    </ul>
+                    <p>Architected a SystemVerilog upsampling and colorspace conversion pipeline on an Altera DE2 FPGA, implementing a 6-tap FIR filter using shared MAC blocks with ≥75% multiplier utilization. Implemented fixed-point block IDCT module using dual-port RAMs and 4 shared multipliers at ≥95% utilization.</p>
+                    <ul class="tech-list"><li>SystemVerilog</li><li>FPGA</li><li>ModelSim</li><li>SRAM</li></ul>
                 </div>
-
-                <!-- Project 3 -->
                 <div class="project-card" data-click-count="0">
                     <div class="project-top">
-                        <!-- Icon: Radar/Target (LiDAR) -->
-                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <circle cx="12" cy="12" r="6"></circle>
-                            <circle cx="12" cy="12" r="2"></circle>
-                            <line x1="12" y1="2" x2="12" y2="12"></line>
-                        </svg>
+                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle><line x1="12" y1="2" x2="12" y2="12"></line></svg>
                     </div>
                     <h4>3D Spatial Measurement System</h4>
                     <p>Designed a firmware driver in C within the Keil IDE to interface with a LiDAR sensor via I2C and UART. Implemented servo motor control logic for 360-degree scanning.</p>
-                    <ul class="tech-list">
-                        <li>C</li>
-                        <li>Keil</li>
-                        <li>UART/I2C</li>
-                        <li>MATLAB</li>
-                    </ul>
+                    <ul class="tech-list"><li>C</li><li>Keil</li><li>UART/I2C</li><li>MATLAB</li></ul>
                 </div>
             </div>
         </section>
-
         <section>
             <h2>Relevant Skills</h2>
             <div class="skills-section">
-                <div class="skill-group">
-                    <h4>Languages</h4>
-                    <ul>
-                        <li>Python</li>
-                        <li>C/C++</li>
-                        <li>SystemVerilog</li>
-                        <li>Verilog/VHDL</li>
-                        <li>MATLAB</li>
-                        <li>Tcl</li>
-                    </ul>
+                <div class="skill-group"><h4>Languages</h4><ul><li>Python</li><li>C/C++</li><li>SystemVerilog</li><li>Verilog/VHDL</li><li>MATLAB</li><li>Tcl</li></ul></div>
+                <div class="skill-group"><h4>Technologies</h4><ul><li>Xilinx Vivado</li><li>Speedgoat/dSpace</li><li>Altium Designer</li><li>Linux</li><li>Git/Subversion</li></ul></div>
+                <div class="skill-group"><h4>Protocols</h4><ul><li>AXI4 / AXI-Stream</li><li>CAN / PCIe</li><li>JTAG / I2C / SPI</li><li>TCP/UDP</li></ul></div>
+            </div>
+        </section>
+        <!-- Terminal -->
+        <section class="terminal-section">
+            <h2>Explore</h2>
+            <div class="terminal">
+                <div class="terminal-bar"><div class="terminal-dot r"></div><div class="terminal-dot y"></div><div class="terminal-dot g"></div><span class="terminal-title">george@fpga:~/hardware</span></div>
+                <div class="terminal-body" id="terminalBody">
+                    <div class="terminal-line"><span class="prompt">$</span> <span class="cmd">help</span></div>
+                    <div class="terminal-line"><span class="out">Available commands: <span class="highlight">mips</span> | <span class="highlight">sdr</span> | <span class="highlight">idct</span> | <span class="highlight">lidar</span> | <span class="highlight">skills</span> | <span class="highlight">about</span> | <span class="highlight">clear</span></span></div>
                 </div>
-                <div class="skill-group">
-                    <h4>Technologies</h4>
-                    <ul>
-                        <li>Xilinx Vivado</li>
-                        <li>Speedgoat/dSpace</li>
-                        <li>Altium Designer</li>
-                        <li>Linux</li>
-                        <li>Git/Subversion</li>
-                    </ul>
-                </div>
-                <div class="skill-group">
-                    <h4>Protocols</h4>
-                    <ul>
-                        <li>AXI4 / AXI-Stream</li>
-                        <li>CAN / PCIe</li>
-                        <li>JTAG / I2C / SPI</li>
-                        <li>TCP/UDP</li>
-                    </ul>
+                <div class="terminal-input-row" style="padding: 0 1rem 1rem;">
+                    <span class="prompt">$</span>
+                    <input type="text" id="terminalInput" autocomplete="off" spellcheck="false" placeholder="Type a command...">
                 </div>
             </div>
         </section>
-
-        <!-- Contact Section -->
         <section class="contact-section">
             <h2 class="contact-title">Get In Touch</h2>
-            <p class="contact-desc">
-                I'm always open to opportunities to work on FPGA designs. Whether you have a question or just want to say hi, my inbox is always open!
-            </p>
+            <p class="contact-desc">I'm always open to opportunities to work on FPGA designs. Whether you have a question or just want to say hi, my inbox is always open!</p>
             <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#103;&#101;&#111;&#114;&#103;&#101;&#119;&#97;&#104;&#98;&#97;&#48;&#51;&#64;&#111;&#117;&#116;&#108;&#111;&#111;&#107;&#46;&#99;&#111;&#109;" class="contact-btn">Say Hello</a>
         </section>
     </div>
-
-    <footer>
-        <p>Built by George Wahba</p>
-    </footer>
-
+    <footer><p>Built by George Wahba</p></footer>
     <script>
-        // ===== CIRCUIT BOARD TRACE ANIMATION =====
         const canvas = document.getElementById('circuit-canvas');
         const ctx = canvas.getContext('2d');
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        let scrollProgress = 0;
+        const docEl = document.documentElement;
+        window.addEventListener('scroll', () => { const m = docEl.scrollHeight - window.innerHeight; scrollProgress = m > 0 ? window.scrollY / m : 0; });
         class CircuitNode {
-            constructor(x, y) {
-                this.x = x;
-                this.y = y;
-                this.connections = [];
-                this.pulseProgress = Math.random();
-            }
-
-            connect(node) {
-                this.connections.push(node);
-            }
-
+            constructor(x, y) { this.x = x; this.y = y; this.connections = []; this.pulseProgress = Math.random(); this.born = Math.random(); }
+            connect(node) { this.connections.push(node); }
             draw() {
-                // Draw node
-                ctx.fillStyle = 'rgba(100, 255, 218, 0.5)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
-                ctx.fill();
-
-                // Draw connections with pulse
+                const v = Math.max(0, Math.min(1, (scrollProgress - this.born * 0.6) / 0.3));
+                if (v <= 0) return;
+                ctx.globalAlpha = v;
+                ctx.fillStyle = `rgba(245,166,35,${0.4*v})`; ctx.beginPath(); ctx.arc(this.x, this.y, 2.5, 0, Math.PI*2); ctx.fill();
                 this.connections.forEach(node => {
-                    const dx = node.x - this.x;
-                    const dy = node.y - this.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    // Draw trace
-                    ctx.strokeStyle = 'rgba(100, 255, 218, 0.15)';
-                    ctx.lineWidth = 1;
-                    ctx.beginPath();
-                    ctx.moveTo(this.x, this.y);
-                    ctx.lineTo(node.x, node.y);
-                    ctx.stroke();
-
-                    // Draw pulse
-                    const pulseX = this.x + dx * this.pulseProgress;
-                    const pulseY = this.y + dy * this.pulseProgress;
-
-                    ctx.fillStyle = 'rgba(100, 255, 218, 0.8)';
-                    ctx.beginPath();
-                    ctx.arc(pulseX, pulseY, 2, 0, Math.PI * 2);
-                    ctx.fill();
+                    const nv = Math.max(0, Math.min(1, (scrollProgress - node.born * 0.6) / 0.3));
+                    const lv = Math.min(v, nv); if (lv <= 0) return;
+                    ctx.strokeStyle = `rgba(245,166,35,${0.1*lv})`; ctx.lineWidth = 1;
+                    ctx.beginPath(); ctx.moveTo(this.x, this.y); ctx.lineTo(node.x, node.y); ctx.stroke();
+                    const dx = node.x-this.x, dy = node.y-this.y;
+                    ctx.fillStyle = `rgba(245,166,35,${0.6*lv})`; ctx.beginPath();
+                    ctx.arc(this.x+dx*this.pulseProgress, this.y+dy*this.pulseProgress, 1.5, 0, Math.PI*2); ctx.fill();
                 });
-
-                // Update pulse
-                this.pulseProgress += 0.005;
-                if (this.pulseProgress > 1) {
-                    this.pulseProgress = 0;
-                }
+                ctx.globalAlpha = 1;
+                this.pulseProgress += 0.003 + scrollProgress * 0.005;
+                if (this.pulseProgress > 1) this.pulseProgress = 0;
             }
         }
-
-        // Create circuit grid
-        const nodes = [];
-        const gridSize = 150;
-        const cols = Math.ceil(canvas.width / gridSize);
-        const rows = Math.ceil(canvas.height / gridSize);
-
-        for (let i = 0; i < cols; i++) {
-            for (let j = 0; j < rows; j++) {
-                const x = i * gridSize + Math.random() * 50;
-                const y = j * gridSize + Math.random() * 50;
-                nodes.push(new CircuitNode(x, y));
-            }
+        const nodes = []; const gridSize = 150;
+        function initNodes() {
+            nodes.length = 0;
+            const cols = Math.ceil(canvas.width/gridSize), rows = Math.ceil(canvas.height/gridSize);
+            for (let i=0;i<cols;i++) for (let j=0;j<rows;j++) nodes.push(new CircuitNode(i*gridSize+Math.random()*60, j*gridSize+Math.random()*60));
+            nodes.forEach(n => { const near = nodes.filter(o => o !== n && Math.sqrt((o.x-n.x)**2+(o.y-n.y)**2) < gridSize*1.5 && Math.random()>0.6); near.slice(0,2).forEach(o => n.connect(o)); });
         }
-
-        // Connect nearby nodes
-        nodes.forEach(node => {
-            const nearby = nodes.filter(other => {
-                if (other === node) return false;
-                const dx = other.x - node.x;
-                const dy = other.y - node.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                return distance < gridSize * 1.5 && Math.random() > 0.6;
-            });
-
-            nearby.slice(0, 2).forEach(other => {
-                node.connect(other);
-            });
-        });
-
-        function animateCircuit() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            nodes.forEach(node => node.draw());
-            requestAnimationFrame(animateCircuit);
-        }
-
+        initNodes();
+        function animateCircuit() { ctx.clearRect(0,0,canvas.width,canvas.height); nodes.forEach(n=>n.draw()); requestAnimationFrame(animateCircuit); }
         animateCircuit();
+        window.addEventListener('resize', () => { canvas.width=window.innerWidth; canvas.height=window.innerHeight; initNodes(); });
 
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        // MIPS Pipeline
+        const stages = ['if','id','ex','mem','wb'];
+        const arrows = ['arrow-1','arrow-2','arrow-3','arrow-4'];
+        const instructions = [
+            { name:'add $t0, $s1, $s2', details:['PC → IM[PC]','Read $s1, $s2; Decode','ALU: $s1 + $s2','— (no mem)','Write $t0'] },
+            { name:'lw $t1, 0($s3)', details:['PC → IM[PC]','Read $s3; offset=0','ALU: $s3 + 0','Mem[$s3+0] → MDR','MDR → $t1'] },
+            { name:'sw $t2, 4($s4)', details:['PC → IM[PC]','Read $s4, $t2','ALU: $s4 + 4','$t2 → Mem[$s4+4]','— (no WB)'] },
+            { name:'beq $s1, $s2, L1', details:['PC → IM[PC]','Read $s1, $s2','ALU: $s1 - $s2; Z?','Update PC if Z=1','— (no WB)'] },
+        ];
+        let currentCycle=0, currentInstr=0, autoInterval=null;
+        function updatePipeline() {
+            stages.forEach((s,i)=>{
+                const r=document.getElementById(`stage-${s}`), t=document.getElementById(`text-${s}`);
+                if(i===currentCycle){r.classList.add('active');t.classList.add('active');}else{r.classList.remove('active');t.classList.remove('active');}
+            });
+            arrows.forEach((a,i)=>{
+                const el=document.getElementById(a);
+                if(i===currentCycle-1){el.classList.add('active');el.setAttribute('marker-end','url(#arrowhead-active)');}
+                else{el.classList.remove('active');el.setAttribute('marker-end','url(#arrowhead)');}
+            });
+            const instr=instructions[currentInstr];
+            document.getElementById('pipeline-instr').textContent=instr.name;
+            document.getElementById('pipeline-detail').textContent=currentCycle<5?instr.details[currentCycle]:'Complete';
+            document.getElementById('pipeCycle').textContent=currentCycle;
+            document.getElementById('pipeInstrName').textContent=instr.name;
+        }
+        document.getElementById('pipeStep').addEventListener('click',()=>{if(currentCycle<5){currentCycle++;updatePipeline();}});
+        document.getElementById('pipeReset').addEventListener('click',()=>{clearInterval(autoInterval);autoInterval=null;currentCycle=0;currentInstr=(currentInstr+1)%instructions.length;updatePipeline();});
+        document.getElementById('pipeAuto').addEventListener('click',()=>{
+            if(autoInterval){clearInterval(autoInterval);autoInterval=null;return;}
+            autoInterval=setInterval(()=>{if(currentCycle<5){currentCycle++;updatePipeline();}else{clearInterval(autoInterval);autoInterval=null;}},800);
+        });
+        updatePipeline();
+
+        // Terminal
+        const terminalBody=document.getElementById('terminalBody'), terminalInput=document.getElementById('terminalInput');
+        const cmds={
+            help:'Available commands: <span class="highlight">mips</span> | <span class="highlight">sdr</span> | <span class="highlight">idct</span> | <span class="highlight">lidar</span> | <span class="highlight">skills</span> | <span class="highlight">about</span> | <span class="highlight">clear</span>',
+            mips:'<span class="highlight">Multi-Cycle MIPS CPU</span>\n┌──────────┐    ┌──────────┐    ┌──────────┐\n│  IF/ID   │───▶│  ID/EX   │───▶│  EX/MEM  │───▶ WB\n│ PC fetch │    │ Decode   │    │ ALU op   │\n└──────────┘    └──────────┘    └──────────┘\nVerilog RTL | Synopsys DC | ASAP7 7nm\nSupports: R-type, I-type, lw/sw, beq, j',
+            sdr:'<span class="highlight">Real-Time FM SDR Receiver</span>\nIQ Samples ──▶ FIR BPF ──▶ FM Demod ──▶ Audio\n  8-bit I/Q     Custom       PLL         48kHz\n                taps        recovery     stereo\nMulti-threaded C++ | Block convolution | RDS decode',
+            idct:'<span class="highlight">HW-Accelerated Image Decompression</span>\nSRAM ──▶ IDCT ──▶ Upsample ──▶ YCbCr→RGB\n         8x8      6-tap FIR     Fixed-pt\n         block    shared MAC    pipeline\nAltera DE2 FPGA | ≥95% multiplier utilization',
+            lidar:'<span class="highlight">3D Spatial Measurement System</span>\nLiDAR ──I2C──▶ MCU ──UART──▶ PC ──▶ MATLAB 3D\nTFMini        Keil C         Serial   Point Cloud\nServo sweep 360° | Distance + angle → (x,y,z)',
+            skills:'<span class="highlight">Languages:</span> Python, C/C++, SystemVerilog, VHDL, MATLAB, Tcl\n<span class="highlight">Tools:</span>     Vivado, ModelSim, Synopsys DC, Altium, Keil\n<span class="highlight">Protocols:</span> AXI4, AXI-Stream, CAN, PCIe, JTAG, I2C, SPI',
+            about:'George Wahba — Computer Engineering @ McMaster University\nSpecializing in FPGA/RTL design and embedded systems.\nPreviously: Christie Digital (FPGA), McMaster/Stellantis (Research)\nSite: <span class="highlight">georgewahba.me</span> | Built with vanilla HTML/CSS/JS',
+        };
+        terminalInput.addEventListener('keydown',(e)=>{
+            if(e.key!=='Enter')return;
+            const cmd=terminalInput.value.trim().toLowerCase(); terminalInput.value='';
+            const echo=document.createElement('div'); echo.className='terminal-line';
+            echo.innerHTML=`<span class="prompt">$</span> <span class="cmd">${cmd}</span>`; terminalBody.appendChild(echo);
+            if(cmd==='clear'){terminalBody.innerHTML='';} else if(cmds[cmd]){
+                const o=document.createElement('div');o.className='terminal-line';o.innerHTML=`<span class="out">${cmds[cmd]}</span>`;terminalBody.appendChild(o);
+            } else if(cmd){const o=document.createElement('div');o.className='terminal-line';o.innerHTML=`<span class="out">Command not found: ${cmd}. Type <span class="highlight">help</span> for available commands.</span>`;terminalBody.appendChild(o);}
+            terminalBody.scrollTop=terminalBody.scrollHeight;
         });
 
-        // ===== BINARY EASTER EGG =====
-        const projectCards = document.querySelectorAll('.project-card');
-        const binaryMessage = document.getElementById('binaryMessage');
-        const binaryOverlay = document.getElementById('binaryOverlay');
-
-        projectCards.forEach(card => {
-            card.addEventListener('click', () => {
-                let count = parseInt(card.getAttribute('data-click-count'));
-                count++;
-                card.setAttribute('data-click-count', count);
-
-                if (count === 5) {
-                    activateBinaryEasterEgg();
-                    // Reset all counters
-                    projectCards.forEach(c => c.setAttribute('data-click-count', '0'));
-                }
+        // Binary Easter Egg
+        document.querySelectorAll('.project-card').forEach(card=>{
+            card.addEventListener('click',()=>{
+                let c=parseInt(card.getAttribute('data-click-count'))+1; card.setAttribute('data-click-count',c);
+                if(c===5){document.getElementById('binaryMessage').classList.add('active');document.getElementById('binaryOverlay').classList.add('active');document.querySelectorAll('.project-card').forEach(x=>x.setAttribute('data-click-count','0'));}
             });
         });
+        document.getElementById('closeBinary').addEventListener('click',()=>{document.getElementById('binaryMessage').classList.remove('active');document.getElementById('binaryOverlay').classList.remove('active');});
+        document.getElementById('binaryOverlay').addEventListener('click',()=>{document.getElementById('binaryMessage').classList.remove('active');document.getElementById('binaryOverlay').classList.remove('active');});
 
-        function activateBinaryEasterEgg() {
-            binaryMessage.classList.add('active');
-            binaryOverlay.classList.add('active');
-
-            console.log('%c01001000 01100101 01101100 01101100 01101111', 'color: #64ffda; font-size: 16px; font-family: monospace;');
-            console.log('%cBinary easter egg activated!', 'color: #64ffda; font-size: 14px;');
-        }
-
-        document.getElementById('closeBinary').addEventListener('click', () => {
-            binaryMessage.classList.remove('active');
-            binaryOverlay.classList.remove('active');
-        });
-
-        binaryOverlay.addEventListener('click', () => {
-            binaryMessage.classList.remove('active');
-            binaryOverlay.classList.remove('active');
-        });
-
-        // ===== ORIGINAL GLOW EFFECT =====
-        let ticking = false;
-        document.addEventListener('mousemove', (e) => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    document.documentElement.style.setProperty('--cursor-x', e.clientX + 'px');
-                    document.documentElement.style.setProperty('--cursor-y', e.clientY + 'px');
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        });
-
-        // Console hints
-        console.log('%c⚡ Hardware & FPGA Portfolio', 'color: #64ffda; font-size: 20px; font-weight: bold;');
-        console.log('%cTry clicking on any project card 5 times... 🔢', 'color: #a8b2d1; font-size: 12px;');
+        // Glow
+        let ticking=false;
+        document.addEventListener('mousemove',(e)=>{if(!ticking){requestAnimationFrame(()=>{docEl.style.setProperty('--cursor-x',e.clientX+'px');docEl.style.setProperty('--cursor-y',e.clientY+'px');ticking=false;});ticking=true;}});
+        console.log('%c⚡ Hardware & FPGA Portfolio','color:#f5a623;font-size:20px;font-weight:bold;');
+        console.log('%cTry the terminal below, or click a project card 5 times... 🔢','color:#8a8578;font-size:12px;');
     </script>
 </body>
 </html>

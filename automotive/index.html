@@ -6,569 +6,119 @@
     <meta name="description" content="George Wahba's Automotive & Controls portfolio - Embedded C, CAN FD networks, and Model-Based Design for electric vehicles including Cadillac Lyriq control systems.">
     <meta name="author" content="George Wahba">
     <meta name="keywords" content="Automotive Controls, CAN FD, Embedded C, Model-Based Design, HIL, Simulink, EcoCAR, Cadillac Lyriq">
-
-    <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://georgewahba.me/automotive">
     <meta property="og:title" content="Automotive & Controls | George Wahba">
     <meta property="og:description" content="Embedded C, CAN FD networks, and Model-Based Design for electric vehicles">
-
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Automotive & Controls | George Wahba">
     <meta name="twitter:description" content="Embedded C, CAN FD networks, and Model-Based Design for electric vehicles">
-
     <title>Automotive & Controls | George Wahba</title>
-
-    <!-- Favicon: Car -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2364ffda%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2%22/><circle cx=%226.5%22 cy=%2216.5%22 r=%222.5%22/><circle cx=%2216.5%22 cy=%2216.5%22 r=%222.5%22/></svg>">
-
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23f5a623%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2%22/><circle cx=%226.5%22 cy=%2216.5%22 r=%222.5%22/><circle cx=%2216.5%22 cy=%2216.5%22 r=%222.5%22/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Consistent Palette */
-            --bg-color: #0a192f;
-            --text-primary: #ccd6f6;
-            --text-secondary: #a8b2d1;
-            --accent: #64ffda;
-            --card-bg: #112240;
-            --hover-bg: #233554;
-            --font-main: 'Inter', 'San Francisco', 'SF Pro Text', -apple-system, system-ui, sans-serif;
-            --font-mono: 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
-            --cursor-x: 50%;
-            --cursor-y: 50%;
+            --bg-color: #0a0a0f; --bg-subtle: #111118; --text-primary: #e0ddd5;
+            --text-secondary: #8a8578; --accent: #f5a623; --accent-dim: rgba(245,166,35,0.15);
+            --accent-glow: rgba(245,166,35,0.4); --card-bg: #141418; --hover-bg: #1e1e24;
+            --border: #2a2a32;
+            --font-main: 'Outfit', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+            --cursor-x: 50%; --cursor-y: 50%;
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        /* Skip to content for accessibility */
-        .skip-to-content {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: var(--accent);
-            color: var(--bg-color);
-            padding: 8px;
-            text-decoration: none;
-            z-index: 1000;
-            font-weight: 600;
-        }
-
-        .skip-to-content:focus {
-            top: 0;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            font-family: var(--font-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-            counter-reset: section;
-        }
-
-        /* Particle Canvas */
-        #particle-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Glow Effect - Optimized */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(
-                min(800px, 50vw) circle at var(--cursor-x) var(--cursor-y),
-                rgba(100, 255, 218, 0.03),
-                transparent 40%
-            );
-            pointer-events: none;
-            z-index: 0;
-            will-change: background;
-        }
-
-        /* Nav */
-        .nav-bar {
-            padding: 1.5rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(10, 25, 47, 0.85);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo {
-            font-family: var(--font-mono);
-            color: var(--accent);
-            font-size: 1.2rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .logo:hover,
-        .logo:focus {
-            color: var(--text-primary);
-            outline: none;
-        }
-
-        .logo:focus-visible {
-            outline: 2px solid var(--accent);
-            outline-offset: 4px;
-            border-radius: 4px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            transition: color 0.2s;
-            padding: 0.5rem;
-        }
-
-        .nav-links a:hover,
-        .nav-links a:focus,
-        .nav-links a.active {
-            color: var(--accent);
-            outline: none;
-        }
-
-        .nav-links a:focus-visible {
-            outline: 2px solid var(--accent);
-            outline-offset: 4px;
-            border-radius: 4px;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-            z-index: 1;
-            position: relative;
-        }
-
-        /* Headers */
-        h1 {
-            font-size: clamp(30px, 5vw, 50px);
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            color: var(--text-primary);
-            margin-top: 4rem;
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-        }
-
-        h2::before {
-            counter-increment: section;
-            content: "0" counter(section) ".";
-            margin-right: 10px;
-            color: var(--accent);
-            font-family: var(--font-mono);
-            font-size: 1.2rem;
-        }
-
-        h2::after {
-            content: "";
-            display: block;
-            width: 200px;
-            height: 1px;
-            background-color: #233554;
-            margin-left: 20px;
-        }
-
-        p.intro {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin-bottom: 3rem;
-        }
-
-        /* Items (Experience) */
-        .item {
-            margin-bottom: 3rem;
-            padding: 1.5rem;
-            background: var(--card-bg);
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .item:hover {
-            transform: translateY(-5px);
-            background: var(--hover-bg);
-        }
-
-        .item-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        h3 {
-            color: var(--text-primary);
-            font-size: 1.1rem;
-        }
-
-        .company {
-            color: var(--accent);
-        }
-
-        .date {
-            color: var(--text-secondary);
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-        }
-
-        .item ul {
-            list-style: none;
-            margin-top: 1rem;
-        }
-
-        .item li {
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .item li::before {
-            content: "▹";
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-        }
-
-        /* Projects Grid */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .project-card {
-            background: var(--card-bg);
-            padding: 2rem 1.5rem;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .project-card:hover {
-            transform: translateY(-7px);
-            background: var(--hover-bg);
-        }
-
-        .project-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .folder-icon {
-            width: 40px;
-            height: 40px;
-            color: var(--accent);
-        }
-
-        .project-card h4 {
-            color: var(--text-primary);
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            flex-grow: 1;
-            margin-bottom: 1.5rem;
-        }
-
-        .tech-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            list-style: none;
-            margin-top: auto;
-        }
-
-        .tech-list li {
-            color: var(--text-secondary);
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-        }
-
-        /* Skills Section */
-        .skills-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .skill-group h4 {
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-        }
-
-        .skill-group ul {
-            list-style: none;
-        }
-
-        .skill-group li {
-            color: var(--text-secondary);
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .skill-group li::before {
-            content: "▹";
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-        }
-
-        /* Contact Section */
-        .contact-section {
-            text-align: center;
-            margin-top: 6rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .contact-title {
-            justify-content: center;
-        }
-
-        .contact-title::before {
-            content: none !important;
-            display: none;
-        }
-
-        .contact-title::after {
-            display: none;
-        }
-
-        .contact-desc {
-            color: var(--text-secondary);
-            margin-bottom: 3rem;
-        }
-
-        .contact-btn {
-            display: inline-block;
-            color: var(--accent);
-            border: 1px solid var(--accent);
-            padding: 1rem 2rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-family: var(--font-mono);
-            transition: all 0.3s ease;
-        }
-
-        .contact-btn:hover,
-        .contact-btn:focus {
-            background: rgba(100, 255, 218, 0.1);
-            transform: translateY(-3px);
-            outline: none;
-        }
-
-        .contact-btn:focus-visible {
-            outline: 2px solid var(--accent);
-            outline-offset: 4px;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-secondary);
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-        }
-
-        /* Easter Egg Modal */
-        .easter-egg-modal {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            background: var(--card-bg);
-            border: 2px solid var(--accent);
-            border-radius: 8px;
-            padding: 3rem;
-            z-index: 1000;
-            text-align: center;
-            max-width: 500px;
-            width: 90%;
-            opacity: 0;
-            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        .easter-egg-modal.active {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 1;
-        }
-
-        .easter-egg-modal h2 {
-            color: var(--accent);
-            margin: 0 0 1rem 0;
-        }
-
-        .easter-egg-modal h2::before,
-        .easter-egg-modal h2::after {
-            display: none;
-        }
-
-        .easter-egg-modal p {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-        }
-
-        .easter-egg-modal button {
-            background: transparent;
-            color: var(--accent);
-            border: 1px solid var(--accent);
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: var(--font-mono);
-            transition: all 0.3s ease;
-        }
-
-        .easter-egg-modal button:hover {
-            background: rgba(100, 255, 218, 0.1);
-        }
-
-        .easter-egg-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 999;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .easter-egg-overlay.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .item-header { flex-direction: column; }
-            .date { margin-bottom: 0.5rem; display: block; }
-            h2::after { width: 100%; }
-        }
-
-        @media (max-width: 480px) {
-            .nav-links a {
-                font-size: 0.75rem;
-            }
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Reduced motion support */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-
-            body::before {
-                animation: none;
-            }
-        }
+        .skip-to-content { position: absolute; top: -40px; left: 0; background: var(--accent); color: var(--bg-color); padding: 8px; text-decoration: none; z-index: 1000; font-weight: 600; }
+        .skip-to-content:focus { top: 0; }
+        body { background-color: var(--bg-color); color: var(--text-primary); font-family: var(--font-main); line-height: 1.6; overflow-x: hidden; counter-reset: section; }
+        body::after { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px); pointer-events: none; z-index: 9999; }
+        #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        body::before { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(min(600px,40vw) circle at var(--cursor-x) var(--cursor-y), rgba(245,166,35,0.04), transparent 40%); pointer-events: none; z-index: 0; will-change: background; }
+        .nav-bar { padding: 1.25rem 2rem; display: flex; justify-content: space-between; align-items: center; background: rgba(10,10,15,0.85); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border); }
+        .logo { font-family: var(--font-mono); color: var(--accent); font-size: 1.1rem; font-weight: 600; text-decoration: none; transition: color 0.2s; }
+        .logo:hover, .logo:focus { color: var(--text-primary); outline: none; }
+        .logo:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-family: var(--font-mono); font-size: 0.8rem; transition: color 0.2s; padding: 0.5rem; letter-spacing: 0.3px; }
+        .nav-links a:hover, .nav-links a:focus, .nav-links a.active { color: var(--accent); outline: none; }
+        .nav-links a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 4rem 2rem; z-index: 1; position: relative; }
+        h1 { font-size: clamp(30px,5vw,50px); font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; letter-spacing: -0.5px; }
+        /* CAN waveform section headers */
+        h2 { font-size: 1.4rem; color: var(--text-primary); margin-top: 4rem; margin-bottom: 2rem; display: flex; align-items: center; font-weight: 500; }
+        h2::before { counter-increment: section; content: "0" counter(section) "."; margin-right: 10px; color: var(--accent); font-family: var(--font-mono); font-size: 1.1rem; }
+        h2::after { content: ""; display: block; width: 200px; height: 24px; margin-left: 20px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='24' viewBox='0 0 200 24'%3E%3Cpolyline points='0,18 5,18 5,6 15,6 15,18 20,18 20,6 40,6 40,18 45,18 45,6 50,6 50,18 60,18 60,6 65,6 65,18 80,18 80,6 85,6 85,18 90,18 90,6 110,6 110,18 115,18 115,6 120,6 120,18 130,18 130,6 140,6 140,18 150,18 150,6 155,6 155,18 170,18 170,6 190,6 190,18 200,18' fill='none' stroke='%23f5a623' stroke-width='1.5' opacity='0.3'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: center; flex-shrink: 0; }
+        p.intro { font-size: 1.05rem; color: var(--text-secondary); max-width: 600px; margin-bottom: 3rem; font-weight: 300; line-height: 1.7; }
+        .item { margin-bottom: 3rem; padding: 1.5rem; background: var(--card-bg); border-radius: 4px; border: 1px solid transparent; transition: all 0.3s ease; opacity: 0; animation: fadeInUp 0.6s ease forwards; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .item:hover { transform: translateY(-5px); background: var(--hover-bg); border-color: var(--border); }
+        .item-header { display: flex; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; }
+        h3 { color: var(--text-primary); font-size: 1.05rem; font-weight: 500; }
+        .company { color: var(--accent); }
+        .date { color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.8rem; }
+        .item ul { list-style: none; margin-top: 1rem; }
+        .item li { color: var(--text-secondary); margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative; font-size: 0.95rem; line-height: 1.6; }
+        .item li::before { content: "▹"; position: absolute; left: 0; color: var(--accent); }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .project-card { background: var(--card-bg); padding: 2rem 1.5rem; border-radius: 4px; border: 1px solid transparent; transition: all 0.3s ease; display: flex; flex-direction: column; height: 100%; }
+        .project-card:hover { transform: translateY(-7px); background: var(--hover-bg); border-color: var(--border); }
+        .project-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+        .folder-icon { width: 40px; height: 40px; color: var(--accent); }
+        .project-card h4 { color: var(--text-primary); font-size: 1.15rem; margin-bottom: 1rem; font-weight: 500; }
+        .project-card p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; flex-grow: 1; margin-bottom: 1.5rem; }
+        .tech-list { display: flex; flex-wrap: wrap; gap: 0.75rem; list-style: none; margin-top: auto; }
+        .tech-list li { color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.7rem; }
+        .skills-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .skill-group h4 { color: var(--text-primary); margin-bottom: 1rem; font-weight: 500; }
+        .skill-group ul { list-style: none; }
+        .skill-group li { color: var(--text-secondary); padding: 0.5rem 0; padding-left: 1.5rem; position: relative; font-size: 0.95rem; }
+        .skill-group li::before { content: "▹"; position: absolute; left: 0; color: var(--accent); }
+        .contact-section { text-align: center; margin-top: 6rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .contact-title { justify-content: center; }
+        .contact-title::before { margin-right: 10px; }
+        .contact-title::after { display: none; }
+        .contact-desc { color: var(--text-secondary); margin-bottom: 3rem; font-weight: 300; }
+        .contact-btn { display: inline-block; color: var(--accent); border: 1px solid var(--accent); padding: 1rem 2rem; border-radius: 4px; text-decoration: none; font-family: var(--font-mono); transition: all 0.3s ease; font-size: 0.9rem; }
+        .contact-btn:hover, .contact-btn:focus { background: var(--accent-dim); transform: translateY(-3px); outline: none; box-shadow: 0 0 20px rgba(245,166,35,0.1); }
+        .contact-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+        footer { text-align: center; padding: 2rem; color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.8rem; }
+        .easter-egg-modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(0); background: var(--card-bg); border: 2px solid var(--accent); border-radius: 8px; padding: 3rem; z-index: 10000; text-align: center; max-width: 500px; width: 90%; opacity: 0; transition: all 0.5s cubic-bezier(0.68,-0.55,0.265,1.55); }
+        .easter-egg-modal.active { transform: translate(-50%,-50%) scale(1); opacity: 1; }
+        .easter-egg-modal h2 { color: var(--accent); margin: 0 0 1.5rem 0; font-size: 1.3rem; }
+        .easter-egg-modal h2::before, .easter-egg-modal h2::after { display: none; }
+        .easter-egg-modal p { color: var(--text-secondary); margin-bottom: 1rem; max-width: 100%; }
+        .easter-egg-modal button { background: transparent; color: var(--accent); border: 1px solid var(--accent); padding: 0.75rem 1.5rem; border-radius: 4px; cursor: pointer; font-family: var(--font-mono); transition: all 0.3s ease; }
+        .easter-egg-modal button:hover { background: var(--accent-dim); }
+        .easter-egg-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        .easter-egg-overlay.active { opacity: 1; pointer-events: all; }
+        @media (max-width: 768px) { .item-header { flex-direction: column; } .date { margin-bottom: 0.5rem; display: block; } h2::after { display: none; } }
+        @media (max-width: 480px) { .nav-links a { font-size: 0.7rem; } .projects-grid { grid-template-columns: 1fr; } }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } }
     </style>
 </head>
 <body>
     <a href="#main-content" class="skip-to-content">Skip to main content</a>
-
-    <!-- Particle Canvas -->
     <canvas id="particle-canvas"></canvas>
-
-    <!-- Easter Egg Modal -->
     <div class="easter-egg-overlay" id="easterEggOverlay"></div>
     <div class="easter-egg-modal" id="easterEggModal">
         <h2>🎮 Konami Code Activated!</h2>
         <p>You've unlocked the secret developer mode! You clearly know your way around a controller... or keyboard.</p>
-        <p style="font-family: var(--font-mono); color: var(--accent); font-size: 0.9rem;">
-            ↑ ↑ ↓ ↓ ← → ← → B A
-        </p>
+        <p style="font-family: var(--font-mono); color: var(--accent); font-size: 0.9rem;">↑ ↑ ↓ ↓ ← → ← → B A</p>
         <button id="closeModal">Close</button>
     </div>
-
     <nav class="nav-bar">
         <a href="/" class="logo">GW</a>
-        <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/automotive" class="active" aria-current="page">Automotive</a>
-            <a href="/hardware">Hardware</a>
-        </div>
+        <div class="nav-links"><a href="/">Home</a><a href="/automotive" class="active" aria-current="page">Automotive</a><a href="/hardware">Hardware</a></div>
     </nav>
-
     <div class="container" id="main-content">
         <header>
-            <span style="font-family: var(--font-mono); color: var(--accent);">Featured Portfolio</span>
+            <span style="font-family: var(--font-mono); color: var(--accent); font-size: 0.85rem;">Featured Portfolio</span>
             <h1>Automotive & Controls</h1>
-            <p class="intro">
-                Specialized experience in embedded firmware, CAN FD networks, and Model-Based Design for electric vehicles. Featuring work on the Cadillac Lyriq control systems.
-            </p>
+            <p class="intro">Specialized experience in embedded firmware, CAN FD networks, and Model-Based Design for electric vehicles. Featuring work on the Cadillac Lyriq control systems.</p>
         </header>
-
         <section>
             <h2>Work Experience</h2>
-
             <div class="item" style="animation-delay: 0.1s;">
                 <div class="item-header">
                     <h3>PCM Control Systems Subject Matter Expert <span class="company">@ McMaster University EcoCAR</span></h3>
@@ -580,7 +130,6 @@
                     <li>Contributed to research papers outlining different types of control systems to be integrated into the vehicle, such as one-pedal driving, RWD to AWD conversion, and torque blending.</li>
                 </ul>
             </div>
-
             <div class="item" style="animation-delay: 0.2s;">
                 <div class="item-header">
                     <h3>Research Assistant II <span class="company">@ McMaster University - Stellantis</span></h3>
@@ -588,277 +137,141 @@
                 </div>
                 <ul>
                     <li>Designed and fabricated mounting hardware in Autodesk Inventor to integrate Hall effect current transducers into a 6-phase inverter setup, enabling non-invasive phase current measurement across HV lines.</li>
-                    <li>Executed incremental board bring-up of high-power DC motor control PCBs, validating HV rail connections from a safety box to the 6-phase inverter using oscilloscopes and multimeters, verifying voltage levels and signal integrity against Altium schematics.</li>
+                    <li>Executed incremental board bring-up of high-power DC motor control PCBs, validating HV rail connections from a safety box to the 6-phase inverter using oscilloscopes and multimeters.</li>
                     <li>Developed MATLAB scripts to analyze time-series test data, extracting key metrics (mean, max, range) to evaluate inverter setup performance across varying operating parameters.</li>
                 </ul>
             </div>
         </section>
-
         <section>
             <h2>Key Projects</h2>
             <div class="projects-grid">
-                <!-- Project 1 -->
                 <div class="project-card">
                     <div class="project-top">
-                        <!-- Icon: Network Signal (Server/Database style) -->
-                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
-                            <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
-                            <line x1="6" y1="6" x2="6.01" y2="6"></line>
-                            <line x1="6" y1="18" x2="6.01" y2="18"></line>
-                        </svg>
+                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
                     </div>
                     <h4>Multi-Channel CAN FD Aggregator & Gateway</h4>
-                    <p>Designed a high-throughput 8-to-2 CAN FD Gateway on TI C2000 microcontroller. Engineered a custom SPI-to-CAN FD driver stack from scratch, implementing edge-triggered GPIO interrupts for precise frame synchronization and implementing message filtering and routing algorithms for multi-channel arbitration.</p>
-                    <ul class="tech-list">
-                        <li>C</li>
-                        <li>TI C2000</li>
-                        <li>SPI</li>
-                        <li>CAN FD</li>
-                    </ul>
+                    <p>Designed a high-throughput 8-to-2 CAN FD Gateway on TI C2000 microcontroller. Engineered a custom SPI-to-CAN FD driver stack from scratch, implementing edge-triggered GPIO interrupts for precise frame synchronization and message filtering/routing algorithms for multi-channel arbitration.</p>
+                    <ul class="tech-list"><li>C</li><li>TI C2000</li><li>SPI</li><li>CAN FD</li></ul>
                 </div>
-
-                <!-- Project 2 -->
                 <div class="project-card">
                     <div class="project-top">
-                        <!-- Icon: Heartbeat/Activity -->
-                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                        </svg>
+                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                     </div>
                     <h4>Pacemaker Control System</h4>
                     <p>Collaborated to design a closed-loop pacemaker control system. Engineered a Simulink Stateflow model to track atrial/ventricular pulses and adapt pacing algorithms in real-time.</p>
-                    <ul class="tech-list">
-                        <li>Python</li>
-                        <li>Simulink</li>
-                        <li>NXP K64</li>
-                    </ul>
+                    <ul class="tech-list"><li>Python</li><li>Simulink</li><li>NXP K64</li></ul>
                 </div>
             </div>
         </section>
-
         <section>
             <h2>Relevant Skills</h2>
             <div class="skills-section">
-                <div class="skill-group">
-                    <h4>Languages & Tools</h4>
-                    <ul>
-                        <li>C/C++</li>
-                        <li>MATLAB</li>
-                        <li>Simulink/Stateflow</li>
-                        <li>Python</li>
-                        <li>Altium Designer</li>
-                    </ul>
-                </div>
-                <div class="skill-group">
-                    <h4>Automotive Protocols</h4>
-                    <ul>
-                        <li>CAN / CAN FD</li>
-                        <li>SPI / I2C / UART</li>
-                        <li>Model-Based Design</li>
-                        <li>Hardware-in-the-Loop</li>
-                        <li>Board Bring-up</li>
-                    </ul>
-                </div>
+                <div class="skill-group"><h4>Languages & Tools</h4><ul><li>C/C++</li><li>MATLAB</li><li>Simulink/Stateflow</li><li>Python</li><li>Altium Designer</li></ul></div>
+                <div class="skill-group"><h4>Automotive Protocols</h4><ul><li>CAN / CAN FD</li><li>SPI / I2C / UART</li><li>Model-Based Design</li><li>Hardware-in-the-Loop</li><li>Board Bring-up</li></ul></div>
             </div>
         </section>
-
-        <!-- Contact Section -->
         <section class="contact-section">
             <h2 class="contact-title">Get In Touch</h2>
-            <p class="contact-desc">
-                I'm always open to opportunities to work on automotive designs. Whether you have a question or just want to say hi, my inbox is always open!
-            </p>
+            <p class="contact-desc">I'm always open to opportunities to work on automotive designs. Whether you have a question or just want to say hi, my inbox is always open!</p>
             <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#103;&#101;&#111;&#114;&#103;&#101;&#119;&#97;&#104;&#98;&#97;&#48;&#51;&#64;&#111;&#117;&#116;&#108;&#111;&#111;&#107;&#46;&#99;&#111;&#109;" class="contact-btn">Say Hello</a>
         </section>
     </div>
-
-    <footer>
-        <p>Built by George Wahba</p>
-    </footer>
-
+    <footer><p>Built by George Wahba</p></footer>
     <script>
-        // ===== PARTICLE SYSTEM =====
+        // Scroll-reactive Particle System
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        let particles = [];
-        const particleCount = 80;
-        const connectionDistance = 150;
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        let particles = []; const particleCount = 80; const connectionDistance = 150;
         const mouse = { x: null, y: null, radius: 150 };
+        let scrollProgress = 0;
+        window.addEventListener('scroll', () => { const m = document.documentElement.scrollHeight - window.innerHeight; scrollProgress = m > 0 ? window.scrollY / m : 0; });
 
         class Particle {
             constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.vy = (Math.random() - 0.5) * 0.5;
-                this.radius = Math.random() * 2 + 1;
+                this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
+                this.vx = (Math.random()-0.5)*0.5; this.vy = (Math.random()-0.5)*0.5;
+                this.radius = Math.random()*2+1;
+                this.born = Math.random(); // scroll birth threshold
             }
-
             update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                // Bounce off edges
-                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-
-                // Mouse interaction
+                const speed = 1 + scrollProgress * 1.5;
+                this.x += this.vx * speed; this.y += this.vy * speed;
+                if (this.x<0||this.x>canvas.width) this.vx*=-1;
+                if (this.y<0||this.y>canvas.height) this.vy*=-1;
                 if (mouse.x !== null) {
-                    const dx = mouse.x - this.x;
-                    const dy = mouse.y - this.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < mouse.radius) {
-                        const angle = Math.atan2(dy, dx);
-                        const force = (mouse.radius - distance) / mouse.radius;
-                        this.vx -= Math.cos(angle) * force * 0.5;
-                        this.vy -= Math.sin(angle) * force * 0.5;
-                    }
+                    const dx=mouse.x-this.x, dy=mouse.y-this.y, d=Math.sqrt(dx*dx+dy*dy);
+                    if (d<mouse.radius) { const a=Math.atan2(dy,dx), f=(mouse.radius-d)/mouse.radius; this.vx-=Math.cos(a)*f*0.5; this.vy-=Math.sin(a)*f*0.5; }
                 }
-
-                // Friction
-                this.vx *= 0.99;
-                this.vy *= 0.99;
+                this.vx *= 0.99; this.vy *= 0.99;
             }
-
             draw() {
-                ctx.fillStyle = 'rgba(100, 255, 218, 0.5)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fill();
+                const vis = Math.max(0, Math.min(1, (scrollProgress - this.born * 0.4) / 0.3));
+                const baseVis = 0.3; // always somewhat visible
+                const alpha = baseVis + vis * 0.5;
+                ctx.fillStyle = `rgba(245,166,35,${alpha})`;
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2); ctx.fill();
             }
         }
 
-        function init() {
-            particles = [];
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-        }
+        function init() { particles=[]; for(let i=0;i<particleCount;i++) particles.push(new Particle()); }
 
         function connectParticles() {
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < connectionDistance) {
-                        const opacity = 1 - (distance / connectionDistance);
-                        ctx.strokeStyle = `rgba(100, 255, 218, ${opacity * 0.2})`;
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
+            const connDist = connectionDistance + scrollProgress * 50;
+            for(let i=0;i<particles.length;i++) {
+                for(let j=i+1;j<particles.length;j++) {
+                    const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
+                    const d=Math.sqrt(dx*dx+dy*dy);
+                    if(d<connDist) {
+                        const opacity = (1-(d/connDist)) * (0.1 + scrollProgress * 0.15);
+                        ctx.strokeStyle=`rgba(245,166,35,${opacity})`; ctx.lineWidth=1;
+                        ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.stroke();
                     }
                 }
             }
         }
 
         function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            particles.forEach(particle => {
-                particle.update();
-                particle.draw();
-            });
-
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            particles.forEach(p=>{p.update();p.draw();});
             connectParticles();
             requestAnimationFrame(animate);
         }
 
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            init();
-        });
+        window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;init();});
+        canvas.addEventListener('mousemove',(e)=>{mouse.x=e.clientX;mouse.y=e.clientY;});
+        canvas.addEventListener('mouseleave',()=>{mouse.x=null;mouse.y=null;});
+        init(); animate();
 
-        canvas.addEventListener('mousemove', (e) => {
-            mouse.x = e.clientX;
-            mouse.y = e.clientY;
-        });
-
-        canvas.addEventListener('mouseleave', () => {
-            mouse.x = null;
-            mouse.y = null;
-        });
-
-        init();
-        animate();
-
-        // ===== KONAMI CODE EASTER EGG =====
-        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-        let konamiIndex = 0;
-
-        document.addEventListener('keydown', (e) => {
-            const key = e.key.toLowerCase();
-
-            if (key === konamiCode[konamiIndex] || e.key === konamiCode[konamiIndex]) {
+        // Konami Code
+        const konamiCode=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+        let konamiIndex=0;
+        document.addEventListener('keydown',(e)=>{
+            const key=e.key.toLowerCase();
+            if(key===konamiCode[konamiIndex]||e.key===konamiCode[konamiIndex]){
                 konamiIndex++;
-
-                if (konamiIndex === konamiCode.length) {
-                    activateEasterEgg();
-                    konamiIndex = 0;
+                if(konamiIndex===konamiCode.length){
+                    document.getElementById('easterEggModal').classList.add('active');
+                    document.getElementById('easterEggOverlay').classList.add('active');
+                    document.documentElement.style.setProperty('--accent','#e74c3c');
+                    particles.forEach(p=>{p.vx=(Math.random()-0.5)*5;p.vy=(Math.random()-0.5)*5;});
+                    setTimeout(()=>document.documentElement.style.setProperty('--accent','#f5a623'),3000);
+                    konamiIndex=0;
                 }
-            } else {
-                konamiIndex = 0;
-            }
+            } else konamiIndex=0;
         });
 
-        function activateEasterEgg() {
-            const modal = document.getElementById('easterEggModal');
-            const overlay = document.getElementById('easterEggOverlay');
+        document.getElementById('closeModal').addEventListener('click',()=>{document.getElementById('easterEggModal').classList.remove('active');document.getElementById('easterEggOverlay').classList.remove('active');});
+        document.getElementById('easterEggOverlay').addEventListener('click',()=>{document.getElementById('easterEggModal').classList.remove('active');document.getElementById('easterEggOverlay').classList.remove('active');});
 
-            modal.classList.add('active');
-            overlay.classList.add('active');
-
-            // Change accent color temporarily
-            document.documentElement.style.setProperty('--accent', '#ff6b6b');
-
-            // Add confetti effect to particles
-            particles.forEach(particle => {
-                particle.vx = (Math.random() - 0.5) * 5;
-                particle.vy = (Math.random() - 0.5) * 5;
-            });
-
-            setTimeout(() => {
-                document.documentElement.style.setProperty('--accent', '#64ffda');
-            }, 3000);
-        }
-
-        document.getElementById('closeModal').addEventListener('click', () => {
-            document.getElementById('easterEggModal').classList.remove('active');
-            document.getElementById('easterEggOverlay').classList.remove('active');
+        // Glow
+        let ticking=false;
+        document.addEventListener('mousemove',(e)=>{
+            if(!ticking){requestAnimationFrame(()=>{document.documentElement.style.setProperty('--cursor-x',e.clientX+'px');document.documentElement.style.setProperty('--cursor-y',e.clientY+'px');ticking=false;});ticking=true;}
         });
-
-        document.getElementById('easterEggOverlay').addEventListener('click', () => {
-            document.getElementById('easterEggModal').classList.remove('active');
-            document.getElementById('easterEggOverlay').classList.remove('active');
-        });
-
-        // ===== ORIGINAL GLOW EFFECT =====
-        let ticking = false;
-        document.addEventListener('mousemove', (e) => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    document.documentElement.style.setProperty('--cursor-x', e.clientX + 'px');
-                    document.documentElement.style.setProperty('--cursor-y', e.clientY + 'px');
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        });
-
-        // Console Easter Egg Hint
-        console.log('%c🎮 Looking for secrets?', 'color: #64ffda; font-size: 16px; font-weight: bold;');
-        console.log('%cTry the Konami Code...', 'color: #a8b2d1; font-size: 12px;');
-        console.log('%c↑ ↑ ↓ ↓ ← → ← → B A', 'color: #64ffda; font-family: monospace;');
+        console.log('%c🎮 Looking for secrets?','color:#f5a623;font-size:16px;font-weight:bold;');
+        console.log('%cTry the Konami Code...','color:#8a8578;font-size:12px;');
+        console.log('%c↑ ↑ ↓ ↓ ← → ← → B A','color:#f5a623;font-family:monospace;');
     </script>
 </body>
 </html>
