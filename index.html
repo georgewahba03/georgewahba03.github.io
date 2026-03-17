@@ -197,10 +197,10 @@
             text-transform: uppercase; letter-spacing: 1.5px; text-align: center;
         }
 
-        /* NEW: Container for text layout */
+        /* UPDATED: Increased vertical offset to add spacing */
         .ic-text {
             position: absolute;
-            top: calc(100% - 1rem); 
+            top: calc(100% + 0.5rem); 
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -298,7 +298,7 @@
             .ic-body { width: 140px; height: 140px; }
             .central-die { width: 60px; height: 60px; font-size: 1.1rem; }
             .pcb-traces { display: none; }
-            .ic-text { position: static; transform: none; margin-top: 1rem; } /* Restore text flow on mobile */
+            .ic-text { position: static; transform: none; margin-top: 1rem; }
         }
 
         @media (prefers-reduced-motion: reduce) {
