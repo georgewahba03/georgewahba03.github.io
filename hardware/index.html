@@ -224,6 +224,22 @@
             <div class="projects-grid">
                 <div class="project-card" data-click-count="0">
                     <div class="project-top">
+                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="15" x2="13" y2="15"/></svg>
+                    </div>
+                    <h4>Multi-Cycle MIPS CPU</h4>
+                    <p>Designed a multi-cycle MIPS processor with an 8-state one-hot FSM, shared-adder ALU, and 32×32 register file. Optimized power via enable-gated pipeline registers and ALU input isolation, and timing via pre-computed branch targets and a balanced OR reduction tree. Synthesized on ASAP7 7nm with clock gating and verified through gate-level simulation with SDF back-annotated timing.</p>
+                    <ul class="tech-list"><li>Verilog</li><li>Synopsys DC</li><li>ASAP7 7nm</li><li>NCVerilog</li><li>GLS</li></ul>
+                </div>
+                <div class="project-card" data-click-count="0">
+                    <div class="project-top">
+                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <h4>Fixed-Point ALU with MAC & Overflow Detection</h4>
+                    <p>Implemented a signed fixed-point ALU (7-bit integer, 5-bit fraction) supporting 8 operations including addition, subtraction, multiplication, multiply-accumulate (MAC), XNOR, ReLU, mean, and absolute maximum. Designed persistent overflow assertion across uninterrupted MAC sequences and verified against constrained-random test vectors.</p>
+                    <ul class="tech-list"><li>Verilog</li><li>NCVerilog</li><li>DVE</li><li>Fixed-Point</li></ul>
+                </div>
+                <div class="project-card" data-click-count="0">
+                    <div class="project-top">
                         <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"></circle><path d="M16.24 7.76a6 6 0 0 1 0 8.49"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path><path d="M7.76 16.24a6 6 0 0 1 0-8.49"></path><path d="M4.93 19.07a10 10 0 0 1 0-14.14"></path></svg>
                     </div>
                     <h4>Real-Time Software Defined Radio (SDR) Receiver</h4>
@@ -252,7 +268,7 @@
             <h2>Relevant Skills</h2>
             <div class="skills-section">
                 <div class="skill-group"><h4>Languages</h4><ul><li>Python</li><li>C/C++</li><li>SystemVerilog</li><li>Verilog/VHDL</li><li>MATLAB</li><li>Tcl</li></ul></div>
-                <div class="skill-group"><h4>Technologies</h4><ul><li>Xilinx Vivado</li><li>Speedgoat/dSpace</li><li>Altium Designer</li><li>Linux</li><li>Git/Subversion</li></ul></div>
+                <div class="skill-group"><h4>Technologies</h4><ul><li>Xilinx Vivado</li><li>Synopsys Design Compiler</li><li>Speedgoat/dSpace</li><li>Altium Designer</li><li>Linux</li><li>Git/Subversion</li></ul></div>
                 <div class="skill-group"><h4>Protocols</h4><ul><li>AXI4/AXI-Stream</li><li>CAN/PCIe</li><li>JTAG/I2C/SPI</li><li>TCP/UDP</li></ul></div>
             </div>
         </section>
@@ -263,7 +279,7 @@
                 <div class="terminal-bar"><div class="terminal-dot r"></div><div class="terminal-dot y"></div><div class="terminal-dot g"></div><span class="terminal-title">george@fpga:~/hardware</span></div>
                 <div class="terminal-body" id="terminalBody">
                     <div class="terminal-line"><span class="prompt">$</span> <span class="cmd">help</span></div>
-                    <div class="terminal-line"><span class="out">Available commands: <span class="highlight">mips</span> | <span class="highlight">sdr</span> | <span class="highlight">idct</span> | <span class="highlight">lidar</span> | <span class="highlight">skills</span> | <span class="highlight">about</span> | <span class="highlight">clear</span></span></div>
+                    <div class="terminal-line"><span class="out">Available commands: <span class="highlight">mips</span> | <span class="highlight">alu</span> | <span class="highlight">sdr</span> | <span class="highlight">idct</span> | <span class="highlight">lidar</span> | <span class="highlight">skills</span> | <span class="highlight">about</span> | <span class="highlight">clear</span></span></div>
                 </div>
                 <div class="terminal-input-row" style="padding: 0 1rem 1rem;">
                     <span class="prompt">$</span>
@@ -356,8 +372,9 @@
         // Terminal
         const terminalBody=document.getElementById('terminalBody'), terminalInput=document.getElementById('terminalInput');
         const cmds={
-            help:'Available commands: <span class="highlight">mips</span> | <span class="highlight">sdr</span> | <span class="highlight">idct</span> | <span class="highlight">lidar</span> | <span class="highlight">skills</span> | <span class="highlight">about</span> | <span class="highlight">clear</span>',
-            mips:'<span class="highlight">Multi-Cycle MIPS CPU</span>\n+----------+    +----------+    +----------+\n|  IF/ID   |--->|  ID/EX   |--->|  EX/MEM  |---> WB\n| PC fetch |    | Decode   |    | ALU op   |\n+----------+    +----------+    +----------+\nVerilog RTL | Synopsys DC | ASAP7 7nm\nSupports: R-type, I-type, lw/sw, beq, j',
+            help:'Available commands: <span class="highlight">mips</span> | <span class="highlight">alu</span> | <span class="highlight">sdr</span> | <span class="highlight">idct</span> | <span class="highlight">lidar</span> | <span class="highlight">skills</span> | <span class="highlight">about</span> | <span class="highlight">clear</span>',
+            mips:'<span class="highlight">Multi-Cycle MIPS CPU</span>\n┌──────┐  ┌──────┐  ┌──────┐  ┌──────┐  ┌──────┐\n│ IDLE │─▶│FETCH │─▶│DECODE│─▶│ EXEC │─▶│  WB  │\n└──────┘  └──────┘  └──────┘  └──┬───┘  └──────┘\n                                 │ mem only\n                            ┌────▼────┐\n                            │ MEM_DEL │─▶ MEM ─▶ WB\n                            └─────────┘\nOne-hot FSM | Shared adder | Enable-gated regs\nALU isolation | Branch pre-compute | Zero OR tree\nSynopsys DC | ASAP7 7nm | GLS + SDF timing',
+            alu:'<span class="highlight">Fixed-Point ALU with MAC</span>\n┌─────────────────────────────────┐\n│  A [11:0]  ──▶ ┌─────┐          │\n│                │ ALU │──▶ Result│\n│  B [11:0]  ──▶ │ MAC │──▶ Accum│\n│                └─────┘          │\n│  Format: [sign][7-int].[5-frac] │\n└─────────────────────────────────┘\nOps: ADD SUB MUL MAC XNOR ReLU MEAN ABSMAX\nPersistent overflow across MAC sequences\nVerified: 9 patterns + 10K random vectors',
             sdr:'<span class="highlight">Real-Time FM SDR Receiver</span>\nIQ Samples ──▶ FIR BPF ──▶ FM Demod ──▶ Audio\n  8-bit I/Q     Custom       PLL         48kHz\n                taps        recovery     stereo\nMulti-threaded C++ | Block convolution | RDS decode',
             idct:'<span class="highlight">HW-Accelerated Image Decompression</span>\nSRAM ──▶ IDCT ──▶ Upsample ──▶ YCbCr→RGB\n         8x8      6-tap FIR     Fixed-pt\n         block    shared MAC    pipeline\nAltera DE2 FPGA | ≥95% multiplier utilization',
             lidar:'<span class="highlight">3D Spatial Measurement System</span>\nLiDAR ──I2C──▶ MCU ──UART──▶ PC ──▶ MATLAB 3D\nTFMini        Keil C         Serial   Point Cloud\nServo sweep 360° | Distance + angle → (x,y,z)',
