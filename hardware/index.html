@@ -224,6 +224,14 @@
             <div class="projects-grid">
                 <div class="project-card" data-click-count="0">
                     <div class="project-top">
+                        <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2"/><line x1="2" y1="8" x2="22" y2="8"/><line x1="2" y1="14" x2="22" y2="14"/><line x1="8" y1="2" x2="8" y2="22"/><line x1="14" y1="2" x2="14" y2="22"/></svg>
+                    </div>
+                    <h4>Image Processing & Display Controller (IPDC)</h4>
+                    <p>Designed a Verilog image processing controller supporting 9 operations on a 16×16 RGB image — origin shifts, scaling, 3×3 median filtering via combinational bubble-sort, YCbCr conversion using ×256 fixed-point arithmetic, and census transform. Taken through the full ASIC flow: RTL verification in Xcelium, synthesis with Synopsys DC, and physical implementation in Cadence Innovus targeting ASAP7 7nm with a 608 ps critical path.</p>
+                    <ul class="tech-list"><li>Verilog</li><li>Synopsys DC</li><li>Cadence Innovus</li><li>ASAP7 7nm</li><li>Xcelium</li></ul>
+                </div>
+                <div class="project-card" data-click-count="0">
+                    <div class="project-top">
                         <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="15" x2="13" y2="15"/></svg>
                     </div>
                     <h4>Multi-Cycle MIPS CPU</h4>
@@ -268,7 +276,7 @@
             <h2>Relevant Skills</h2>
             <div class="skills-section">
                 <div class="skill-group"><h4>Languages</h4><ul><li>Python</li><li>C/C++</li><li>SystemVerilog</li><li>Verilog/VHDL</li><li>MATLAB</li><li>Tcl</li></ul></div>
-                <div class="skill-group"><h4>Technologies</h4><ul><li>Xilinx Vivado</li><li>Synopsys Design Compiler</li><li>Speedgoat/dSpace</li><li>Altium Designer</li><li>Linux</li><li>Git/Subversion</li></ul></div>
+                <div class="skill-group"><h4>Technologies</h4><ul><li>Xilinx Vivado</li><li>Synopsys Design Compiler</li><li>Cadence Innovus</li><li>Speedgoat/dSpace</li><li>Altium Designer</li><li>Linux</li><li>Git/Subversion</li></ul></div>
                 <div class="skill-group"><h4>Protocols</h4><ul><li>AXI4/AXI-Stream</li><li>CAN/PCIe</li><li>JTAG/I2C/SPI</li><li>TCP/UDP</li></ul></div>
             </div>
         </section>
@@ -279,7 +287,7 @@
                 <div class="terminal-bar"><div class="terminal-dot r"></div><div class="terminal-dot y"></div><div class="terminal-dot g"></div><span class="terminal-title">george@fpga:~/hardware</span></div>
                 <div class="terminal-body" id="terminalBody">
                     <div class="terminal-line"><span class="prompt">$</span> <span class="cmd">help</span></div>
-                    <div class="terminal-line"><span class="out">Available commands: <span class="highlight">mips</span> | <span class="highlight">alu</span> | <span class="highlight">sdr</span> | <span class="highlight">idct</span> | <span class="highlight">lidar</span> | <span class="highlight">skills</span> | <span class="highlight">about</span> | <span class="highlight">clear</span></span></div>
+                    <div class="terminal-line"><span class="out">Available commands: <span class="highlight">ipdc</span> | <span class="highlight">mips</span> | <span class="highlight">alu</span> | <span class="highlight">sdr</span> | <span class="highlight">idct</span> | <span class="highlight">lidar</span> | <span class="highlight">skills</span> | <span class="highlight">about</span> | <span class="highlight">clear</span></span></div>
                 </div>
                 <div class="terminal-input-row" style="padding: 0 1rem 1rem;">
                     <span class="prompt">$</span>
@@ -372,13 +380,14 @@
         // Terminal
         const terminalBody=document.getElementById('terminalBody'), terminalInput=document.getElementById('terminalInput');
         const cmds={
-            help:'Available commands: <span class="highlight">mips</span> | <span class="highlight">alu</span> | <span class="highlight">sdr</span> | <span class="highlight">idct</span> | <span class="highlight">lidar</span> | <span class="highlight">skills</span> | <span class="highlight">about</span> | <span class="highlight">clear</span>',
+            help:'Available commands: <span class="highlight">ipdc</span> | <span class="highlight">mips</span> | <span class="highlight">alu</span> | <span class="highlight">sdr</span> | <span class="highlight">idct</span> | <span class="highlight">lidar</span> | <span class="highlight">skills</span> | <span class="highlight">about</span> | <span class="highlight">clear</span>',
+            ipdc:'<span class="highlight">Image Processing & Display Controller</span>\n┌──────────┐    ┌──────────┐    ┌──────────┐\n│  16×16   │───▶│   FSM    │───▶│ DISPLAY  │\n│  RGB IN  │    │ 12-state │    │ mux out  │\n└──────────┘    └────┬─────┘    └──────────┘\n                     │\n          ┌──────────┼──────────┐\n          ▼          ▼          ▼\n     ┌────────┐ ┌────────┐ ┌────────┐\n     │ Median │ │ YCbCr  │ │ Census │\n     │ Sort-9 │ │ ×256fp │ │ 3×3    │\n     └────────┘ └────────┘ └────────┘\nOps: LOAD SHIFT×4 SCALE×2 MED YCbCr CENSUS\nFull ASIC flow: Xcelium → Synopsys DC → Innovus\nASAP7 7nm | 608ps critical path | ~1.6 GHz max',
             mips:'<span class="highlight">Multi-Cycle MIPS CPU</span>\n┌──────┐  ┌──────┐  ┌──────┐  ┌──────┐  ┌──────┐\n│ IDLE │─▶│FETCH │─▶│DECODE│─▶│ EXEC │─▶│  WB  │\n└──────┘  └──────┘  └──────┘  └──┬───┘  └──────┘\n                                 │ mem only\n                            ┌────▼────┐\n                            │ MEM_DEL │─▶ MEM ─▶ WB\n                            └─────────┘\nOne-hot FSM | Shared adder | Enable-gated regs\nALU isolation | Branch pre-compute | Zero OR tree\nSynopsys DC | ASAP7 7nm | GLS + SDF timing',
             alu:'<span class="highlight">Fixed-Point ALU with MAC</span>\n┌─────────────────────────────────┐\n│  A [11:0]  ──▶ ┌─────┐          │\n│                │ ALU │──▶ Result│\n│  B [11:0]  ──▶ │ MAC │──▶ Accum│\n│                └─────┘          │\n│  Format: [sign][7-int].[5-frac] │\n└─────────────────────────────────┘\nOps: ADD SUB MUL MAC XNOR ReLU MEAN ABSMAX\nPersistent overflow across MAC sequences\nVerified: 9 patterns + 10K random vectors',
             sdr:'<span class="highlight">Real-Time FM SDR Receiver</span>\nIQ Samples ──▶ FIR BPF ──▶ FM Demod ──▶ Audio\n  8-bit I/Q     Custom       PLL         48kHz\n                taps        recovery     stereo\nMulti-threaded C++ | Block convolution | RDS decode',
             idct:'<span class="highlight">HW-Accelerated Image Decompression</span>\nSRAM ──▶ IDCT ──▶ Upsample ──▶ YCbCr→RGB\n         8x8      6-tap FIR     Fixed-pt\n         block    shared MAC    pipeline\nAltera DE2 FPGA | ≥95% multiplier utilization',
             lidar:'<span class="highlight">3D Spatial Measurement System</span>\nLiDAR ──I2C──▶ MCU ──UART──▶ PC ──▶ MATLAB 3D\nTFMini        Keil C         Serial   Point Cloud\nServo sweep 360° | Distance + angle → (x,y,z)',
-            skills:'<span class="highlight">Languages:</span> Python, C/C++, SystemVerilog, VHDL, MATLAB, Tcl\n<span class="highlight">Tools:</span>     Vivado, ModelSim, Synopsys DC, Altium, Keil\n<span class="highlight">Protocols:</span> AXI4, AXI-Stream, CAN, PCIe, JTAG, I2C, SPI',
+            skills:'<span class="highlight">Languages:</span> Python, C/C++, SystemVerilog, VHDL, MATLAB, Tcl\n<span class="highlight">Tools:</span>     Vivado, ModelSim, Synopsys DC, Cadence Innovus, Altium, Keil\n<span class="highlight">Protocols:</span> AXI4, AXI-Stream, CAN, PCIe, JTAG, I2C, SPI',
             about:'George Wahba — Computer Engineering @ McMaster University\nSpecializing in FPGA/RTL design and embedded systems.\nPreviously: Christie Digital (FPGA), McMaster/Stellantis (Research)\nSite: <span class="highlight">georgewahba.me</span> | Built with vanilla HTML/CSS/JS',
         };
         terminalInput.addEventListener('keydown',(e)=>{
