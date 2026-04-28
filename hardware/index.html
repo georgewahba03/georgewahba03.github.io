@@ -68,8 +68,10 @@
         .pipeline-stage-text { fill: var(--text-secondary); font-family: 'JetBrains Mono', monospace; font-size: 11px; text-anchor: middle; transition: fill 0.3s ease; }
         .pipeline-stage-text.active { fill: var(--accent); font-weight: 600; }
         .pipeline-reg-text { fill: var(--text-secondary); font-family: 'JetBrains Mono', monospace; font-size: 9px; text-anchor: middle; opacity: 0.6; }
-        .pipeline-arrow { stroke: var(--border); stroke-width: 1.5; fill: none; marker-end: url(#arrowhead); }
+        .pipeline-arrow { stroke: var(--border); stroke-width: 1.5; fill: none; }
         .pipeline-arrow.active { stroke: var(--accent); }
+        .arrow-tip { fill: var(--border); transition: fill 0.3s ease; }
+        .arrow-tip.active { fill: var(--accent); }
         .pipeline-controls { display: flex; gap: 1rem; margin-top: 1.5rem; align-items: center; flex-wrap: wrap; }
         .pipe-btn { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 0.5rem 1.25rem; border-radius: 4px; cursor: pointer; font-family: var(--font-mono); font-size: 0.8rem; transition: all 0.2s; }
         .pipe-btn:hover { background: var(--accent-dim); }
@@ -181,10 +183,7 @@
             <div class="pipeline-title">// Interactive: Multi-Cycle MIPS Datapath</div>
             <div class="pipeline-container">
                 <svg class="pipeline-svg" viewBox="0 0 750 200" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2a2a32"/></marker>
-                        <marker id="arrowhead-active" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#f5a623"/></marker>
-                    </defs>
+                    <defs></defs>
                     <rect class="pipeline-stage" id="stage-if" x="20" y="40" width="120" height="60" rx="4"/>
                     <text class="pipeline-stage-text" id="text-if" x="80" y="65">IF</text>
                     <text class="pipeline-stage-text" id="sub-if" x="80" y="82" style="font-size:8px;">Fetch</text>
@@ -200,10 +199,14 @@
                     <rect class="pipeline-stage" id="stage-wb" x="620" y="40" width="110" height="60" rx="4"/>
                     <text class="pipeline-stage-text" id="text-wb" x="675" y="65">WB</text>
                     <text class="pipeline-stage-text" id="sub-wb" x="675" y="82" style="font-size:8px;">WriteBack</text>
-                    <line class="pipeline-arrow" id="arrow-1" x1="140" y1="70" x2="168" y2="70"/>
-                    <line class="pipeline-arrow" id="arrow-2" x1="290" y1="70" x2="318" y2="70"/>
-                    <line class="pipeline-arrow" id="arrow-3" x1="440" y1="70" x2="468" y2="70"/>
-                    <line class="pipeline-arrow" id="arrow-4" x1="590" y1="70" x2="618" y2="70"/>
+                    <line class="pipeline-arrow" id="arrow-1" x1="140" y1="70" x2="164" y2="70"/>
+                    <polygon class="arrow-tip" id="tip-1" points="160,64 170,70 160,76"/>
+                    <line class="pipeline-arrow" id="arrow-2" x1="290" y1="70" x2="314" y2="70"/>
+                    <polygon class="arrow-tip" id="tip-2" points="310,64 320,70 310,76"/>
+                    <line class="pipeline-arrow" id="arrow-3" x1="440" y1="70" x2="464" y2="70"/>
+                    <polygon class="arrow-tip" id="tip-3" points="460,64 470,70 460,76"/>
+                    <line class="pipeline-arrow" id="arrow-4" x1="590" y1="70" x2="614" y2="70"/>
+                    <polygon class="arrow-tip" id="tip-4" points="610,64 620,70 610,76"/>
                     <text class="pipeline-reg-text" x="155" y="30">PC</text>
                     <text class="pipeline-reg-text" x="305" y="30">A, B</text>
                     <text class="pipeline-reg-text" x="455" y="30">ALUOut</text>
@@ -360,8 +363,8 @@
             });
             arrows.forEach((a,i)=>{
                 const el=document.getElementById(a);
-                if(i===currentCycle-1){el.classList.add('active');el.setAttribute('marker-end','url(#arrowhead-active)');}
-                else{el.classList.remove('active');el.setAttribute('marker-end','url(#arrowhead)');}
+                if(i===currentCycle-1){el.classList.add('active');document.getElementById('tip-'+(i+1)).classList.add('active');}
+                else{el.classList.remove('active');document.getElementById('tip-'+(i+1)).classList.remove('active');}
             });
             const instr=instructions[currentInstr];
             document.getElementById('pipeline-instr').textContent=instr.name;
