@@ -57,7 +57,7 @@ p.intro{font-size:1.05rem;color:var(--text-secondary);max-width:620px;margin-bot
 .trace-pulse.active{opacity:1}
 
 .pcb-layout{display:flex;align-items:center;justify-content:center;width:100%;padding:2rem;position:relative;z-index:2}
-.ic-package{display:flex;flex-direction:column;align-items:center;gap:1rem;cursor:pointer;text-decoration:none;transition:transform .3s ease;padding:1.5rem}
+.ic-package{display:flex;flex-direction:column;align-items:center;gap:1rem;cursor:pointer;text-decoration:none;color:var(--text-primary);transition:transform .3s ease;padding:1.5rem}
 .ic-package:hover{transform:translateY(-4px)}
 .ic-body{width:160px;height:160px;background:var(--card-bg);border:2px solid var(--border);border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;position:relative;transition:border-color .4s ease,box-shadow .4s ease}
 .ic-package:hover .ic-body{border-color:var(--accent);box-shadow:0 0 30px rgba(245,166,35,.1),inset 0 0 30px rgba(245,166,35,.03)}
@@ -70,7 +70,7 @@ p.intro{font-size:1.05rem;color:var(--text-secondary);max-width:620px;margin-bot
 .ic-package:hover .ic-pin-h{background:var(--accent);box-shadow:0 0 6px var(--accent-glow)}
 .ic-icon{width:40px;height:40px;color:var(--accent);opacity:.8}
 .ic-label{font-family:var(--font-mono);font-size:.65rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1.5px;text-align:center}
-.ic-name{font-size:1rem;font-weight:500;text-align:center;margin-top:1rem}
+.ic-name{font-size:1rem;color:var(--text-primary);font-weight:500;text-align:center;margin-top:1rem}
 .ic-desc{font-family:var(--font-mono);font-size:.6rem;color:var(--text-secondary);text-align:center;max-width:190px;line-height:1.5;margin-top:.25rem}
 .central-die{width:80px;height:80px;background:var(--card-bg);border:2px solid var(--accent);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:1.4rem;font-weight:700;color:var(--accent);position:relative;z-index:3;box-shadow:0 0 40px rgba(245,166,35,.08);flex-shrink:0}
 .central-die::before{content:"";position:absolute;inset:4px;border:1px solid rgba(245,166,35,.2);border-radius:2px}
@@ -117,29 +117,24 @@ footer{text-align:center;padding:2rem;color:var(--text-secondary);font-family:va
   </header>
 
   <div class="pcb-board">
-    <svg class="pcb-traces" viewBox="0 0 1000 420" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+    <svg class="pcb-traces" preserveAspectRatio="none" aria-hidden="true">
       <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
         <circle cx="10" cy="10" r=".5" fill="rgba(255,255,255,.04)"/>
       </pattern>
       <rect width="100%" height="100%" fill="url(#grid)"/>
-      <polyline class="trace-line" id="trace-left-1" points="280,170 340,170 400,170 440,190 470,210"/>
-      <polyline class="trace-line" id="trace-left-2" points="280,210 340,210 470,210"/>
-      <polyline class="trace-line" id="trace-left-3" points="280,250 340,250 400,250 440,230 470,210"/>
-      <polyline class="trace-line" id="trace-right-1" points="530,210 560,190 600,170 660,170 720,170"/>
-      <polyline class="trace-line" id="trace-right-2" points="530,210 660,210 720,210"/>
-      <polyline class="trace-line" id="trace-right-3" points="530,210 560,230 600,250 660,250 720,250"/>
+        <g id="via-group"></g>
+      <polyline class="trace-line" id="trace-left-1" points=""/>
+      <polyline class="trace-line" id="trace-left-2" points=""/>
+      <polyline class="trace-line" id="trace-left-3" points=""/>
+      <polyline class="trace-line" id="trace-right-1" points=""/>
+      <polyline class="trace-line" id="trace-right-2" points=""/>
+      <polyline class="trace-line" id="trace-right-3" points=""/>
       <circle class="trace-pulse" id="pulse-l1" cx="280" cy="170"/>
       <circle class="trace-pulse" id="pulse-l2" cx="280" cy="210"/>
       <circle class="trace-pulse" id="pulse-l3" cx="280" cy="250"/>
       <circle class="trace-pulse" id="pulse-r1" cx="530" cy="210"/>
       <circle class="trace-pulse" id="pulse-r2" cx="530" cy="210"/>
       <circle class="trace-pulse" id="pulse-r3" cx="530" cy="210"/>
-      <circle cx="340" cy="170" r="4" fill="none" stroke="#2a2a32" stroke-width="1"/>
-      <circle cx="340" cy="210" r="4" fill="none" stroke="#2a2a32" stroke-width="1"/>
-      <circle cx="340" cy="250" r="4" fill="none" stroke="#2a2a32" stroke-width="1"/>
-      <circle cx="660" cy="170" r="4" fill="none" stroke="#2a2a32" stroke-width="1"/>
-      <circle cx="660" cy="210" r="4" fill="none" stroke="#2a2a32" stroke-width="1"/>
-      <circle cx="660" cy="250" r="4" fill="none" stroke="#2a2a32" stroke-width="1"/>
     </svg>
 
     <div class="pcb-layout">
@@ -221,6 +216,53 @@ function drawMatrix(){
 setInterval(drawMatrix,50);
 addEventListener('resize',()=>{canvas.width=innerWidth;canvas.height=innerHeight;columns=Math.floor(canvas.width/fontSize);drops=[];for(let i=0;i<columns;i++)drops[i]=Math.random()*-100;});
 
+
+// ---- Align traces to real IC geometry (measured from the DOM) ----
+function layoutTraces(leftId,rightId){
+  const board=document.querySelector('.pcb-board');
+  const svg=document.querySelector('.pcb-traces');
+  if(!board||!svg)return;
+  if(getComputedStyle(svg).display==='none')return;
+  const br=board.getBoundingClientRect();
+  if(br.width<1)return;
+  svg.setAttribute('viewBox',`0 0 ${br.width} ${br.height}`);
+  const rel=el=>{const r=el.getBoundingClientRect();
+    return{left:r.left-br.left,right:r.right-br.left,cy:r.top+r.height/2-br.top};};
+  const dieEl=document.querySelector('.central-die');
+  const leftEl=document.getElementById(leftId);
+  const rightEl=document.getElementById(rightId);
+  if(!dieEl||!leftEl||!rightEl)return;
+  const die=rel(dieEl);
+  const lp=[...leftEl.querySelectorAll('.ic-pins-right .ic-pin-h')].map(rel);
+  const rp=[...rightEl.querySelectorAll('.ic-pins-left .ic-pin-h')].map(rel);
+  const vias=[];
+  lp.forEach((p,i)=>{
+    const el=document.getElementById('trace-left-'+(i+1));
+    if(!el)return;
+    const mid=p.right+(die.left-p.right)*0.45;
+    el.setAttribute('points',`${p.right},${p.cy} ${mid},${p.cy} ${die.left},${die.cy}`);
+    vias.push([mid,p.cy]);
+  });
+  rp.forEach((p,i)=>{
+    const el=document.getElementById('trace-right-'+(i+1));
+    if(!el)return;
+    const mid=die.right+(p.left-die.right)*0.55;
+    el.setAttribute('points',`${die.right},${die.cy} ${mid},${p.cy} ${p.left},${p.cy}`);
+    vias.push([mid,p.cy]);
+  });
+  const g=document.getElementById('via-group');
+  if(g)g.innerHTML=vias.map(v=>`<circle cx="${v[0]}" cy="${v[1]}" r="4" fill="none" stroke="#2a2a32" stroke-width="1"/>`).join('');
+}
+function initTraces(l,r){
+  const run=()=>layoutTraces(l,r);
+  run();
+  requestAnimationFrame(run);
+  addEventListener('resize',run);
+  addEventListener('load',run);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(run);
+  setTimeout(run,400);
+}
+
 function animatePulses(pulseIds,traceIds){
   const pulses=pulseIds.map(id=>document.getElementById(id));
   const traces=traceIds.map(id=>document.getElementById(id));
@@ -262,6 +304,7 @@ addEventListener('mousemove',e=>{
     document.documentElement.style.setProperty('--cursor-y',e.clientY+'px');
     ticking=false;});ticking=true;}
 });
+initTraces('ic-automotive','ic-hardware');
 </script>
 </body>
 </html>
