@@ -196,6 +196,17 @@ body{
 .entry-title{font-size:1.12rem;font-weight:500;letter-spacing:-.005em}
 .entry-meta{font-family:var(--font-mono);font-size:.68rem;color:var(--brass);letter-spacing:.06em;white-space:nowrap}
 .entry-body{color:var(--ink-muted);font-weight:300;font-size:.97rem}
+.entry-org{color:var(--oxblood);font-weight:400}
+.entry-where{font-family:var(--font-mono);font-size:.66rem;color:var(--ink-muted);letter-spacing:.06em;margin-bottom:.35rem}
+.entry-list{list-style:none;counter-reset:sub;margin-top:.85rem}
+.entry-list li{
+  counter-increment:sub;position:relative;padding-left:2rem;margin-bottom:.7rem;
+  color:var(--ink-muted);font-weight:300;font-size:.97rem;line-height:1.68;
+}
+.entry-list li::before{
+  content:"(" counter(sub,lower-alpha) ")";position:absolute;left:0;top:.12em;
+  font-family:var(--font-mono);font-size:.68rem;color:var(--brass);
+}
 .entry-tags{display:flex;flex-wrap:wrap;gap:.85rem;margin-top:.9rem;list-style:none}
 .entry-tags li{font-family:var(--font-mono);font-size:.65rem;color:var(--brass);letter-spacing:.04em}
 
@@ -303,36 +314,24 @@ footer{
       <strong>Technology regulation and product safety.</strong> Automotive controls work taught me how safety-critical systems are actually validated — and how far that can sit from what a standard requires on paper.
     </p>
 
-    <h2 data-numeral="III.">Work &amp; Projects</h2>
-
-    <p class="para">
-      Selected work at the intersection of law and software. This section will grow through 1L.
-    </p>
-
-    <!-- ============================================================
-         PLACEHOLDER ENTRIES
-         Replace the copy below with the content you send over.
-         Each entry follows the same three-part shape:
-           .entry-title  — what it is
-           .entry-meta   — date or status
-           .entry-body   — 2–3 sentences, concrete
-           .entry-tags   — tools / domains
-         ============================================================ -->
+    <h2 data-numeral="III.">Experience</h2>
 
     <div class="entry">
       <div class="entry-head">
-        <span class="entry-title">A2AJ &mdash; Canadian legal data tooling</span>
-        <span class="entry-meta">In progress</span>
+        <span class="entry-title">Research Assistant <span class="entry-org">&mdash; Access to Algorithmic Justice</span></span>
+        <span class="entry-meta">June 2026 &middot; Toronto, ON</span>
       </div>
-      <p class="entry-body">
-        <!-- TODO: replace with an accurate description of what you built or explored.
-             Keep it to what actually exists — scope, dataset, and outcome. -->
-        Placeholder. Describe the scope of the work, which A2AJ datasets it uses, what the tool does, and where it stands.
-      </p>
+      <ul class="entry-list">
+        <li>Collaborated with law students from multiple law schools to develop law-related prompts benchmarking AI and its effectiveness in assessing legal problems.</li>
+        <li>Trained and led sub-teams of research assistants to colour-code publicly available decisions from courts including the Supreme Court of Canada, the Ontario Court of Appeal, and the Court of Appeal of Alberta, enabling empirical analysis of the writing styles of the cases and the judges who presided over them.</li>
+        <li>Maintained an open line of communication between the coding sub-team and research leads Professor Sean Rehaag, Professor Simon Wallace, and Clifford McCarten.</li>
+      </ul>
       <ul class="entry-tags">
-        <li>Python</li><li>A2AJ datasets</li><li>NLP</li>
+        <li>Empirical legal research</li><li>AI benchmarking</li><li>Appellate decisions</li>
       </ul>
     </div>
+
+    <h2 data-numeral="IV.">Projects</h2>
 
     <div class="entry">
       <div class="entry-head">
@@ -353,7 +352,7 @@ footer{
       This section is under construction. Writing samples, coursework, and journal or clinic work will be added as 1L progresses.
     </div>
 
-    <h2 data-numeral="IV.">Engineering Record</h2>
+    <h2 data-numeral="V.">Engineering Record</h2>
 
     <p class="para">
       The technical work that precedes all of this — FPGA and RTL design, embedded firmware, and automotive control systems — is documented separately.
