@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="George Wahba - Computer Engineer and incoming JD candidate. Portfolio spanning embedded systems, FPGA design, and automotive controls, alongside legal work.">
+<meta name="description" content="George Wahba - Computer Engineer and incoming JD candidate. Portfolio spanning embedded systems, FPGA design, and automotive controls, alongside legal research and technology work.">
 <meta name="author" content="George Wahba">
 <meta name="keywords" content="George Wahba, Computer Engineering, Embedded Systems, FPGA, Automotive Controls, Law, JD Candidate, Legal Technology">
 <meta property="og:type" content="website">
@@ -15,294 +15,233 @@
 <meta name="twitter:title" content="George Wahba | Engineering & Law">
 <meta name="twitter:description" content="Computer engineer and incoming JD candidate">
 <title>George Wahba</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><rect x=%222%22 y=%222%22 width=%2220%22 height=%2220%22 rx=%224%22 ry=%224%22 stroke=%22%23f5a623%22 fill=%22none%22 stroke-width=%222%22/><text x=%2250%25%22 y=%2250%25%22 dy=%22.35em%22 text-anchor=%22middle%22 font-family=%22monospace%22 font-weight=%22bold%22 font-size=%2211%22 fill=%22%23f5a623%22>GW</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><rect x=%222%22 y=%222%22 width=%2220%22 height=%2220%22 rx=%224%22 ry=%224%22 stroke=%22%23c9b896%22 fill=%22none%22 stroke-width=%222%22/><text x=%2250%25%22 y=%2250%25%22 dy=%22.35em%22 text-anchor=%22middle%22 font-family=%22monospace%22 font-weight=%22bold%22 font-size=%2211%22 fill=%22%23c9b896%22>GW</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg-color:#0a0a0f; --bg-subtle:#111118; --text-primary:#e0ddd5; --text-secondary:#8a8578;
-  --accent:#f5a623; --accent-dim:rgba(245,166,35,.15); --accent-glow:rgba(245,166,35,.4);
-  --brass:#c9b896; --brass-dim:rgba(201,184,150,.15); --brass-glow:rgba(201,184,150,.4);
-  --card-bg:#141418; --border:#2a2a32;
-  --font-main:'Outfit',-apple-system,system-ui,sans-serif;
+  /* shared bridge colour */
+  --brass:#c9b896;
+  --brass-deep:#9a7b4f;
+
+  /* engineering half */
+  --eng-bg:#0a0a0f;
+  --eng-bg-soft:#111118;
+  --eng-text:#e0ddd5;
+  --eng-muted:#8a8578;
+  --eng-accent:#f5a623;
+
+  /* legal half */
+  --law-bg:#f0f1ee;
+  --law-text:#16191c;
+  --law-muted:#5a6169;
+  --law-accent:#6b2737;
+
+  --font-sans:'Outfit',-apple-system,system-ui,sans-serif;
   --font-mono:'JetBrains Mono','Fira Code',monospace;
-  --cursor-x:50%; --cursor-y:50%;
+  --font-serif:'Newsreader',Georgia,serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-.skip-to-content{position:absolute;top:-40px;left:0;background:var(--accent);color:var(--bg-color);padding:8px;text-decoration:none;z-index:1000;font-weight:600}
+.skip-to-content{position:absolute;top:-40px;left:0;background:var(--brass);color:var(--eng-bg);padding:8px;text-decoration:none;z-index:1000;font-weight:600}
 .skip-to-content:focus{top:0}
-body{background:var(--bg-color);color:var(--text-primary);font-family:var(--font-main);min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;line-height:1.3;overflow-x:hidden;position:relative}
-body::after{content:"";position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);pointer-events:none;z-index:9999}
-#matrix-canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
-body::before{content:"";position:fixed;inset:0;background:radial-gradient(min(600px,40vw) circle at var(--cursor-x) var(--cursor-y),rgba(245,166,35,.04),transparent 40%);pointer-events:none;z-index:0;will-change:background}
-.container{max-width:1000px;width:100%;padding:0 2rem 5rem;z-index:1}
 
-.hero{display:flex;flex-direction:column;align-items:flex-start;margin-bottom:6rem;animation:fadeUp .8s ease-out forwards;padding-top:5rem}
-.mono-intro{color:var(--accent);font-family:var(--font-mono);font-size:.9rem;margin-bottom:1.2rem;letter-spacing:.5px}
-h1{font-size:clamp(44px,8vw,80px);font-weight:700;line-height:1.05;letter-spacing:-1px}
-h2.subtitle{font-size:clamp(30px,5.5vw,56px);font-weight:300;color:var(--text-secondary);margin-bottom:1.5rem;line-height:1.1}
-p.hero-desc{max-width:560px;font-size:1.05rem;color:var(--text-secondary);margin-bottom:3rem;line-height:1.7;font-weight:300}
-
-.pcb-section{animation:fadeUp .8s ease-out .2s both}
-.section-header{display:flex;align-items:center;margin-bottom:2.5rem}
-.section-header h3{font-size:1.6rem;white-space:nowrap;font-weight:500}
-.section-header::after{content:"";display:block;width:300px;height:1px;background:linear-gradient(90deg,var(--border),transparent);margin-left:20px}
-
-.pcb-board{position:relative;width:100%;min-height:420px;background:radial-gradient(circle at 20% 50%,rgba(245,166,35,.02),transparent 50%),radial-gradient(circle at 80% 50%,rgba(201,184,150,.02),transparent 50%),var(--bg-subtle);border:1px solid var(--border);border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.pcb-traces{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.trace-line{stroke:var(--border);stroke-width:2;fill:none;transition:stroke .6s ease}
-.trace-line.glow{stroke:var(--accent);stroke-width:2.5;filter:drop-shadow(0 0 6px var(--accent-glow))}
-.trace-line.glow-brass{stroke:var(--brass);stroke-width:2.5;filter:drop-shadow(0 0 6px var(--brass-glow))}
-.trace-pulse{fill:var(--accent);r:4;opacity:0;filter:drop-shadow(0 0 4px var(--accent))}
-.trace-pulse.active{opacity:1}
-.trace-pulse.brass{fill:var(--brass);filter:drop-shadow(0 0 4px var(--brass))}
-
-.pcb-layout{display:flex;align-items:center;justify-content:center;width:100%;padding:2rem;position:relative;z-index:2}
-.ic-package{display:flex;flex-direction:column;align-items:center;gap:1rem;cursor:pointer;text-decoration:none;color:var(--text-primary);transition:transform .3s ease;padding:1.5rem}
-.ic-package:hover{transform:translateY(-4px)}
-.ic-body{width:160px;height:160px;background:var(--card-bg);border:2px solid var(--border);border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;position:relative;transition:border-color .4s ease,box-shadow .4s ease}
-.ic-package:hover .ic-body{border-color:var(--accent);box-shadow:0 0 30px rgba(245,166,35,.1),inset 0 0 30px rgba(245,166,35,.03)}
-.ic-package.legal:hover .ic-body{border-color:var(--brass);box-shadow:0 0 30px rgba(201,184,150,.1),inset 0 0 30px rgba(201,184,150,.03)}
-.ic-pins-top,.ic-pins-bottom{display:flex;justify-content:center;gap:12px}
-.ic-pin{width:3px;height:14px;background:var(--border);border-radius:1px;transition:background .4s ease,box-shadow .4s ease}
-.ic-package:hover .ic-pin{background:var(--accent);box-shadow:0 0 6px var(--accent-glow)}
-.ic-package.legal:hover .ic-pin{background:var(--brass);box-shadow:0 0 6px var(--brass-glow)}
-.ic-pins-left,.ic-pins-right{position:absolute;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px}
-.ic-pins-left{left:-14px}.ic-pins-right{right:-14px}
-.ic-pin-h{width:14px;height:3px;background:var(--border);border-radius:1px;transition:background .4s ease,box-shadow .4s ease}
-.ic-package:hover .ic-pin-h{background:var(--accent);box-shadow:0 0 6px var(--accent-glow)}
-.ic-package.legal:hover .ic-pin-h{background:var(--brass);box-shadow:0 0 6px var(--brass-glow)}
-.ic-icon{width:40px;height:40px;color:var(--accent);opacity:.8}
-.ic-package.legal .ic-icon{color:var(--brass)}
-.ic-label{font-family:var(--font-mono);font-size:.65rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1.5px;text-align:center}
-.ic-name{font-size:1rem;color:var(--text-primary);font-weight:500;text-align:center;margin-top:1rem}
-.ic-desc{font-family:var(--font-mono);font-size:.6rem;color:var(--text-secondary);text-align:center;max-width:190px;line-height:1.5;margin-top:.25rem}
-.central-die{width:80px;height:80px;background:var(--card-bg);border:2px solid var(--accent);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:1.4rem;font-weight:700;color:var(--accent);position:relative;z-index:3;box-shadow:0 0 40px rgba(245,166,35,.08);flex-shrink:0}
-.central-die::before{content:"";position:absolute;inset:4px;border:1px solid rgba(245,166,35,.2);border-radius:2px}
-
-.contact-section{text-align:center;margin-top:8rem;animation:fadeUp .8s ease-out .4s both}
-.contact-title{font-size:2.2rem;margin-bottom:1.5rem;font-weight:500}
-.contact-desc{color:var(--text-secondary);font-size:1.05rem;max-width:520px;margin:0 auto 2.5rem;line-height:1.7;font-weight:300}
-.contact-btn{display:inline-block;color:var(--accent);border:1px solid var(--accent);border-radius:4px;padding:1.1rem 1.75rem;font-size:.9rem;font-family:var(--font-mono);text-decoration:none;transition:all .25s cubic-bezier(.645,.045,.355,1);letter-spacing:.5px}
-.contact-btn:hover,.contact-btn:focus{background:var(--accent-dim);box-shadow:0 0 20px rgba(245,166,35,.1);outline:none}
-.contact-btn:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
-footer{width:100%;text-align:center;padding:2rem;color:var(--text-secondary);font-family:var(--font-mono);font-size:.8rem;margin-top:auto;z-index:1}
-
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-@media (max-width:768px){
-  .section-header::after{width:100%}
-  .container{padding:0 1.5rem 4rem}
-  .pcb-layout{flex-direction:column;gap:1.5rem}
-  .ic-body{width:140px;height:140px}
-  .central-die{width:60px;height:60px;font-size:1.1rem}
-  .pcb-traces{display:none}
+body{
+  background:var(--eng-bg);
+  color:var(--eng-text);
+  font-family:var(--font-sans);
+  line-height:1.6;
+  overflow-x:hidden;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
 }
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+.container{max-width:1000px;margin:0 auto;padding:0 2rem;width:100%}
+
+/* ---------------- Hero ---------------- */
+.hero{padding:7rem 0 5rem;animation:rise .8s ease-out both}
+.hero-eyebrow{
+  font-family:var(--font-mono);color:var(--brass);font-size:.75rem;
+  letter-spacing:.18em;text-transform:uppercase;display:block;margin-bottom:1.4rem;
+}
+h1{font-size:clamp(44px,8vw,82px);font-weight:700;line-height:1.02;letter-spacing:-.025em}
+.hero-sub{
+  font-size:clamp(22px,3.6vw,36px);font-weight:300;color:var(--eng-muted);
+  line-height:1.25;margin-top:.6rem;max-width:20ch;
+}
+.hero-desc{
+  max-width:52ch;font-size:1.02rem;color:var(--eng-muted);
+  margin-top:2rem;line-height:1.75;font-weight:300;
+}
+
+/* ---------------- The diptych ---------------- */
+.choice{
+  display:flex;
+  width:100%;
+  min-height:min(66vh,540px);
+  position:relative;
+  animation:rise .8s ease-out .15s both;
+  isolation:isolate;
+}
+
+.panel{
+  flex:1 1 0;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:3rem clamp(1.5rem,4vw,3.5rem);
+  text-decoration:none;
+  overflow:hidden;
+  transition:flex-grow .6s cubic-bezier(.22,.61,.36,1);
+}
+
+/* -- left: engineering, in the engineering design language -- */
+.panel-eng{background:var(--eng-bg-soft);color:var(--eng-text);border-right:1px solid var(--brass-deep)}
+.panel-eng .panel-eyebrow{font-family:var(--font-mono);color:var(--eng-accent)}
+.panel-eng .panel-title{font-family:var(--font-sans);font-weight:600;letter-spacing:-.02em}
+.panel-eng .panel-desc{color:var(--eng-muted);font-family:var(--font-sans);font-weight:300}
+.panel-eng .panel-meta{font-family:var(--font-mono);color:var(--eng-muted)}
+.panel-eng .panel-go{font-family:var(--font-mono);color:var(--eng-accent)}
+.panel-eng::before{
+  content:"";position:absolute;inset:0;z-index:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,.05) .5px,transparent .5px);
+  background-size:22px 22px;
+  opacity:.65;
+  transition:opacity .6s ease;
+}
+
+/* -- right: law, in the legal design language -- */
+.panel-law{background:var(--law-bg);color:var(--law-text)}
+.panel-law .panel-eyebrow{font-family:var(--font-mono);color:var(--law-accent)}
+.panel-law .panel-title{font-family:var(--font-serif);font-weight:500;letter-spacing:-.015em}
+.panel-law .panel-desc{color:var(--law-muted);font-family:var(--font-serif);font-weight:300}
+.panel-law .panel-meta{font-family:var(--font-mono);color:var(--law-muted)}
+.panel-law .panel-go{font-family:var(--font-mono);color:var(--law-accent)}
+.panel-law::before{
+  content:"";position:absolute;inset:0;z-index:0;
+  background-image:repeating-linear-gradient(180deg,transparent,transparent 31px,rgba(107,39,55,.05) 31px,rgba(107,39,55,.05) 32px);
+  opacity:.8;
+  transition:opacity .6s ease;
+}
+
+/* -- the seam -- */
+.seam-light{
+  position:absolute;top:0;right:-1px;width:1px;height:26%;z-index:3;
+  background:linear-gradient(180deg,transparent,var(--brass),transparent);
+  opacity:.75;
+  animation:travel 7s ease-in-out infinite;
+  pointer-events:none;
+}
+
+/* -- panel content -- */
+.panel > *:not(.seam-light){position:relative;z-index:2}
+.panel-eyebrow{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:auto}
+.panel-title{font-size:clamp(30px,4.4vw,46px);line-height:1.08;margin-bottom:.7rem}
+.panel-desc{font-size:1rem;line-height:1.65;max-width:34ch;margin-bottom:1.6rem}
+.panel-meta{font-size:.66rem;letter-spacing:.09em;line-height:1.7;display:block;margin-bottom:1.8rem}
+.panel-go{
+  font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:.6rem;
+  transition:gap .35s cubic-bezier(.22,.61,.36,1);
+}
+.panel-go .arrow{transition:transform .35s cubic-bezier(.22,.61,.36,1);display:inline-block}
+
+/* -- interaction: the seam shifts toward whichever side you lean into -- */
+@media (hover:hover) and (min-width:769px){
+  .choice:hover .panel{flex-grow:.82}
+  .choice .panel:hover{flex-grow:1.45}
+  .panel:hover::before{opacity:1}
+  .panel:hover .panel-go .arrow{transform:translateX(5px)}
+  .panel:hover .panel-go{gap:.85rem}
+  .choice .panel:focus-visible{flex-grow:1.45}
+}
+.panel:focus-visible{outline:2px solid var(--brass);outline-offset:-6px}
+
+/* ---------------- Contact ---------------- */
+.contact{padding:6rem 0 4rem;text-align:center}
+.contact h2{font-size:2rem;font-weight:500;margin-bottom:1.2rem}
+.contact p{color:var(--eng-muted);max-width:46ch;margin:0 auto 2.5rem;font-weight:300;line-height:1.75}
+.contact-btn{
+  display:inline-block;color:var(--brass);border:1px solid var(--brass);
+  padding:1rem 2rem;font-family:var(--font-mono);font-size:.78rem;letter-spacing:.1em;
+  text-decoration:none;transition:background .25s,color .25s;
+}
+.contact-btn:hover,.contact-btn:focus{background:var(--brass);color:var(--eng-bg);outline:none}
+.contact-btn:focus-visible{outline:2px solid var(--brass);outline-offset:4px}
+
+footer{
+  text-align:center;padding:2rem;color:var(--eng-muted);
+  font-family:var(--font-mono);font-size:.72rem;letter-spacing:.06em;margin-top:auto;
+}
+
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes travel{
+  0%{top:-26%}
+  50%{top:100%}
+  100%{top:-26%}
+}
+
+/* ---------------- Mobile ---------------- */
+@media (max-width:768px){
+  .hero{padding:4.5rem 0 3rem}
+  .choice{flex-direction:column;min-height:0}
+  .panel{min-height:340px;padding:2.5rem 1.5rem}
+  .panel-eng{border-right:none;border-bottom:1px solid var(--brass-deep)}
+  .seam-light{display:none}
+  .panel-eyebrow{margin-bottom:2.5rem}
+  .contact{padding:4rem 0 3rem}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .seam-light{display:none}
+}
 </style>
 </head>
 <body>
-<a href="#main-content" class="skip-to-content">Skip to main content</a>
-<canvas id="matrix-canvas"></canvas>
+<a href="#choose" class="skip-to-content">Skip to main content</a>
 
-<div class="container" id="main-content">
-  <section class="hero">
-    <span class="mono-intro">Hi, my name is</span>
-    <h1>George Wahba.</h1>
-    <h2 class="subtitle">I build systems, and I'm learning the rules that govern them.</h2>
+<div class="container">
+  <header class="hero">
+    <span class="hero-eyebrow">George Wahba</span>
+    <h1>Two tracks.</h1>
+    <p class="hero-sub">One habit of taking things apart.</p>
     <p class="hero-desc">
-      Computer Engineering graduate specializing in embedded systems, FPGA design, and automotive controls — and an incoming JD candidate. Two tracks, one throughline: understanding how complex systems actually work before deciding what they should do.
+      Computer Engineering graduate specializing in embedded systems, FPGA design, and automotive controls &mdash; and an incoming JD candidate. The throughline is the same either way: understand how a system actually behaves before arguing about what it should do.
     </p>
-  </section>
+  </header>
+</div>
 
-  <section class="pcb-section">
-    <div class="section-header"><h3>Select Your Experience</h3></div>
-    <div class="pcb-board">
-      <svg class="pcb-traces" preserveAspectRatio="none" aria-hidden="true">
-        <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-          <circle cx="10" cy="10" r=".5" fill="rgba(255,255,255,.04)"/>
-        </pattern>
-        <rect width="100%" height="100%" fill="url(#grid)"/>
-        <g id="via-group"></g>
-        <polyline class="trace-line" id="trace-left-1" points=""/>
-        <polyline class="trace-line" id="trace-left-2" points=""/>
-        <polyline class="trace-line" id="trace-left-3" points=""/>
-        <polyline class="trace-line" id="trace-right-1" points=""/>
-        <polyline class="trace-line" id="trace-right-2" points=""/>
-        <polyline class="trace-line" id="trace-right-3" points=""/>
-        <circle class="trace-pulse" id="pulse-l1" cx="280" cy="170"/>
-        <circle class="trace-pulse" id="pulse-l2" cx="280" cy="210"/>
-        <circle class="trace-pulse" id="pulse-l3" cx="280" cy="250"/>
-        <circle class="trace-pulse brass" id="pulse-r1" cx="530" cy="210"/>
-        <circle class="trace-pulse brass" id="pulse-r2" cx="530" cy="210"/>
-        <circle class="trace-pulse brass" id="pulse-r3" cx="530" cy="210"/>
-      </svg>
+<main class="choice" id="choose">
+  <a href="/engineering" class="panel panel-eng" aria-label="Enter the engineering portfolio">
+    <span class="seam-light" aria-hidden="true"></span>
+    <span class="panel-eyebrow">Engineering</span>
+    <h2 class="panel-title">How it works</h2>
+    <p class="panel-desc">Four years of co-op and research work in embedded firmware, RTL and FPGA design, and vehicle control systems.</p>
+    <span class="panel-meta">Hardware &amp; FPGA &middot; Automotive &amp; Controls</span>
+    <span class="panel-go">Enter <span class="arrow" aria-hidden="true">&rarr;</span></span>
+  </a>
 
-      <div class="pcb-layout">
-        <a href="/engineering" class="ic-package" id="ic-engineering" aria-label="View engineering portfolio">
-          <div class="ic-pins-top"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
-          <div class="ic-body">
-            <div class="ic-pins-left"><div class="ic-pin-h"></div><div class="ic-pin-h"></div><div class="ic-pin-h"></div></div>
-            <svg class="ic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/>
-              <line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/>
-              <line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/>
-              <line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/>
-              <line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/>
-            </svg>
-            <span class="ic-label">Engineering</span>
-            <div class="ic-pins-right"><div class="ic-pin-h"></div><div class="ic-pin-h"></div><div class="ic-pin-h"></div></div>
-          </div>
-          <div class="ic-pins-bottom"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
-          <span class="ic-name">Engineering</span>
-          <span class="ic-desc">Hardware &amp; FPGA · Automotive &amp; Controls</span>
-        </a>
+  <a href="/legal" class="panel panel-law" aria-label="Enter the law and policy section">
+    <span class="panel-eyebrow">Law &amp; Policy</span>
+    <h2 class="panel-title">What it owes</h2>
+    <p class="panel-desc">Incoming JD candidate. Empirical legal research, legal technology, and access to justice.</p>
+    <span class="panel-meta">Experience &middot; Projects &middot; Interests</span>
+    <span class="panel-go">Enter <span class="arrow" aria-hidden="true">&rarr;</span></span>
+  </a>
+</main>
 
-        <div class="central-die">GW</div>
-
-        <a href="/legal" class="ic-package legal" id="ic-legal" aria-label="View legal portfolio">
-          <div class="ic-pins-top"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
-          <div class="ic-body">
-            <div class="ic-pins-left"><div class="ic-pin-h"></div><div class="ic-pin-h"></div><div class="ic-pin-h"></div></div>
-            <svg class="ic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="3" x2="12" y2="21"/><line x1="5" y1="7" x2="19" y2="7"/>
-              <path d="M5 7l-3 6a3 3 0 0 0 6 0z"/><path d="M19 7l-3 6a3 3 0 0 0 6 0z"/>
-              <line x1="8" y1="21" x2="16" y2="21"/>
-            </svg>
-            <span class="ic-label">Law &amp; Policy</span>
-            <div class="ic-pins-right"><div class="ic-pin-h"></div><div class="ic-pin-h"></div><div class="ic-pin-h"></div></div>
-          </div>
-          <div class="ic-pins-bottom"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
-          <span class="ic-name">Law &amp; Policy</span>
-          <span class="ic-desc">Incoming JD · Legal technology · Access to justice</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="contact-section">
-    <h2 class="contact-title">Get In Touch</h2>
-    <p class="contact-desc">Open to conversations on either side of the board — engineering work, legal technology, or anything at the intersection. My inbox is always open.</p>
+<div class="container">
+  <section class="contact">
+    <h2>Get In Touch</h2>
+    <p>Open to conversations on either side of the line &mdash; engineering work, legal technology, or anything sitting between them.</p>
     <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#103;&#101;&#111;&#114;&#103;&#101;&#119;&#97;&#104;&#98;&#97;&#48;&#51;&#64;&#111;&#117;&#116;&#108;&#111;&#111;&#107;&#46;&#99;&#111;&#109;" class="contact-btn">Say Hello</a>
   </section>
 </div>
 
 <footer><p>Built by George Wahba</p></footer>
 
-<script>
-// Scroll-reactive matrix rain
-const canvas=document.getElementById('matrix-canvas'),ctx=canvas.getContext('2d');
-canvas.width=innerWidth;canvas.height=innerHeight;
-const chars='0123456789ABCDEF><+-*/=[]{}();:';const fontSize=14;
-let columns=Math.floor(canvas.width/fontSize),drops=[],scrollProgress=0;
-for(let i=0;i<columns;i++)drops[i]=Math.random()*-100;
-addEventListener('scroll',()=>{const m=document.documentElement.scrollHeight-innerHeight;scrollProgress=m>0?scrollY/m:0;});
-function drawMatrix(){
-  canvas.style.opacity=.06+scrollProgress*.14;
-  ctx.fillStyle=`rgba(10,10,15,${.05+scrollProgress*.03})`;ctx.fillRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle=`hsl(${35+scrollProgress*10},90%,55%)`;ctx.font=fontSize+'px monospace';
-  const speed=1+scrollProgress*2;
-  for(let i=0;i<drops.length;i++){
-    ctx.fillText(chars[Math.floor(Math.random()*chars.length)],i*fontSize,drops[i]*fontSize);
-    if(drops[i]*fontSize>canvas.height&&Math.random()>(.98-scrollProgress*.02))drops[i]=0;
-    drops[i]+=speed*(.5+Math.random()*.5);
-  }
-}
-setInterval(drawMatrix,50);
-addEventListener('resize',()=>{canvas.width=innerWidth;canvas.height=innerHeight;columns=Math.floor(canvas.width/fontSize);drops=[];for(let i=0;i<columns;i++)drops[i]=Math.random()*-100;});
-
-
-// ---- Align traces to real IC geometry (measured from the DOM) ----
-function layoutTraces(leftId,rightId){
-  const board=document.querySelector('.pcb-board');
-  const svg=document.querySelector('.pcb-traces');
-  if(!board||!svg)return;
-  if(getComputedStyle(svg).display==='none')return;
-  const br=board.getBoundingClientRect();
-  if(br.width<1)return;
-  svg.setAttribute('viewBox',`0 0 ${br.width} ${br.height}`);
-  const rel=el=>{const r=el.getBoundingClientRect();
-    return{left:r.left-br.left,right:r.right-br.left,cy:r.top+r.height/2-br.top};};
-  const dieEl=document.querySelector('.central-die');
-  const leftEl=document.getElementById(leftId);
-  const rightEl=document.getElementById(rightId);
-  if(!dieEl||!leftEl||!rightEl)return;
-  const die=rel(dieEl);
-  const lp=[...leftEl.querySelectorAll('.ic-pins-right .ic-pin-h')].map(rel);
-  const rp=[...rightEl.querySelectorAll('.ic-pins-left .ic-pin-h')].map(rel);
-  const vias=[];
-  lp.forEach((p,i)=>{
-    const el=document.getElementById('trace-left-'+(i+1));
-    if(!el)return;
-    const mid=p.right+(die.left-p.right)*0.45;
-    el.setAttribute('points',`${p.right},${p.cy} ${mid},${p.cy} ${die.left},${die.cy}`);
-    vias.push([mid,p.cy]);
-  });
-  rp.forEach((p,i)=>{
-    const el=document.getElementById('trace-right-'+(i+1));
-    if(!el)return;
-    const mid=die.right+(p.left-die.right)*0.55;
-    el.setAttribute('points',`${die.right},${die.cy} ${mid},${p.cy} ${p.left},${p.cy}`);
-    vias.push([mid,p.cy]);
-  });
-  const g=document.getElementById('via-group');
-  if(g)g.innerHTML=vias.map(v=>`<circle cx="${v[0]}" cy="${v[1]}" r="4" fill="none" stroke="#2a2a32" stroke-width="1"/>`).join('');
-}
-function initTraces(l,r){
-  const run=()=>layoutTraces(l,r);
-  run();
-  requestAnimationFrame(run);
-  addEventListener('resize',run);
-  addEventListener('load',run);
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(run);
-  setTimeout(run,400);
-}
-
-// PCB trace pulses
-function animatePulses(pulseIds,traceIds,glowClass){
-  const pulses=pulseIds.map(id=>document.getElementById(id));
-  const traces=traceIds.map(id=>document.getElementById(id));
-  traces.forEach(t=>t.classList.add(glowClass));
-  pulses.forEach(p=>p.classList.add('active'));
-  let progress=0;
-  function step(){
-    progress+=.015; if(progress>1)progress=0;
-    pulses.forEach((pulse,i)=>{
-      const pts=traces[i].getAttribute('points').trim().split(/\s+/).map(p=>{const[x,y]=p.split(',').map(Number);return{x,y};});
-      const seg=progress*(pts.length-1);
-      const idx=Math.min(Math.floor(seg),pts.length-2);
-      const frac=seg-idx;
-      pulse.setAttribute('cx',pts[idx].x+(pts[idx+1].x-pts[idx].x)*frac);
-      pulse.setAttribute('cy',pts[idx].y+(pts[idx+1].y-pts[idx].y)*frac);
-    });
-    return requestAnimationFrame(step);
-  }
-  return step();
-}
-function stopPulses(pulseIds,traceIds,glowClass,animId){
-  cancelAnimationFrame(animId);
-  pulseIds.forEach(id=>document.getElementById(id).classList.remove('active'));
-  traceIds.forEach(id=>document.getElementById(id).classList.remove(glowClass));
-}
-const L_P=['pulse-l1','pulse-l2','pulse-l3'],L_T=['trace-left-1','trace-left-2','trace-left-3'];
-const R_P=['pulse-r1','pulse-r2','pulse-r3'],R_T=['trace-right-1','trace-right-2','trace-right-3'];
-let leftAnim,rightAnim;
-const icE=document.getElementById('ic-engineering'),icL=document.getElementById('ic-legal');
-icE.addEventListener('mouseenter',()=>{leftAnim=animatePulses(L_P,L_T,'glow');});
-icE.addEventListener('mouseleave',()=>{stopPulses(L_P,L_T,'glow',leftAnim);});
-icL.addEventListener('mouseenter',()=>{rightAnim=animatePulses(R_P,R_T,'glow-brass');});
-icL.addEventListener('mouseleave',()=>{stopPulses(R_P,R_T,'glow-brass',rightAnim);});
-
-// Cursor glow
-let ticking=false;
-addEventListener('mousemove',e=>{
-  if(!ticking){requestAnimationFrame(()=>{
-    document.documentElement.style.setProperty('--cursor-x',e.clientX+'px');
-    document.documentElement.style.setProperty('--cursor-y',e.clientY+'px');
-    ticking=false;});ticking=true;}
-});
-console.log('%c👋 Welcome to georgewahba.me','color:#f5a623;font-size:20px;font-weight:bold;');
-initTraces('ic-engineering','ic-legal');
-</script>
 </body>
 </html>
