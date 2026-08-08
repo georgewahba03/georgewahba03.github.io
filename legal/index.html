@@ -120,7 +120,7 @@ body{
 /* ---------- Judgment body: marginal numbering ---------- */
 .reasons{
   border-left:1px solid var(--brass);
-  padding-left:3.25rem;
+  padding-left:4.25rem;
   counter-reset:para;
   position:relative;
 }
@@ -138,8 +138,8 @@ body{
 .reasons h2::before{
   content:attr(data-numeral);
   position:absolute;
-  left:-3.25rem;
-  width:2.25rem;
+  left:-3.35rem;
+  width:2.5rem;
   text-align:left;
   color:var(--brass);
   font-weight:400;
@@ -155,8 +155,8 @@ body{
 .para::before{
   content:"[" counter(para) "]";
   position:absolute;
-  left:-3.25rem;
-  width:2.25rem;
+  left:-3.35rem;
+  width:2.5rem;
   text-align:left;
   font-family:var(--font-mono);
   font-size:.68rem;
