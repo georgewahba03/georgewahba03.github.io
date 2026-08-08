@@ -1,548 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="George Wahba - Computer Engineering student specializing in embedded systems, FPGA design, and automotive controls. Portfolio showcasing real-time validation and hardware-software co-design projects.">
-    <meta name="author" content="George Wahba">
-    <meta name="keywords" content="George Wahba, Computer Engineering, Embedded Systems, FPGA, Automotive Controls, RTL Design, SystemVerilog">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="George Wahba - Computer Engineer and incoming JD candidate. Portfolio spanning embedded systems, FPGA design, and automotive controls, alongside legal work.">
+<meta name="author" content="George Wahba">
+<meta name="keywords" content="George Wahba, Computer Engineering, Embedded Systems, FPGA, Automotive Controls, Law, JD Candidate, Legal Technology">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://georgewahba.me/">
+<meta property="og:title" content="George Wahba | Engineering & Law">
+<meta property="og:description" content="Computer engineer and incoming JD candidate">
+<meta property="og:site_name" content="George Wahba">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="George Wahba | Engineering & Law">
+<meta name="twitter:description" content="Computer engineer and incoming JD candidate">
+<title>George Wahba</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><rect x=%222%22 y=%222%22 width=%2220%22 height=%2220%22 rx=%224%22 ry=%224%22 stroke=%22%23f5a623%22 fill=%22none%22 stroke-width=%222%22/><text x=%2250%25%22 y=%2250%25%22 dy=%22.35em%22 text-anchor=%22middle%22 font-family=%22monospace%22 font-weight=%22bold%22 font-size=%2211%22 fill=%22%23f5a623%22>GW</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-color:#0a0a0f; --bg-subtle:#111118; --text-primary:#e0ddd5; --text-secondary:#8a8578;
+  --accent:#f5a623; --accent-dim:rgba(245,166,35,.15); --accent-glow:rgba(245,166,35,.4);
+  --brass:#c9b896; --brass-dim:rgba(201,184,150,.15); --brass-glow:rgba(201,184,150,.4);
+  --card-bg:#141418; --border:#2a2a32;
+  --font-main:'Outfit',-apple-system,system-ui,sans-serif;
+  --font-mono:'JetBrains Mono','Fira Code',monospace;
+  --cursor-x:50%; --cursor-y:50%;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+.skip-to-content{position:absolute;top:-40px;left:0;background:var(--accent);color:var(--bg-color);padding:8px;text-decoration:none;z-index:1000;font-weight:600}
+.skip-to-content:focus{top:0}
+body{background:var(--bg-color);color:var(--text-primary);font-family:var(--font-main);min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;line-height:1.3;overflow-x:hidden;position:relative}
+body::after{content:"";position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);pointer-events:none;z-index:9999}
+#matrix-canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(min(600px,40vw) circle at var(--cursor-x) var(--cursor-y),rgba(245,166,35,.04),transparent 40%);pointer-events:none;z-index:0;will-change:background}
+.container{max-width:1000px;width:100%;padding:0 2rem 5rem;z-index:1}
 
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://georgewahba.me/">
-    <meta property="og:title" content="George Wahba | Computer Engineering Portfolio">
-    <meta property="og:description" content="Specializing in embedded systems, FPGA design, and automotive controls">
-    <meta property="og:site_name" content="George Wahba Portfolio">
+.hero{display:flex;flex-direction:column;align-items:flex-start;margin-bottom:6rem;animation:fadeUp .8s ease-out forwards;padding-top:5rem}
+.mono-intro{color:var(--accent);font-family:var(--font-mono);font-size:.9rem;margin-bottom:1.2rem;letter-spacing:.5px}
+h1{font-size:clamp(44px,8vw,80px);font-weight:700;line-height:1.05;letter-spacing:-1px}
+h2.subtitle{font-size:clamp(30px,5.5vw,56px);font-weight:300;color:var(--text-secondary);margin-bottom:1.5rem;line-height:1.1}
+p.hero-desc{max-width:560px;font-size:1.05rem;color:var(--text-secondary);margin-bottom:3rem;line-height:1.7;font-weight:300}
 
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="George Wahba | Computer Engineering Portfolio">
-    <meta name="twitter:description" content="Specializing in embedded systems, FPGA design, and automotive controls">
+.pcb-section{animation:fadeUp .8s ease-out .2s both}
+.section-header{display:flex;align-items:center;margin-bottom:2.5rem}
+.section-header h3{font-size:1.6rem;white-space:nowrap;font-weight:500}
+.section-header::after{content:"";display:block;width:300px;height:1px;background:linear-gradient(90deg,var(--border),transparent);margin-left:20px}
 
-    <title>George Wahba | Portfolio</title>
+.pcb-board{position:relative;width:100%;min-height:420px;background:radial-gradient(circle at 20% 50%,rgba(245,166,35,.02),transparent 50%),radial-gradient(circle at 80% 50%,rgba(201,184,150,.02),transparent 50%),var(--bg-subtle);border:1px solid var(--border);border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.pcb-traces{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.trace-line{stroke:var(--border);stroke-width:2;fill:none;transition:stroke .6s ease}
+.trace-line.glow{stroke:var(--accent);stroke-width:2.5;filter:drop-shadow(0 0 6px var(--accent-glow))}
+.trace-line.glow-brass{stroke:var(--brass);stroke-width:2.5;filter:drop-shadow(0 0 6px var(--brass-glow))}
+.trace-pulse{fill:var(--accent);r:4;opacity:0;filter:drop-shadow(0 0 4px var(--accent))}
+.trace-pulse.active{opacity:1}
+.trace-pulse.brass{fill:var(--brass);filter:drop-shadow(0 0 4px var(--brass))}
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><text x=%2250%25%22 y=%2250%25%22 dy=%22.35em%22 text-anchor=%22middle%22 font-family=%22monospace%22 font-weight=%22bold%22 font-size=%2214%22 fill=%22%23f5a623%22>GW</text><rect x=%222%22 y=%222%22 width=%2220%22 height=%2220%22 rx=%224%22 ry=%224%22 stroke=%22%23f5a623%22 fill=%22none%22 stroke-width=%222%22/></svg>">
+.pcb-layout{display:flex;align-items:center;justify-content:center;width:100%;padding:2rem;position:relative;z-index:2}
+.ic-package{display:flex;flex-direction:column;align-items:center;gap:1rem;cursor:pointer;text-decoration:none;transition:transform .3s ease;padding:1.5rem}
+.ic-package:hover{transform:translateY(-4px)}
+.ic-body{width:160px;height:160px;background:var(--card-bg);border:2px solid var(--border);border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;position:relative;transition:border-color .4s ease,box-shadow .4s ease}
+.ic-package:hover .ic-body{border-color:var(--accent);box-shadow:0 0 30px rgba(245,166,35,.1),inset 0 0 30px rgba(245,166,35,.03)}
+.ic-package.legal:hover .ic-body{border-color:var(--brass);box-shadow:0 0 30px rgba(201,184,150,.1),inset 0 0 30px rgba(201,184,150,.03)}
+.ic-pins-top,.ic-pins-bottom{display:flex;justify-content:center;gap:12px}
+.ic-pin{width:3px;height:14px;background:var(--border);border-radius:1px;transition:background .4s ease,box-shadow .4s ease}
+.ic-package:hover .ic-pin{background:var(--accent);box-shadow:0 0 6px var(--accent-glow)}
+.ic-package.legal:hover .ic-pin{background:var(--brass);box-shadow:0 0 6px var(--brass-glow)}
+.ic-pins-left,.ic-pins-right{position:absolute;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px}
+.ic-pins-left{left:-14px}.ic-pins-right{right:-14px}
+.ic-pin-h{width:14px;height:3px;background:var(--border);border-radius:1px;transition:background .4s ease,box-shadow .4s ease}
+.ic-package:hover .ic-pin-h{background:var(--accent);box-shadow:0 0 6px var(--accent-glow)}
+.ic-package.legal:hover .ic-pin-h{background:var(--brass);box-shadow:0 0 6px var(--brass-glow)}
+.ic-icon{width:40px;height:40px;color:var(--accent);opacity:.8}
+.ic-package.legal .ic-icon{color:var(--brass)}
+.ic-label{font-family:var(--font-mono);font-size:.65rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1.5px;text-align:center}
+.ic-name{font-size:1rem;color:var(--text-primary);font-weight:500;text-align:center;margin-top:1rem}
+.ic-desc{font-family:var(--font-mono);font-size:.6rem;color:var(--text-secondary);text-align:center;max-width:190px;line-height:1.5;margin-top:.25rem}
+.central-die{width:80px;height:80px;background:var(--card-bg);border:2px solid var(--accent);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:1.4rem;font-weight:700;color:var(--accent);position:relative;z-index:3;box-shadow:0 0 40px rgba(245,166,35,.08);flex-shrink:0}
+.central-die::before{content:"";position:absolute;inset:4px;border:1px solid rgba(245,166,35,.2);border-radius:2px}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+.contact-section{text-align:center;margin-top:8rem;animation:fadeUp .8s ease-out .4s both}
+.contact-title{font-size:2.2rem;margin-bottom:1.5rem;font-weight:500}
+.contact-desc{color:var(--text-secondary);font-size:1.05rem;max-width:520px;margin:0 auto 2.5rem;line-height:1.7;font-weight:300}
+.contact-btn{display:inline-block;color:var(--accent);border:1px solid var(--accent);border-radius:4px;padding:1.1rem 1.75rem;font-size:.9rem;font-family:var(--font-mono);text-decoration:none;transition:all .25s cubic-bezier(.645,.045,.355,1);letter-spacing:.5px}
+.contact-btn:hover,.contact-btn:focus{background:var(--accent-dim);box-shadow:0 0 20px rgba(245,166,35,.1);outline:none}
+.contact-btn:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+footer{width:100%;text-align:center;padding:2rem;color:var(--text-secondary);font-family:var(--font-mono);font-size:.8rem;margin-top:auto;z-index:1}
 
-    <style>
-        :root {
-            --bg-color: #0a0a0f;
-            --bg-subtle: #111118;
-            --text-primary: #e0ddd5;
-            --text-secondary: #8a8578;
-            --accent: #f5a623;
-            --accent-dim: rgba(245, 166, 35, 0.15);
-            --accent-glow: rgba(245, 166, 35, 0.4);
-            --card-bg: #141418;
-            --hover-bg: #1e1e24;
-            --border: #2a2a32;
-            --font-main: 'Outfit', -apple-system, system-ui, sans-serif;
-            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-            --cursor-x: 50%;
-            --cursor-y: 50%;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        .skip-to-content {
-            position: absolute; top: -40px; left: 0;
-            background: var(--accent); color: var(--bg-color);
-            padding: 8px; text-decoration: none; z-index: 1000; font-weight: 600;
-        }
-        .skip-to-content:focus { top: 0; }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            font-family: var(--font-main);
-            min-height: 100vh;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            line-height: 1.3;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        body::after {
-            content: "";
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
-            pointer-events: none; z-index: 9999;
-        }
-
-        #matrix-canvas {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 0;
-        }
-
-        body::before {
-            content: "";
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(min(600px,40vw) circle at var(--cursor-x) var(--cursor-y), rgba(245,166,35,0.04), transparent 40%);
-            pointer-events: none; z-index: 0; will-change: background;
-        }
-
-        .container { max-width: 1000px; width: 100%; padding: 0 2rem 5rem 2rem; z-index: 1; }
-
-        .hero {
-            display: flex; flex-direction: column; align-items: flex-start;
-            margin-bottom: 6rem; animation: fadeUp 0.8s ease-out forwards; padding-top: 5rem;
-        }
-
-        .mono-intro {
-            color: var(--accent); font-family: var(--font-mono);
-            font-size: 0.9rem; margin-bottom: 1.2rem; margin-left: 2px; letter-spacing: 0.5px;
-        }
-
-        h1 {
-            font-size: clamp(44px, 8vw, 80px); font-weight: 700;
-            color: var(--text-primary); margin: 0; line-height: 1.05; letter-spacing: -1px;
-        }
-
-        h2.subtitle {
-            font-size: clamp(36px, 6vw, 64px); font-weight: 300;
-            color: var(--text-secondary); margin: 0 0 1.5rem 0; line-height: 1.1;
-        }
-
-        p.hero-desc {
-            max-width: 540px; font-size: 1.05rem; color: var(--text-secondary);
-            margin-bottom: 3rem; line-height: 1.7; font-weight: 300;
-        }
-
-        .pcb-section { animation: fadeUp 0.8s ease-out 0.2s both; }
-
-        .section-header { display: flex; align-items: center; margin-bottom: 2.5rem; }
-        .section-header h3 { font-size: 1.6rem; color: var(--text-primary); white-space: nowrap; font-weight: 500; }
-        .section-header::after {
-            content: ""; display: block; width: 300px; height: 1px;
-            background: linear-gradient(90deg, var(--border), transparent); margin-left: 20px;
-        }
-
-        .pcb-board {
-            position: relative; width: 100%; min-height: 420px;
-            background: radial-gradient(circle at 20% 50%, rgba(245,166,35,0.02), transparent 50%),
-                        radial-gradient(circle at 80% 50%, rgba(245,166,35,0.02), transparent 50%),
-                        var(--bg-subtle);
-            border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
-            display: flex; align-items: center; justify-content: center;
-        }
-
-        .pcb-traces {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;
-        }
-
-        .trace-line { stroke: var(--border); stroke-width: 2; fill: none; transition: stroke 0.6s ease; }
-        .trace-line.glow { stroke: var(--accent); stroke-width: 2.5; filter: drop-shadow(0 0 6px var(--accent-glow)); }
-
-        .trace-pulse { fill: var(--accent); r: 4; opacity: 0; filter: drop-shadow(0 0 4px var(--accent)); }
-        .trace-pulse.active { opacity: 1; }
-
-        .pcb-layout {
-            display: flex; align-items: center; justify-content: center;
-            gap: 0; width: 100%; padding: 2rem; position: relative; z-index: 2;
-        }
-
-        .ic-package {
-            display: flex; flex-direction: column; align-items: center; gap: 1rem;
-            cursor: pointer; text-decoration: none; padding: 1.5rem;
-            position: relative;
-        }
-
-        .ic-body {
-            width: 160px; height: 160px; background: var(--card-bg); border: 2px solid var(--border);
-            border-radius: 6px; display: flex; flex-direction: column; align-items: center;
-            justify-content: center; gap: 0.75rem; position: relative;
-            transition: border-color 0.4s ease, box-shadow 0.4s ease;
-        }
-
-        .ic-package:hover .ic-body {
-            border-color: var(--accent);
-            box-shadow: 0 0 30px rgba(245,166,35,0.1), inset 0 0 30px rgba(245,166,35,0.03);
-        }
-
-        .ic-pins-top, .ic-pins-bottom { 
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex; 
-            gap: 12px; 
-        }
-        .ic-pins-top { top: -14px; }
-        .ic-pins-bottom { bottom: -14px; }
-
-        .ic-pin {
-            width: 3px; height: 14px; background: var(--border); border-radius: 1px;
-            transition: background 0.4s ease, box-shadow 0.4s ease;
-        }
-        .ic-package:hover .ic-pin { background: var(--accent); box-shadow: 0 0 6px var(--accent-glow); }
-
-        .ic-pins-left, .ic-pins-right {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            display: flex; flex-direction: column; gap: 12px;
-        }
-        .ic-pins-left { left: -14px; }
-        .ic-pins-right { right: -14px; }
-
-        .ic-pin-h {
-            width: 14px; height: 3px; background: var(--border); border-radius: 1px;
-            transition: background 0.4s ease, box-shadow 0.4s ease;
-        }
-        .ic-package:hover .ic-pin-h { background: var(--accent); box-shadow: 0 0 6px var(--accent-glow); }
-
-        .ic-icon { width: 40px; height: 40px; color: var(--accent); opacity: 0.8; }
-
-        .ic-label {
-            font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-secondary);
-            text-transform: uppercase; letter-spacing: 1.5px; text-align: center;
-        }
-
-        .ic-text {
-            position: absolute;
-            top: calc(100% + 0.5rem); 
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: max-content;
-        }
-
-        .ic-name {
-            font-family: var(--font-main); font-size: 1rem; color: var(--text-primary);
-            font-weight: 500; text-align: center; margin-top: 0;
-        }
-
-        .ic-desc {
-            font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-secondary);
-            text-align: center; max-width: 180px; line-height: 1.5; margin-top: 0.25rem;
-        }
-
-        .central-die {
-            width: 80px; height: 80px; background: var(--card-bg); border: 2px solid var(--accent);
-            border-radius: 4px; display: flex; align-items: center; justify-content: center;
-            font-family: var(--font-mono); font-size: 1.4rem; font-weight: 700; color: var(--accent);
-            position: relative; z-index: 3; box-shadow: 0 0 40px rgba(245,166,35,0.08); flex-shrink: 0;
-        }
-        .central-die::before {
-            content: ""; position: absolute; inset: 4px;
-            border: 1px solid rgba(245,166,35,0.2); border-radius: 2px;
-        }
-
-        .contact-section {
-            text-align: center; margin-top: 8rem; animation: fadeUp 0.8s ease-out 0.4s both;
-        }
-        .contact-title { color: var(--text-primary); font-size: 2.2rem; margin-bottom: 1.5rem; font-weight: 500; }
-        .contact-desc {
-            color: var(--text-secondary); font-size: 1.05rem; max-width: 500px;
-            margin: 0 auto 2.5rem auto; line-height: 1.7; font-weight: 300;
-        }
-
-        .contact-btn {
-            display: inline-block; color: var(--accent); background-color: transparent;
-            border: 1px solid var(--accent); border-radius: 4px;
-            padding: 1.1rem 1.75rem; font-size: 0.9rem; font-family: var(--font-mono);
-            text-decoration: none; transition: all 0.25s cubic-bezier(0.645,0.045,0.355,1);
-            letter-spacing: 0.5px;
-        }
-        .contact-btn:hover, .contact-btn:focus {
-            background-color: var(--accent-dim);
-            box-shadow: 0 0 20px rgba(245,166,35,0.1); outline: none;
-        }
-        .contact-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-
-        footer {
-            width: 100%; text-align: center; padding: 2rem;
-            color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.8rem;
-            margin-top: auto; z-index: 1;
-        }
-
-        .dev-console {
-            position: fixed; bottom: -400px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 800px; height: 350px;
-            background: rgba(20,20,24,0.98); border: 2px solid var(--accent);
-            border-radius: 8px 8px 0 0; z-index: 10000;
-            transition: bottom 0.5s cubic-bezier(0.68,-0.55,0.265,1.55);
-            box-shadow: 0 -10px 40px rgba(0,0,0,0.5); backdrop-filter: blur(20px);
-        }
-        .dev-console.active { bottom: 0; }
-        .console-header {
-            background: var(--bg-subtle); padding: 0.75rem 1rem;
-            display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 1px solid var(--accent);
-        }
-        .console-title { color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; }
-        .console-close {
-            background: transparent; border: 1px solid var(--accent); color: var(--accent);
-            padding: 0.25rem 0.75rem; border-radius: 4px; cursor: pointer;
-            font-family: var(--font-mono); font-size: 0.8rem; transition: all 0.2s;
-        }
-        .console-close:hover { background: var(--accent-dim); }
-        .console-content {
-            padding: 1rem; height: calc(100% - 50px); overflow-y: auto;
-            font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.6;
-        }
-        .console-line { color: var(--text-secondary); margin-bottom: 0.5rem; }
-        .console-line.success { color: var(--accent); }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 768px) {
-            .section-header::after { width: 100%; }
-            .container { padding: 0 1.5rem 4rem 1.5rem; }
-            .pcb-layout { flex-direction: column; gap: 1.5rem; }
-            .ic-body { width: 140px; height: 140px; }
-            .central-die { width: 60px; height: 60px; font-size: 1.1rem; }
-            .pcb-traces { display: none; }
-            .ic-text { position: static; transform: none; margin-top: 1rem; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-    </style>
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@media (max-width:768px){
+  .section-header::after{width:100%}
+  .container{padding:0 1.5rem 4rem}
+  .pcb-layout{flex-direction:column;gap:1.5rem}
+  .ic-body{width:140px;height:140px}
+  .central-die{width:60px;height:60px;font-size:1.1rem}
+  .pcb-traces{display:none}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
 </head>
 <body>
-    <a href="#main-content" class="skip-to-content">Skip to main content</a>
-    <canvas id="matrix-canvas"></canvas>
+<a href="#main-content" class="skip-to-content">Skip to main content</a>
+<canvas id="matrix-canvas"></canvas>
 
-    <div class="dev-console" id="devConsole">
-        <div class="console-header">
-            <span class="console-title">// Developer Console</span>
-            <button class="console-close" id="closeConsole">Close</button>
-        </div>
-        <div class="console-content" id="consoleContent">
-            <div class="console-line success">$ ./access_dev_mode.sh</div>
-            <div class="console-line">Initializing developer environment...</div>
-            <div class="console-line success">✓ System check complete</div>
-            <div class="console-line success">✓ Loading portfolio modules</div>
-            <div class="console-line">
-                <br><span style="color: var(--accent);">Welcome, Developer!</span><br>
-                You've discovered the secret console. 🎉<br><br>
-                <span style="color: var(--text-primary);">Fun fact:</span> This site is built with vanilla HTML, CSS, and JavaScript.<br>
-                No frameworks, no build tools — just the fundamentals.<br><br>
-                Type <span style="color: var(--accent);">'d'</span> three times to open this console again!
-            </div>
-        </div>
+<div class="container" id="main-content">
+  <section class="hero">
+    <span class="mono-intro">Hi, my name is</span>
+    <h1>George Wahba.</h1>
+    <h2 class="subtitle">I build systems, and I'm learning the rules that govern them.</h2>
+    <p class="hero-desc">
+      Computer Engineering graduate specializing in embedded systems, FPGA design, and automotive controls — and an incoming JD candidate. Two tracks, one throughline: understanding how complex systems actually work before deciding what they should do.
+    </p>
+  </section>
+
+  <section class="pcb-section">
+    <div class="section-header"><h3>Select Your Experience</h3></div>
+    <div class="pcb-board">
+      <svg class="pcb-traces" viewBox="0 0 1000 420" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+          <circle cx="10" cy="10" r=".5" fill="rgba(255,255,255,.04)"/>
+        </pattern>
+        <rect width="100%" height="100%" fill="url(#grid)"/>
+        <polyline class="trace-line" id="trace-left-1" points="280,170 340,170 400,170 440,190 470,210"/>
+        <polyline class="trace-line" id="trace-left-2" points="280,210 340,210 470,210"/>
+        <polyline class="trace-line" id="trace-left-3" points="280,250 340,250 400,250 440,230 470,210"/>
+        <polyline class="trace-line" id="trace-right-1" points="530,210 560,190 600,170 660,170 720,170"/>
+        <polyline class="trace-line" id="trace-right-2" points="530,210 660,210 720,210"/>
+        <polyline class="trace-line" id="trace-right-3" points="530,210 560,230 600,250 660,250 720,250"/>
+        <circle class="trace-pulse" id="pulse-l1" cx="280" cy="170"/>
+        <circle class="trace-pulse" id="pulse-l2" cx="280" cy="210"/>
+        <circle class="trace-pulse" id="pulse-l3" cx="280" cy="250"/>
+        <circle class="trace-pulse brass" id="pulse-r1" cx="530" cy="210"/>
+        <circle class="trace-pulse brass" id="pulse-r2" cx="530" cy="210"/>
+        <circle class="trace-pulse brass" id="pulse-r3" cx="530" cy="210"/>
+        <circle cx="340" cy="170" r="4" fill="none" stroke="#2a2a32" stroke-width="1"/>
+        <circle cx="340" cy="210" r="4" fill="none" stroke="#2a2a32" stroke-width="1"/>
+        <circle cx="340" cy="250" r="4" fill="none" stroke="#2a2a32" stroke-width="1"/>
+        <circle cx="660" cy="170" r="4" fill="none" stroke="#2a2a32" stroke-width="1"/>
+        <circle cx="660" cy="210" r="4" fill="none" stroke="#2a2a32" stroke-width="1"/>
+        <circle cx="660" cy="250" r="4" fill="none" stroke="#2a2a32" stroke-width="1"/>
+      </svg>
+
+      <div class="pcb-layout">
+        <a href="/engineering" class="ic-package" id="ic-engineering" aria-label="View engineering portfolio">
+          <div class="ic-pins-top"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
+          <div class="ic-body">
+            <div class="ic-pins-left"><div class="ic-pin-h"></div><div class="ic-pin-h"></div><div class="ic-pin-h"></div></div>
+            <svg class="ic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/>
+              <line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/>
+              <line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/>
+              <line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/>
+              <line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/>
+            </svg>
+            <span class="ic-label">Engineering</span>
+            <div class="ic-pins-right"><div class="ic-pin-h"></div><div class="ic-pin-h"></div><div class="ic-pin-h"></div></div>
+          </div>
+          <div class="ic-pins-bottom"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
+          <span class="ic-name">Engineering</span>
+          <span class="ic-desc">Hardware &amp; FPGA · Automotive &amp; Controls</span>
+        </a>
+
+        <div class="central-die">GW</div>
+
+        <a href="/legal" class="ic-package legal" id="ic-legal" aria-label="View legal portfolio">
+          <div class="ic-pins-top"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
+          <div class="ic-body">
+            <div class="ic-pins-left"><div class="ic-pin-h"></div><div class="ic-pin-h"></div><div class="ic-pin-h"></div></div>
+            <svg class="ic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="3" x2="12" y2="21"/><line x1="5" y1="7" x2="19" y2="7"/>
+              <path d="M5 7l-3 6a3 3 0 0 0 6 0z"/><path d="M19 7l-3 6a3 3 0 0 0 6 0z"/>
+              <line x1="8" y1="21" x2="16" y2="21"/>
+            </svg>
+            <span class="ic-label">Law &amp; Policy</span>
+            <div class="ic-pins-right"><div class="ic-pin-h"></div><div class="ic-pin-h"></div><div class="ic-pin-h"></div></div>
+          </div>
+          <div class="ic-pins-bottom"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
+          <span class="ic-name">Law &amp; Policy</span>
+          <span class="ic-desc">Incoming JD · Legal technology · Access to justice</span>
+        </a>
+      </div>
     </div>
+  </section>
 
-    <div class="container" id="main-content">
-        <section class="hero">
-            <span class="mono-intro">Hi, my name is</span>
-            <h1>George Wahba.</h1>
-            <h2 class="subtitle">I build things for the physical world.</h2>
-            <p class="hero-desc">
-                I'm a Computer Engineering graduate specializing in embedded systems, FPGA design, and automotive controls. Currently, I'm focused on real-time validation and hardware-software co-design.
-            </p>
-        </section>
+  <section class="contact-section">
+    <h2 class="contact-title">Get In Touch</h2>
+    <p class="contact-desc">Open to conversations on either side of the board — engineering work, legal technology, or anything at the intersection. My inbox is always open.</p>
+    <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#103;&#101;&#111;&#114;&#103;&#101;&#119;&#97;&#104;&#98;&#97;&#48;&#51;&#64;&#111;&#117;&#116;&#108;&#111;&#111;&#107;&#46;&#99;&#111;&#109;" class="contact-btn">Say Hello</a>
+  </section>
+</div>
 
-        <section class="pcb-section">
-            <div class="section-header">
-                <h3>Select Your Experience</h3>
-            </div>
-            <div class="pcb-board">
-                <svg class="pcb-traces" viewBox="0 0 1000 420" preserveAspectRatio="xMidYMid meet">
-                    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                        <circle cx="10" cy="10" r="0.5" fill="rgba(255,255,255,0.04)"/>
-                    </pattern>
-                    <rect width="100%" height="100%" fill="url(#grid)"/>
+<footer><p>Built by George Wahba</p></footer>
 
-                    <polyline class="trace-line" id="trace-left-1" points="280,195 470,195"/>
-                    <polyline class="trace-line" id="trace-left-2" points="280,210 470,210"/>
-                    <polyline class="trace-line" id="trace-left-3" points="280,225 470,225"/>
+<script>
+// Scroll-reactive matrix rain
+const canvas=document.getElementById('matrix-canvas'),ctx=canvas.getContext('2d');
+canvas.width=innerWidth;canvas.height=innerHeight;
+const chars='0123456789ABCDEF><+-*/=[]{}();:';const fontSize=14;
+let columns=Math.floor(canvas.width/fontSize),drops=[],scrollProgress=0;
+for(let i=0;i<columns;i++)drops[i]=Math.random()*-100;
+addEventListener('scroll',()=>{const m=document.documentElement.scrollHeight-innerHeight;scrollProgress=m>0?scrollY/m:0;});
+function drawMatrix(){
+  canvas.style.opacity=.06+scrollProgress*.14;
+  ctx.fillStyle=`rgba(10,10,15,${.05+scrollProgress*.03})`;ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle=`hsl(${35+scrollProgress*10},90%,55%)`;ctx.font=fontSize+'px monospace';
+  const speed=1+scrollProgress*2;
+  for(let i=0;i<drops.length;i++){
+    ctx.fillText(chars[Math.floor(Math.random()*chars.length)],i*fontSize,drops[i]*fontSize);
+    if(drops[i]*fontSize>canvas.height&&Math.random()>(.98-scrollProgress*.02))drops[i]=0;
+    drops[i]+=speed*(.5+Math.random()*.5);
+  }
+}
+setInterval(drawMatrix,50);
+addEventListener('resize',()=>{canvas.width=innerWidth;canvas.height=innerHeight;columns=Math.floor(canvas.width/fontSize);drops=[];for(let i=0;i<columns;i++)drops[i]=Math.random()*-100;});
 
-                    <polyline class="trace-line" id="trace-right-1" points="530,195 720,195"/>
-                    <polyline class="trace-line" id="trace-right-2" points="530,210 720,210"/>
-                    <polyline class="trace-line" id="trace-right-3" points="530,225 720,225"/>
+// PCB trace pulses
+function animatePulses(pulseIds,traceIds,glowClass){
+  const pulses=pulseIds.map(id=>document.getElementById(id));
+  const traces=traceIds.map(id=>document.getElementById(id));
+  traces.forEach(t=>t.classList.add(glowClass));
+  pulses.forEach(p=>p.classList.add('active'));
+  let progress=0;
+  function step(){
+    progress+=.015; if(progress>1)progress=0;
+    pulses.forEach((pulse,i)=>{
+      const pts=traces[i].getAttribute('points').trim().split(/\s+/).map(p=>{const[x,y]=p.split(',').map(Number);return{x,y};});
+      const seg=progress*(pts.length-1);
+      const idx=Math.min(Math.floor(seg),pts.length-2);
+      const frac=seg-idx;
+      pulse.setAttribute('cx',pts[idx].x+(pts[idx+1].x-pts[idx].x)*frac);
+      pulse.setAttribute('cy',pts[idx].y+(pts[idx+1].y-pts[idx].y)*frac);
+    });
+    return requestAnimationFrame(step);
+  }
+  return step();
+}
+function stopPulses(pulseIds,traceIds,glowClass,animId){
+  cancelAnimationFrame(animId);
+  pulseIds.forEach(id=>document.getElementById(id).classList.remove('active'));
+  traceIds.forEach(id=>document.getElementById(id).classList.remove(glowClass));
+}
+const L_P=['pulse-l1','pulse-l2','pulse-l3'],L_T=['trace-left-1','trace-left-2','trace-left-3'];
+const R_P=['pulse-r1','pulse-r2','pulse-r3'],R_T=['trace-right-1','trace-right-2','trace-right-3'];
+let leftAnim,rightAnim;
+const icE=document.getElementById('ic-engineering'),icL=document.getElementById('ic-legal');
+icE.addEventListener('mouseenter',()=>{leftAnim=animatePulses(L_P,L_T,'glow');});
+icE.addEventListener('mouseleave',()=>{stopPulses(L_P,L_T,'glow',leftAnim);});
+icL.addEventListener('mouseenter',()=>{rightAnim=animatePulses(R_P,R_T,'glow-brass');});
+icL.addEventListener('mouseleave',()=>{stopPulses(R_P,R_T,'glow-brass',rightAnim);});
 
-                    <circle class="trace-pulse" id="pulse-l1" cx="280" cy="195"/>
-                    <circle class="trace-pulse" id="pulse-l2" cx="280" cy="210"/>
-                    <circle class="trace-pulse" id="pulse-l3" cx="280" cy="225"/>
-                    <circle class="trace-pulse" id="pulse-r1" cx="530" cy="195"/>
-                    <circle class="trace-pulse" id="pulse-r2" cx="530" cy="210"/>
-                    <circle class="trace-pulse" id="pulse-r3" cx="530" cy="225"/>
-
-                    <circle cx="340" cy="195" r="4" fill="none" stroke="var(--border)" stroke-width="1"/>
-                    <circle cx="340" cy="210" r="4" fill="none" stroke="var(--border)" stroke-width="1"/>
-                    <circle cx="340" cy="225" r="4" fill="none" stroke="var(--border)" stroke-width="1"/>
-                    <circle cx="660" cy="195" r="4" fill="none" stroke="var(--border)" stroke-width="1"/>
-                    <circle cx="660" cy="210" r="4" fill="none" stroke="var(--border)" stroke-width="1"/>
-                    <circle cx="660" cy="225" r="4" fill="none" stroke="var(--border)" stroke-width="1"/>
-                </svg>
-
-                <div class="pcb-layout">
-                    <a href="/automotive" class="ic-package" id="ic-automotive" aria-label="View automotive and controls portfolio">
-                        <div class="ic-body">
-                            <div class="ic-pins-top"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
-                            <div class="ic-pins-left"><div class="ic-pin-h"></div><div class="ic-pin-h"></div><div class="ic-pin-h"></div></div>
-                            
-                            <svg class="ic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/>
-                                <circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/>
-                            </svg>
-                            <span class="ic-label">Automotive<br>& Controls</span>
-                            
-                            <div class="ic-pins-right"><div class="ic-pin-h"></div><div class="ic-pin-h"></div><div class="ic-pin-h"></div></div>
-                            <div class="ic-pins-bottom"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
-                        </div>
-                        <div class="ic-text">
-                            <span class="ic-name">Automotive & Controls</span>
-                            <span class="ic-desc">Embedded C · CAN FD · Simulink · HIL</span>
-                        </div>
-                    </a>
-
-                    <div class="central-die">GW</div>
-
-                    <a href="/hardware" class="ic-package" id="ic-hardware" aria-label="View hardware and FPGA portfolio">
-                        <div class="ic-body">
-                            <div class="ic-pins-top"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
-                            <div class="ic-pins-left"><div class="ic-pin-h"></div><div class="ic-pin-h"></div><div class="ic-pin-h"></div></div>
-                            
-                            <svg class="ic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
-                                <rect x="9" y="9" width="6" height="6"></rect>
-                                <line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line>
-                                <line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line>
-                                <line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line>
-                                <line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line>
-                            </svg>
-                            <span class="ic-label">Hardware<br>& FPGA</span>
-                            
-                            <div class="ic-pins-right"><div class="ic-pin-h"></div><div class="ic-pin-h"></div><div class="ic-pin-h"></div></div>
-                            <div class="ic-pins-bottom"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
-                        </div>
-                        <div class="ic-text">
-                            <span class="ic-name">Hardware & FPGA</span>
-                            <span class="ic-desc">SystemVerilog · DSP · Vivado · RTL</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section class="contact-section">
-            <h2 class="contact-title">Get In Touch</h2>
-            <p class="contact-desc">
-                I'm always open to opportunities to work on either automotive or FPGA designs. Whether you have a question or just want to say hi, my inbox is always open!
-            </p>
-            <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#103;&#101;&#111;&#114;&#103;&#101;&#119;&#97;&#104;&#98;&#97;&#48;&#51;&#64;&#111;&#117;&#116;&#108;&#111;&#111;&#107;&#46;&#99;&#111;&#109;" class="contact-btn">Say Hello</a>
-        </section>
-    </div>
-
-    <footer><p>Built by George Wahba</p></footer>
-
-    <script>
-        // ===== SCROLL-REACTIVE MATRIX RAIN =====
-        const canvas = document.getElementById('matrix-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const chars = '0123456789ABCDEF><+-*/=[]{}();:';
-        const fontSize = 14;
-        let columns = Math.floor(canvas.width / fontSize);
-        let drops = [];
-        let scrollProgress = 0;
-
-        for (let i = 0; i < columns; i++) drops[i] = Math.random() * -100;
-
-        window.addEventListener('scroll', () => {
-            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-            scrollProgress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
-        });
-
-        function drawMatrix() {
-            canvas.style.opacity = 0.06 + scrollProgress * 0.14;
-            ctx.fillStyle = `rgba(10, 10, 15, ${0.05 + scrollProgress * 0.03})`;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = `hsl(${35 + scrollProgress * 10}, 90%, 55%)`;
-            ctx.font = fontSize + 'px monospace';
-            const speed = 1 + scrollProgress * 2;
-            for (let i = 0; i < drops.length; i++) {
-                ctx.fillText(chars[Math.floor(Math.random() * chars.length)], i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > (0.98 - scrollProgress * 0.02)) drops[i] = 0;
-                drops[i] += speed * (0.5 + Math.random() * 0.5);
-            }
-        }
-        setInterval(drawMatrix, 50);
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            columns = Math.floor(canvas.width / fontSize);
-            drops = []; for (let i = 0; i < columns; i++) drops[i] = Math.random() * -100;
-        });
-
-        // ===== PCB TRACE HOVER =====
-        function animatePulses(pulseIds, traceIds) {
-            const pulses = pulseIds.map(id => document.getElementById(id));
-            const traces = traceIds.map(id => document.getElementById(id));
-            traces.forEach(t => t.classList.add('glow'));
-            pulses.forEach(p => p.classList.add('active'));
-            let progress = 0;
-            function step() {
-                progress += 0.015;
-                if (progress > 1) progress = 0;
-                pulses.forEach((pulse, i) => {
-                    const pts = traces[i].getAttribute('points').split(' ').map(p => {
-                        const [x, y] = p.split(',').map(Number); return { x, y };
-                    });
-                    const seg = progress * (pts.length - 1);
-                    const idx = Math.min(Math.floor(seg), pts.length - 2);
-                    const frac = seg - idx;
-                    pulse.setAttribute('cx', pts[idx].x + (pts[idx+1].x - pts[idx].x) * frac);
-                    pulse.setAttribute('cy', pts[idx].y + (pts[idx+1].y - pts[idx].y) * frac);
-                });
-                return requestAnimationFrame(step);
-            }
-            return step();
-        }
-        function stopPulses(pulseIds, traceIds, animId) {
-            cancelAnimationFrame(animId);
-            pulseIds.forEach(id => document.getElementById(id).classList.remove('active'));
-            traceIds.forEach(id => document.getElementById(id).classList.remove('glow'));
-        }
-
-        let leftAnim, rightAnim;
-        const icA = document.getElementById('ic-automotive');
-        const icH = document.getElementById('ic-hardware');
-        icA.addEventListener('mouseenter', () => { leftAnim = animatePulses(['pulse-l1','pulse-l2','pulse-l3'], ['trace-left-1','trace-left-2','trace-left-3']); });
-        icA.addEventListener('mouseleave', () => { stopPulses(['pulse-l1','pulse-l2','pulse-l3'], ['trace-left-1','trace-left-2','trace-left-3'], leftAnim); });
-        icH.addEventListener('mouseenter', () => { rightAnim = animatePulses(['pulse-r1','pulse-r2','pulse-r3'], ['trace-right-1','trace-right-2','trace-right-3']); });
-        icH.addEventListener('mouseleave', () => { stopPulses(['pulse-r1','pulse-r2','pulse-r3'], ['trace-right-1','trace-right-2','trace-right-3'], rightAnim); });
-
-        // ===== DEBUG CONSOLE =====
-        let debugCount = 0, debugTimer = null;
-        document.addEventListener('keypress', (e) => {
-            clearTimeout(debugTimer);
-            debugTimer = setTimeout(() => debugCount = 0, 2000);
-            if (e.key === 'd' || e.key === 'D') {
-                debugCount++;
-                if (debugCount >= 3) { document.getElementById('devConsole').classList.add('active'); debugCount = 0; }
-            } else debugCount = 0;
-        });
-        document.getElementById('closeConsole').addEventListener('click', () => document.getElementById('devConsole').classList.remove('active'));
-
-        // ===== GLOW =====
-        let ticking = false;
-        document.addEventListener('mousemove', (e) => {
-            if (!ticking) {
-                requestAnimationFrame(() => {
-                    document.documentElement.style.setProperty('--cursor-x', e.clientX + 'px');
-                    document.documentElement.style.setProperty('--cursor-y', e.clientY + 'px');
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        });
-
-        console.log('%c👋 Welcome to georgewahba.me', 'color: #f5a623; font-size: 20px; font-weight: bold;');
-        console.log('%cTry pressing "d" three times...', 'color: #8a8578; font-size: 12px;');
-    </script>
+// Cursor glow
+let ticking=false;
+addEventListener('mousemove',e=>{
+  if(!ticking){requestAnimationFrame(()=>{
+    document.documentElement.style.setProperty('--cursor-x',e.clientX+'px');
+    document.documentElement.style.setProperty('--cursor-y',e.clientY+'px');
+    ticking=false;});ticking=true;}
+});
+console.log('%c👋 Welcome to georgewahba.me','color:#f5a623;font-size:20px;font-weight:bold;');
+</script>
 </body>
 </html>
