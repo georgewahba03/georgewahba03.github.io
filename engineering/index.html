@@ -49,15 +49,16 @@ body::before{content:"";position:fixed;inset:0;background:radial-gradient(min(60
 h1{font-size:clamp(34px,6vw,60px);font-weight:700;margin:.5rem 0 1rem;letter-spacing:-.5px;line-height:1.05}
 p.intro{font-size:1.05rem;color:var(--text-secondary);max-width:620px;margin-bottom:3.5rem;font-weight:300;line-height:1.7}
 
-.pcb-board{position:relative;width:100%;min-height:420px;background:radial-gradient(circle at 20% 50%,rgba(245,166,35,.02),transparent 50%),radial-gradient(circle at 80% 50%,rgba(245,166,35,.02),transparent 50%),var(--bg-subtle);border:1px solid var(--border);border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.pcb-board{position:relative;width:100%;min-height:470px;background:radial-gradient(circle at 20% 50%,rgba(245,166,35,.02),transparent 50%),radial-gradient(circle at 80% 50%,rgba(245,166,35,.02),transparent 50%),var(--bg-subtle);border:1px solid var(--border);border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center}
 .pcb-traces{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .trace-line{stroke:var(--border);stroke-width:2;fill:none;transition:stroke .6s ease}
 .trace-line.glow{stroke:var(--accent);stroke-width:2.5;filter:drop-shadow(0 0 6px var(--accent-glow))}
 .trace-pulse{fill:var(--accent);r:4;opacity:0;filter:drop-shadow(0 0 4px var(--accent))}
 .trace-pulse.active{opacity:1}
 
-.pcb-layout{display:flex;align-items:center;justify-content:center;width:100%;padding:2rem;position:relative;z-index:2}
-.ic-package{display:flex;flex-direction:column;align-items:center;gap:1rem;cursor:pointer;text-decoration:none;color:var(--text-primary);transition:transform .3s ease;padding:1.5rem}
+.pcb-layout{display:flex;align-items:center;justify-content:center;width:100%;padding:2.5rem 2rem 7rem;position:relative;z-index:2}
+.ic-package{position:relative;display:flex;flex-direction:column;align-items:center;gap:1rem;cursor:pointer;text-decoration:none;color:var(--text-primary);transition:transform .3s ease;padding:1.5rem}
+.ic-caption{position:absolute;top:calc(100% - .5rem);left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;width:15rem;pointer-events:none}
 .ic-package:hover{transform:translateY(-4px)}
 .ic-body{width:160px;height:160px;background:var(--card-bg);border:2px solid var(--border);border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;position:relative;transition:border-color .4s ease,box-shadow .4s ease}
 .ic-package:hover .ic-body{border-color:var(--accent);box-shadow:0 0 30px rgba(245,166,35,.1),inset 0 0 30px rgba(245,166,35,.03)}
@@ -70,8 +71,8 @@ p.intro{font-size:1.05rem;color:var(--text-secondary);max-width:620px;margin-bot
 .ic-package:hover .ic-pin-h{background:var(--accent);box-shadow:0 0 6px var(--accent-glow)}
 .ic-icon{width:40px;height:40px;color:var(--accent);opacity:.8}
 .ic-label{font-family:var(--font-mono);font-size:.65rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1.5px;text-align:center}
-.ic-name{font-size:1rem;color:var(--text-primary);font-weight:500;text-align:center;margin-top:1rem}
-.ic-desc{font-family:var(--font-mono);font-size:.6rem;color:var(--text-secondary);text-align:center;max-width:190px;line-height:1.5;margin-top:.25rem}
+.ic-name{font-size:1rem;color:var(--text-primary);font-weight:500;text-align:center}
+.ic-desc{font-family:var(--font-mono);font-size:.6rem;color:var(--text-secondary);text-align:center;max-width:190px;line-height:1.5;margin-top:.4rem}
 .central-die{width:80px;height:80px;background:var(--card-bg);border:2px solid var(--accent);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:1.4rem;font-weight:700;color:var(--accent);position:relative;z-index:3;box-shadow:0 0 40px rgba(245,166,35,.08);flex-shrink:0}
 .central-die::before{content:"";position:absolute;inset:4px;border:1px solid rgba(245,166,35,.2);border-radius:2px}
 
@@ -84,7 +85,8 @@ p.intro{font-size:1.05rem;color:var(--text-secondary);max-width:620px;margin-bot
 footer{text-align:center;padding:2rem;color:var(--text-secondary);font-family:var(--font-mono);font-size:.8rem;z-index:1;position:relative}
 
 @media (max-width:768px){
-  .pcb-layout{flex-direction:column;gap:1.5rem}
+  .pcb-layout{flex-direction:column;gap:1.5rem;padding:2rem}
+  .ic-caption{position:static;transform:none;width:auto;margin-top:1rem}
   .ic-body{width:140px;height:140px}
   .central-die{width:60px;height:60px;font-size:1.1rem}
   .pcb-traces{display:none}
@@ -150,8 +152,7 @@ footer{text-align:center;padding:2rem;color:var(--text-secondary);font-family:va
           <div class="ic-pins-right"><div class="ic-pin-h"></div><div class="ic-pin-h"></div><div class="ic-pin-h"></div></div>
         </div>
         <div class="ic-pins-bottom"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
-        <span class="ic-name">Automotive &amp; Controls</span>
-        <span class="ic-desc">Embedded C · CAN FD · Simulink · HIL</span>
+        <span class="ic-caption"><span class="ic-name">Automotive &amp; Controls</span><span class="ic-desc">Embedded C · CAN FD · Simulink · HIL</span></span>
       </a>
 
       <div class="central-die">GW</div>
@@ -171,8 +172,7 @@ footer{text-align:center;padding:2rem;color:var(--text-secondary);font-family:va
           <div class="ic-pins-right"><div class="ic-pin-h"></div><div class="ic-pin-h"></div><div class="ic-pin-h"></div></div>
         </div>
         <div class="ic-pins-bottom"><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div><div class="ic-pin"></div></div>
-        <span class="ic-name">Hardware &amp; FPGA</span>
-        <span class="ic-desc">SystemVerilog · RTL · Vivado · ASIC flow</span>
+        <span class="ic-caption"><span class="ic-name">Hardware &amp; FPGA</span><span class="ic-desc">SystemVerilog · RTL · Vivado · ASIC flow</span></span>
       </a>
     </div>
   </div>
@@ -236,18 +236,21 @@ function layoutTraces(leftId,rightId){
   const lp=[...leftEl.querySelectorAll('.ic-pins-right .ic-pin-h')].map(rel);
   const rp=[...rightEl.querySelectorAll('.ic-pins-left .ic-pin-h')].map(rel);
   const vias=[];
+  const spread=(n,i)=>n<2?0:(i-(n-1)/2)*14;
   lp.forEach((p,i)=>{
     const el=document.getElementById('trace-left-'+(i+1));
     if(!el)return;
-    const mid=p.right+(die.left-p.right)*0.45;
-    el.setAttribute('points',`${p.right},${p.cy} ${mid},${p.cy} ${die.left},${die.cy}`);
+    const mid=p.right+(die.left-p.right)*0.55;
+    const dy=die.cy+spread(lp.length,i);
+    el.setAttribute('points',`${p.right},${p.cy} ${mid},${p.cy} ${die.left},${dy}`);
     vias.push([mid,p.cy]);
   });
   rp.forEach((p,i)=>{
     const el=document.getElementById('trace-right-'+(i+1));
     if(!el)return;
-    const mid=die.right+(p.left-die.right)*0.55;
-    el.setAttribute('points',`${die.right},${die.cy} ${mid},${p.cy} ${p.left},${p.cy}`);
+    const mid=die.right+(p.left-die.right)*0.45;
+    const dy=die.cy+spread(rp.length,i);
+    el.setAttribute('points',`${die.right},${dy} ${mid},${p.cy} ${p.left},${p.cy}`);
     vias.push([mid,p.cy]);
   });
   const g=document.getElementById('via-group');
