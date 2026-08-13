@@ -170,6 +170,14 @@ h1{font-size:clamp(44px,8vw,82px);font-weight:700;line-height:1.02;letter-spacin
 }
 .contact-btn:hover,.contact-btn:focus{background:var(--brass);color:var(--eng-bg);outline:none}
 .contact-btn:focus-visible{outline:2px solid var(--brass);outline-offset:4px}
+.contact-aside{margin-top:2rem}
+.contact-aside a{
+  color:var(--eng-muted);font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;
+  text-decoration:none;border-bottom:1px solid rgba(138,133,120,.35);padding-bottom:2px;
+  transition:color .25s,border-color .25s;
+}
+.contact-aside a:hover,.contact-aside a:focus{color:var(--brass);border-bottom-color:var(--brass);outline:none}
+.contact-aside a:focus-visible{outline:2px solid var(--brass);outline-offset:4px;border-radius:2px}
 
 footer{
   text-align:center;padding:2rem;color:var(--eng-muted);
@@ -238,6 +246,7 @@ footer{
     <h2>Get In Touch</h2>
     <p>Open to conversations on either side of the line &mdash; engineering work, legal technology, or anything sitting between them.</p>
     <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#103;&#101;&#111;&#114;&#103;&#101;&#119;&#97;&#104;&#98;&#97;&#48;&#51;&#64;&#111;&#117;&#116;&#108;&#111;&#111;&#107;&#46;&#99;&#111;&#109;" class="contact-btn">Say Hello</a>
+    <p class="contact-aside"><a href="/about">Or see what I get up to off the clock &rarr;</a></p>
   </section>
 </div>
 
