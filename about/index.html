@@ -76,7 +76,8 @@ h1{font-size:clamp(34px,6vw,60px);font-weight:600;letter-spacing:-.035em;line-he
 .crest-inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.3,.7,.4,1);transform-style:preserve-3d}
 .crest[aria-pressed="true"] .crest-inner{transform:rotateY(180deg)}
 .crest-face{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--edge);border-radius:10px;background:var(--dusk-raised);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;padding:1.4rem;text-align:center}
-.crest-front svg{width:46px;height:46px}
+.kit{display:flex;width:62px;height:62px;border-radius:8px;overflow:hidden;border:1px solid var(--edge)}
+.kit i{flex:1;display:block}
 .crest-name{font-size:.98rem;font-weight:500;color:var(--chalk);line-height:1.3}
 .crest-league{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .crest-hint{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.1em;color:var(--brass);text-transform:uppercase;margin-top:.2rem}
@@ -86,23 +87,30 @@ h1{font-size:clamp(34px,6vw,60px);font-weight:600;letter-spacing:-.035em;line-he
 .clip video{width:100%;max-width:620px;border-radius:10px;border:1px solid var(--edge);display:block;background:var(--dusk-deep)}
 .clip figcaption{font-family:var(--font-mono);font-size:.66rem;color:var(--muted);letter-spacing:.05em;margin-top:.7rem}
 
-/* ---------- Gamepad (signature) ---------- */
-.pad-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:2.5rem;align-items:center}
-.pad{width:100%;max-width:420px;margin:0 auto}
-.pad-shell{fill:var(--dusk-raised);stroke:var(--edge);stroke-width:2}
-.pad-inert{fill:var(--dusk-deep);stroke:var(--edge);stroke-width:1.5;opacity:.5}
-.hit{cursor:pointer}
-.hit .cap{fill:var(--dusk-deep);stroke:var(--edge);stroke-width:1.5;transition:fill .18s ease,stroke .18s ease}
-.hit .glyph{fill:var(--muted);font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;text-anchor:middle;transition:fill .18s ease;pointer-events:none}
-.hit:hover .cap,.hit.on .cap{fill:var(--coral-dim);stroke:var(--coral)}
-.hit:hover .glyph,.hit.on .glyph{fill:var(--coral)}
-.hit:focus{outline:none}
-.hit:focus-visible .cap{stroke:var(--seafoam);stroke-width:2.5}
-.readout{border-left:2px solid var(--coral);padding-left:1.4rem;min-height:140px}
-.readout-key{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);display:block;margin-bottom:.5rem}
-.readout-title{font-size:1.45rem;font-weight:600;letter-spacing:-.02em;line-height:1.15;margin-bottom:.55rem}
-.readout-note{color:var(--muted);font-size:.9rem;line-height:1.65}
-.readout-meta{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.08em;color:var(--seafoam);margin-top:.85rem;display:block}
+/* ---------- Games: expanding rack (signature) ---------- */
+.rack{display:flex;gap:.6rem;height:400px}
+.slot{
+  position:relative;flex:1 1 0;border:0;padding:0;cursor:pointer;overflow:hidden;
+  border-radius:12px;background:var(--dusk-raised);font-family:inherit;color:inherit;
+  transition:flex-grow .55s cubic-bezier(.22,.61,.36,1);text-align:left;
+}
+.slot:focus-visible{outline:2px solid var(--seafoam);outline-offset:3px}
+.slot-wash{position:absolute;inset:0;opacity:.9;transition:opacity .45s ease}
+.slot-grain{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.07) .5px,transparent .5px);background-size:14px 14px}
+.slot-body{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:1.5rem}
+.slot-genre{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:.5rem}
+.slot-title{
+  font-size:1.5rem;font-weight:600;letter-spacing:-.02em;line-height:1.1;color:#fff;
+  writing-mode:vertical-rl;transform:rotate(180deg);max-height:230px;
+  transition:writing-mode 0s;
+}
+.slot-detail{opacity:0;max-height:0;overflow:hidden;transition:opacity .3s ease .12s,max-height .45s ease}
+.slot-note{color:rgba(255,255,255,.85);font-size:.92rem;line-height:1.6;max-width:38ch;margin-top:.7rem}
+.slot-meta{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.08em;color:rgba(255,255,255,.6);margin-top:.9rem;display:block}
+.slot[aria-expanded="true"]{flex-grow:3.2}
+.slot[aria-expanded="true"] .slot-wash{opacity:1}
+.slot[aria-expanded="true"] .slot-title{writing-mode:horizontal-tb;transform:none;max-height:none}
+.slot[aria-expanded="true"] .slot-detail{opacity:1;max-height:260px}
 
 /* ---------- Films: ranked ---------- */
 .rank{list-style:none;counter-reset:film}
@@ -126,11 +134,10 @@ h1{font-size:clamp(34px,6vw,60px);font-weight:600;letter-spacing:-.035em;line-he
 .rot-sub{font-family:var(--font-mono);font-size:.64rem;color:var(--muted);letter-spacing:.05em}
 
 /* ---------- One book ---------- */
-.book{margin-top:4.5rem;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:center;background:var(--dusk-raised);border:1px solid var(--edge);border-left:3px solid var(--brass);border-radius:10px;padding:2rem}
+.book{margin-top:0;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:center;background:var(--dusk-raised);border:1px solid var(--edge);border-left:3px solid var(--brass);border-radius:10px;padding:2rem}
 .book-spine{width:74px;height:200px;border-radius:3px;background:linear-gradient(105deg,#1d3b52,#2d5f7a);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(0,0,0,.35);flex-shrink:0}
 .book-spine span{writing-mode:vertical-rl;transform:rotate(180deg);font-size:.8rem;font-weight:500;letter-spacing:.03em;color:var(--chalk)}
-.book-label{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);display:block;margin-bottom:.7rem}
-.book-title{font-size:1.55rem;font-weight:600;letter-spacing:-.02em;line-height:1.15}
+.book-title{font-size:1.35rem;font-weight:600;letter-spacing:-.02em;line-height:1.15}
 .book-author{font-family:var(--font-mono);font-size:.7rem;color:var(--seafoam);letter-spacing:.06em;margin-top:.4rem;display:block}
 .book-note{color:var(--muted);font-size:.94rem;line-height:1.7;margin-top:1rem;max-width:52ch}
 
@@ -146,8 +153,11 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-family:var(--fon
 @keyframes bounce{0%,100%{transform:scaleY(.45)}50%{transform:scaleY(1)}}
 
 @media (max-width:820px){
-  .pad-wrap{grid-template-columns:1fr;gap:1.75rem}
-  .readout{border-left:0;border-top:2px solid var(--coral);padding-left:0;padding-top:1.2rem;min-height:0}
+  .rack{flex-direction:column;height:auto}
+  .slot{min-height:96px}
+  .slot[aria-expanded="true"]{flex-grow:1}
+  .slot-title{writing-mode:horizontal-tb;transform:none;max-height:none}
+  .slot[aria-expanded="true"]{min-height:250px}
 }
 @media (max-width:640px){
   .hero{grid-template-columns:1fr;gap:1.75rem;justify-items:start}
@@ -196,7 +206,7 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-family:var(--fon
   <div class="tabs" role="tablist" aria-label="Interests">
     <button class="tab" role="tab" id="tab-sports" aria-controls="panel-sports" aria-selected="true">Sport</button>
     <button class="tab" role="tab" id="tab-games" aria-controls="panel-games" aria-selected="false" tabindex="-1">Games</button>
-    <button class="tab" role="tab" id="tab-films" aria-controls="panel-films" aria-selected="false" tabindex="-1">Films</button>
+    <button class="tab" role="tab" id="tab-films" aria-controls="panel-films" aria-selected="false" tabindex="-1">Films &amp; books</button>
     <button class="tab" role="tab" id="tab-music" aria-controls="panel-music" aria-selected="false" tabindex="-1">On repeat</button>
   </div>
 
@@ -219,65 +229,37 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-family:var(--fon
         <source src="assets/soccer.mp4" type="video/mp4">
         Your browser can't play this clip.
       </video>
-      <figcaption>Add your own caption here — where, when, what happened.</figcaption>
+      <figcaption>May 27th, 2026; Welland, ON.</figcaption>
     </figure>
   </section>
 
   <!-- ============ GAMES ============ -->
   <section class="panel" id="panel-games" role="tabpanel" aria-labelledby="tab-games" hidden>
-    <p class="panel-lede">Three buttons, three games. Hover or tab through them.</p>
-    <div class="pad-wrap">
-      <svg class="pad" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path class="pad-shell" d="M92 70 h216 a52 52 0 0 1 52 52 v34 a44 44 0 0 1-44 44 h-16 a30 30 0 0 1-26-15 l-14-24 h-120 l-14 24 a30 30 0 0 1-26 15 h-16 a44 44 0 0 1-44-44 v-34 a52 52 0 0 1 52-52 z"/>
-        <rect class="pad-shell" x="112" y="52" width="46" height="16" rx="8"/>
-        <rect class="pad-shell" x="242" y="52" width="46" height="16" rx="8"/>
-        <!-- inert shell details -->
-        <rect class="pad-inert" x="98" y="112" width="66" height="22" rx="4"/>
-        <rect class="pad-inert" x="120" y="90" width="22" height="66" rx="4"/>
-        <circle class="pad-inert" cx="168" cy="168" r="21"/>
-        <circle class="pad-inert" cx="236" cy="168" r="21"/>
-        <rect class="pad-inert" x="188" y="108" width="26" height="11" rx="5"/>
-        <!-- bound buttons -->
-        <g class="hit" data-key="y" tabindex="0" role="button" aria-label="Y button">
-          <circle class="cap" cx="298" cy="98" r="17"/><text class="glyph" x="298" y="103">Y</text>
-        </g>
-        <g class="hit" data-key="x" tabindex="0" role="button" aria-label="X button">
-          <circle class="cap" cx="268" cy="128" r="17"/><text class="glyph" x="268" y="133">X</text>
-        </g>
-        <g class="hit" data-key="a" tabindex="0" role="button" aria-label="A button">
-          <circle class="cap" cx="298" cy="158" r="17"/><text class="glyph" x="298" y="163">A</text>
-        </g>
-      </svg>
-      <div class="readout" aria-live="polite">
-        <span class="readout-key" id="ro-key"></span>
-        <h2 class="readout-title" id="ro-title"></h2>
-        <p class="readout-note" id="ro-note"></p>
-        <span class="readout-meta" id="ro-meta"></span>
-      </div>
-    </div>
+    <p class="panel-lede">Three on rotation. Open one.</p>
+    <div class="rack" id="rack"></div>
   </section>
 
   <!-- ============ FILMS ============ -->
   <section class="panel" id="panel-films" role="tabpanel" aria-labelledby="tab-films" hidden>
-    <p class="panel-lede">In order. I'll defend the ranking.</p>
+    <p class="panel-lede">Top five, in order. I'll defend the ranking.</p>
+    <h3 class="sub-head">Films</h3>
     <ol class="rank" id="rankList"></ol>
+
+    <h3 class="sub-head">And one book</h3>
+    <div class="book">
+      <div class="book-spine" aria-hidden="true"><span>The Elegant Universe</span></div>
+      <div>
+        <h2 class="book-title">The Elegant Universe</h2>
+        <span class="book-author">Brian Greene &middot; 1999</span>
+        <p class="book-note">Greene's account of string theory and the search for a unified description of physics — the long-running problem that general relativity and quantum mechanics each work beautifully and refuse to agree with each other.</p>
+      </div>
+    </div>
   </section>
 
   <!-- ============ MUSIC ============ -->
   <section class="panel" id="panel-music" role="tabpanel" aria-labelledby="tab-music" hidden>
     <p class="panel-lede">What's getting the most play right now.</p>
     <ul class="rot-list" id="rotList"></ul>
-  </section>
-
-  <!-- ============ ONE BOOK ============ -->
-  <section class="book">
-    <div class="book-spine" aria-hidden="true"><span>The Elegant Universe</span></div>
-    <div>
-      <span class="book-label">Favourite book</span>
-      <h2 class="book-title">The Elegant Universe</h2>
-      <span class="book-author">Brian Greene &middot; 1999</span>
-      <p class="book-note">Greene's account of string theory and the search for a unified description of physics — the long-running problem that general relativity and quantum mechanics each work beautifully and refuse to agree with each other.</p>
-    </div>
   </section>
 
   <section class="outro">
@@ -301,19 +283,22 @@ const SPORTS=[
 ];
 
 const TEAMS=[
-  {name:'Egypt',league:'National team',color:'#c8102e',
+  {name:'Egypt',league:'National team',bands:['#c8102e','#ffffff','#000000'],
    note:'Your line — how you started following them, or a match you still bring up.'},
-  {name:'Liverpool FC',league:'Premier League',color:'#c8102e',
+  {name:'Liverpool FC',league:'Premier League',bands:['#c8102e','#c8102e','#00b2a9'],
    note:'Your line — when you started supporting them.'},
-  {name:'Toronto Raptors',league:'NBA',color:'#ce1141',
+  {name:'Toronto Raptors',league:'NBA',bands:['#ce1141','#000000','#b4975a'],
    note:'Your line — 2019 is right there if you want it.'}
 ];
 
-const BINDINGS={
-  a:{label:'A',title:'EA Sports FC 26',note:'Your line — career mode, Ultimate Team, or online.',meta:'Football'},
-  x:{label:'X',title:'NBA 2K26',note:'Your line — MyCareer, MyTeam, or park.',meta:'Basketball'},
-  y:{label:'Y',title:'Marvel Rivals',note:'Your line — which hero you main.',meta:'Hero shooter'}
-};
+const GAMES=[
+  {title:'EA Sports FC 26',genre:'Football',wash:'linear-gradient(160deg,#0b6b3a,#052e1c)',
+   note:'Your line — career mode, Ultimate Team, or online.',meta:'Your platform'},
+  {title:'NBA 2K26',genre:'Basketball',wash:'linear-gradient(160deg,#b5581f,#3d1b0a)',
+   note:'Your line — MyCareer, MyTeam, or park.',meta:'Your platform'},
+  {title:'Marvel Rivals',genre:'Hero shooter',wash:'linear-gradient(160deg,#5b2a8c,#1e0f33)',
+   note:'Your line — which hero you main.',meta:'Your platform'}
+];
 
 const FILMS=[
   {title:'Interstellar',note:'Nolan · 2014'},
@@ -324,9 +309,9 @@ const FILMS=[
 ];
 
 const ARTISTS=[
-  {title:'Don Toliver',sub:'Your line — a favourite track or album'},
-  {title:'TUL8TE',sub:'Your line — a favourite track or album'},
-  {title:'Pitbull',sub:'Your line — a favourite track or album'}
+  {title:'Don Toliver',sub:'Favourite Songs: Excavator, OPPOSITE, Leather Coat'},
+  {title:'TUL8TE',sub:'Favourite Songs: El Hob Gany, Nano, Daroory'},
+  {title:'Pitbull',sub:'Favourite Songs: Blanco, The Anthem, On The Floor'}
 ];
 
 /* ========================================================== */
@@ -364,9 +349,7 @@ document.getElementById('crestGrid').innerHTML=TEAMS.map(t=>`
   <button class="crest" aria-pressed="false" aria-label="${t.name} — flip for details">
     <span class="crest-inner">
       <span class="crest-face crest-front">
-        <svg viewBox="0 0 24 24" fill="none" stroke="${t.color}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2l8 3v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V5l8-3z"/>
-        </svg>
+        <span class="kit" aria-hidden="true">${t.bands.map(c=>`<i style="background:${c}"></i>`).join('')}</span>
         <span class="crest-name">${t.name}</span>
         <span class="crest-league">${t.league}</span>
         <span class="crest-hint">Flip</span>
@@ -378,21 +361,27 @@ document.querySelectorAll('.crest').forEach(c=>{
   c.addEventListener('click',()=>c.setAttribute('aria-pressed',c.getAttribute('aria-pressed')!=='true'));
 });
 
-// Gamepad
-const roKey=document.getElementById('ro-key'),roTitle=document.getElementById('ro-title'),
-      roNote=document.getElementById('ro-note'),roMeta=document.getElementById('ro-meta');
-function showBinding(dataKey){
-  const b=BINDINGS[dataKey]; if(!b)return;
-  document.querySelectorAll('.hit').forEach(h=>h.classList.toggle('on',h.dataset.key===dataKey));
-  roKey.textContent=b.label; roTitle.textContent=b.title;
-  roNote.textContent=b.note; roMeta.textContent=b.meta||'';
-}
-document.querySelectorAll('.hit').forEach(h=>{
-  const k=h.dataset.key;
-  h.addEventListener('mouseenter',()=>showBinding(k));
-  h.addEventListener('focus',()=>showBinding(k));
-  h.addEventListener('click',()=>showBinding(k));
-  h.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showBinding(k);}});
+// Games rack
+const rack=document.getElementById('rack');
+rack.innerHTML=GAMES.map((g,i)=>`
+  <button class="slot" aria-expanded="${i===0}" aria-label="${g.title}">
+    <span class="slot-wash" style="background:${g.wash}"></span>
+    <span class="slot-grain" aria-hidden="true"></span>
+    <span class="slot-body">
+      <span class="slot-genre">${g.genre}</span>
+      <span class="slot-title">${g.title}</span>
+      <span class="slot-detail">
+        <span class="slot-note">${g.note}</span>
+        <span class="slot-meta">${g.meta}</span>
+      </span>
+    </span>
+  </button>`).join('');
+const slots=[...rack.querySelectorAll('.slot')];
+function openSlot(el){slots.forEach(s=>s.setAttribute('aria-expanded',s===el));}
+slots.forEach(s=>{
+  s.addEventListener('click',()=>openSlot(s));
+  s.addEventListener('mouseenter',()=>openSlot(s));
+  s.addEventListener('focus',()=>openSlot(s));
 });
 
 // Films
@@ -406,7 +395,6 @@ document.getElementById('rotList').innerHTML=ARTISTS.map(a=>`
     <span class="rot-body"><span class="rot-title">${a.title}</span><br><span class="rot-sub">${a.sub}</span></span>
   </li>`).join('');
 
-showBinding('a');
 </script>
 </body>
 </html>
