@@ -18,7 +18,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><rect x=%222%22 y=%222%22 width=%2220%22 height=%2220%22 rx=%224%22 ry=%224%22 stroke=%22%23c9b896%22 fill=%22none%22 stroke-width=%222%22/><text x=%2250%25%22 y=%2250%25%22 dy=%22.35em%22 text-anchor=%22middle%22 font-family=%22monospace%22 font-weight=%22bold%22 font-size=%2211%22 fill=%22%23c9b896%22>GW</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=Space+Grotesk:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   /* shared bridge colour */
@@ -38,9 +38,16 @@
   --law-muted:#5a6169;
   --law-accent:#6b2737;
 
+  /* about half */
+  --abt-bg:#17252e;
+  --abt-text:#eef2f0;
+  --abt-muted:#8fa3ad;
+  --abt-accent:#ff7a5c;
+
   --font-sans:'Outfit',-apple-system,system-ui,sans-serif;
   --font-mono:'JetBrains Mono','Fira Code',monospace;
   --font-serif:'Newsreader',Georgia,serif;
+  --font-grotesk:'Space Grotesk',-apple-system,system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 .skip-to-content{position:absolute;top:-40px;left:0;background:var(--brass);color:var(--eng-bg);padding:8px;text-decoration:none;z-index:1000;font-weight:600}
@@ -113,7 +120,7 @@ h1{font-size:clamp(44px,8vw,82px);font-weight:700;line-height:1.02;letter-spacin
 }
 
 /* -- right: law, in the legal design language -- */
-.panel-law{background:var(--law-bg);color:var(--law-text)}
+.panel-law{background:var(--law-bg);color:var(--law-text);border-right:1px solid var(--brass-deep)}
 .panel-law .panel-eyebrow{font-family:var(--font-mono);color:var(--law-accent)}
 .panel-law .panel-title{font-family:var(--font-serif);font-weight:500;letter-spacing:-.015em}
 .panel-law .panel-desc{color:var(--law-muted);font-family:var(--font-serif);font-weight:300}
@@ -126,6 +133,21 @@ h1{font-size:clamp(44px,8vw,82px);font-weight:700;line-height:1.02;letter-spacin
   transition:opacity .6s ease;
 }
 
+/* -- right: about, in the about design language -- */
+.panel-abt{background:var(--abt-bg);color:var(--abt-text)}
+.panel-abt .panel-eyebrow{font-family:var(--font-mono);color:var(--abt-accent)}
+.panel-abt .panel-title{font-family:var(--font-grotesk);font-weight:600;letter-spacing:-.03em}
+.panel-abt .panel-desc{color:var(--abt-muted);font-family:var(--font-grotesk);font-weight:300}
+.panel-abt .panel-meta{font-family:var(--font-mono);color:var(--abt-muted)}
+.panel-abt .panel-go{font-family:var(--font-mono);color:var(--abt-accent)}
+.panel-abt::before{
+  content:"";position:absolute;inset:0;z-index:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,.06) .5px,transparent .5px);
+  background-size:18px 18px;
+  opacity:.6;
+  transition:opacity .6s ease;
+}
+
 /* -- the seam -- */
 .seam-light{
   position:absolute;top:0;right:-1px;width:1px;height:26%;z-index:3;
@@ -134,6 +156,7 @@ h1{font-size:clamp(44px,8vw,82px);font-weight:700;line-height:1.02;letter-spacin
   animation:travel 7s ease-in-out infinite;
   pointer-events:none;
 }
+.panel-law .seam-light{animation-duration:9s;animation-delay:-3.5s}
 
 /* -- panel content -- */
 .panel > *:not(.seam-light){position:relative;z-index:2}
@@ -150,12 +173,12 @@ h1{font-size:clamp(44px,8vw,82px);font-weight:700;line-height:1.02;letter-spacin
 
 /* -- interaction: the seam shifts toward whichever side you lean into -- */
 @media (hover:hover) and (min-width:769px){
-  .choice:hover .panel{flex-grow:.82}
-  .choice .panel:hover{flex-grow:1.45}
+  .choice:hover .panel{flex-grow:.86}
+  .choice .panel:hover{flex-grow:1.4}
   .panel:hover::before{opacity:1}
   .panel:hover .panel-go .arrow{transform:translateX(5px)}
   .panel:hover .panel-go{gap:.85rem}
-  .choice .panel:focus-visible{flex-grow:1.45}
+  .choice .panel:focus-visible{flex-grow:1.4}
 }
 .panel:focus-visible{outline:2px solid var(--brass);outline-offset:-6px}
 
@@ -170,14 +193,6 @@ h1{font-size:clamp(44px,8vw,82px);font-weight:700;line-height:1.02;letter-spacin
 }
 .contact-btn:hover,.contact-btn:focus{background:var(--brass);color:var(--eng-bg);outline:none}
 .contact-btn:focus-visible{outline:2px solid var(--brass);outline-offset:4px}
-.contact-aside{margin-top:2rem}
-.contact-aside a{
-  color:var(--eng-muted);font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;
-  text-decoration:none;border-bottom:1px solid rgba(138,133,120,.35);padding-bottom:2px;
-  transition:color .25s,border-color .25s;
-}
-.contact-aside a:hover,.contact-aside a:focus{color:var(--brass);border-bottom-color:var(--brass);outline:none}
-.contact-aside a:focus-visible{outline:2px solid var(--brass);outline-offset:4px;border-radius:2px}
 
 footer{
   text-align:center;padding:2rem;color:var(--eng-muted);
@@ -195,8 +210,8 @@ footer{
 @media (max-width:768px){
   .hero{padding:4.5rem 0 3rem}
   .choice{flex-direction:column;min-height:0}
-  .panel{min-height:340px;padding:2.5rem 1.5rem}
-  .panel-eng{border-right:none;border-bottom:1px solid var(--brass-deep)}
+  .panel{min-height:300px;padding:2.5rem 1.5rem}
+  .panel-eng,.panel-law{border-right:none;border-bottom:1px solid var(--brass-deep)}
   .seam-light{display:none}
   .panel-eyebrow{margin-bottom:2.5rem}
   .contact{padding:4rem 0 3rem}
@@ -233,10 +248,19 @@ footer{
   </a>
 
   <a href="/legal" class="panel panel-law" aria-label="Enter the law and policy section">
+    <span class="seam-light" aria-hidden="true"></span>
     <span class="panel-eyebrow">Law &amp; Policy</span>
     <h2 class="panel-title">What it owes</h2>
     <p class="panel-desc">Incoming JD candidate. Empirical legal research, legal technology, and access to justice.</p>
     <span class="panel-meta">Experience &middot; Projects &middot; Interests</span>
+    <span class="panel-go">Enter <span class="arrow" aria-hidden="true">&rarr;</span></span>
+  </a>
+
+  <a href="/about" class="panel panel-abt" aria-label="Enter the about section">
+    <span class="panel-eyebrow">About</span>
+    <h2 class="panel-title">Who's behind it</h2>
+    <p class="panel-desc">Volleyball, soccer and basketball, whatever's on the controller, and a top five I'll defend.</p>
+    <span class="panel-meta">Sport &middot; Games &middot; Films &middot; Music</span>
     <span class="panel-go">Enter <span class="arrow" aria-hidden="true">&rarr;</span></span>
   </a>
 </main>
@@ -246,7 +270,6 @@ footer{
     <h2>Get In Touch</h2>
     <p>Open to conversations on either side of the line &mdash; engineering work, legal technology, or anything sitting between them.</p>
     <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#103;&#101;&#111;&#114;&#103;&#101;&#119;&#97;&#104;&#98;&#97;&#48;&#51;&#64;&#111;&#117;&#116;&#108;&#111;&#111;&#107;&#46;&#99;&#111;&#109;" class="contact-btn">Say Hello</a>
-    <p class="contact-aside"><a href="/about">Or see what I get up to off the clock &rarr;</a></p>
   </section>
 </div>
 
