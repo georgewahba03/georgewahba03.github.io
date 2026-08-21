@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="George Wahba - Computer Engineer and incoming JD candidate. Portfolio spanning embedded systems, FPGA design, and automotive controls, alongside legal research and technology work.">
 <meta name="author" content="George Wahba">
 <meta name="keywords" content="George Wahba, Computer Engineering, Embedded Systems, FPGA, Automotive Controls, Law, JD Candidate, Legal Technology">
@@ -221,6 +221,61 @@ footer{
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   .seam-light{display:none}
 }
+
+/* ==========================================================
+   iOS / iPadOS hardening
+   ========================================================== */
+
+/* 1. Safari inflates text in landscape unless this is pinned */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+
+/* 2. Kill the grey flash on tap; focus rings still show */
+*{-webkit-tap-highlight-color:transparent}
+
+/* 3. 100vh on iOS includes the address bar, so full-height
+      elements get clipped. dvh tracks the visible viewport. */
+body{min-height:100vh;min-height:100dvh}
+
+/* 4. Stop horizontal rubber-banding revealing blank gutters */
+html,body{overscroll-behavior-x:none}
+
+/* 5. Every tap target meets the 44px minimum. Padding grows
+      inward so the visual size is unchanged. */
+.nav-links a,.nav-sub a{
+  min-height:44px;display:inline-flex;align-items:center;
+}
+
+/* 6. Respect the notch and home indicator. Only matters
+      because the viewport is now viewport-fit=cover. */
+.nav-bar{
+  padding-left:max(2rem,env(safe-area-inset-left));
+  padding-right:max(2rem,env(safe-area-inset-right));
+}
+footer{padding-bottom:max(2rem,env(safe-area-inset-bottom))}
+
+/* 7. Momentum scrolling inside any horizontal scroller */
+[style*="overflow-x"],.pipeline-container{-webkit-overflow-scrolling:touch}
+
+/* Three full-bleed panels are too narrow on iPad portrait
+   (768–834px). Stack earlier, and give the stacked panels
+   room for the safe area at the bottom of the screen. */
+@media (max-width:900px){
+  .choice{flex-direction:column;min-height:0}
+  .panel{min-height:300px;padding:2.5rem 1.5rem}
+  .panel-eng,.panel-law{border-right:none;border-bottom:1px solid var(--brass-deep)}
+  .seam-light{display:none}
+  .panel-eyebrow{margin-bottom:2.5rem}
+  .panel-abt{padding-bottom:max(2.5rem,env(safe-area-inset-bottom))}
+}
+/* iPad landscape keeps three columns but needs tighter type */
+@media (min-width:901px) and (max-width:1100px){
+  .panel{padding:2.25rem 1.75rem}
+  .panel-title{font-size:clamp(26px,3.2vw,34px)}
+  .panel-desc{font-size:.92rem;margin-bottom:1.2rem}
+  .panel-meta{margin-bottom:1.2rem}
+}
+.choice{min-height:min(66vh,540px);min-height:min(66dvh,540px)}
+
 </style>
 </head>
 <body>

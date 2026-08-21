@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="George Wahba's Hardware & FPGA portfolio - RTL design, SystemVerilog, and Digital Signal Processing featuring Real-Time SDR and Image Acceleration projects.">
     <meta name="author" content="George Wahba">
     <meta name="keywords" content="FPGA, RTL Design, SystemVerilog, Verilog, VHDL, DSP, Vivado, Hardware Design, Image Processing">
@@ -139,7 +139,71 @@
         @media (max-width: 768px) { .item-header { flex-direction: column; } .date { margin-bottom: 0.5rem; display: block; } h2::after { display: none; } }
         @media (max-width: 480px) { .nav-links a { font-size: 0.68rem; padding: 0.4rem 0.25rem; } .nav-links { gap: 0.4rem; } .projects-grid { grid-template-columns: 1fr; } }
         @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } }
-    </style>
+
+/* ==========================================================
+   iOS / iPadOS hardening
+   ========================================================== */
+
+/* 1. Safari inflates text in landscape unless this is pinned */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+
+/* 2. Kill the grey flash on tap; focus rings still show */
+*{-webkit-tap-highlight-color:transparent}
+
+/* 3. 100vh on iOS includes the address bar, so full-height
+      elements get clipped. dvh tracks the visible viewport. */
+body{min-height:100vh;min-height:100dvh}
+
+/* 4. Stop horizontal rubber-banding revealing blank gutters */
+html,body{overscroll-behavior-x:none}
+
+/* 5. Every tap target meets the 44px minimum. Padding grows
+      inward so the visual size is unchanged. */
+.nav-links a,.nav-sub a{
+  min-height:44px;display:inline-flex;align-items:center;
+}
+
+/* 6. Respect the notch and home indicator. Only matters
+      because the viewport is now viewport-fit=cover. */
+.nav-bar{
+  padding-left:max(2rem,env(safe-area-inset-left));
+  padding-right:max(2rem,env(safe-area-inset-right));
+}
+footer{padding-bottom:max(2rem,env(safe-area-inset-bottom))}
+
+/* 7. Momentum scrolling inside any horizontal scroller */
+[style*="overflow-x"],.pipeline-container{-webkit-overflow-scrolling:touch}
+
+/* iOS zooms the whole page when a focused input is under
+   16px. The terminal was 12.8px, so tapping it jumped the
+   layout. 16px on touch pointers only; desktop keeps .8rem. */
+@media (pointer:coarse){
+  #terminalInput{font-size:16px}
+}
+/* The MIPS datapath is 700px wide and scrolls horizontally.
+   Nothing signalled that on a phone, so it read as cut off. */
+.pipeline-container{position:relative}
+@media (max-width:768px){
+  .pipeline-container::after{
+    content:"scroll \2192";
+    position:absolute;top:.5rem;right:.75rem;
+    font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;
+    color:var(--text-secondary);opacity:.7;pointer-events:none;
+  }
+  .pipe-btn{min-height:44px;padding:.5rem 1rem}
+  .pipeline-controls{gap:.6rem}
+  .pipe-info{margin-left:0;width:100%}
+}
+
+/* These two only had a 480px breakpoint, so iPad portrait
+   got desktop spacing. */
+@media (max-width:900px){
+  .container{padding:3rem 1.5rem 2rem}
+  .projects-grid{grid-template-columns:1fr}
+  .skills-section{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+}
+
+</style>
 </head>
 <body>
     <a href="#main-content" class="skip-to-content">Skip to main content</a>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="George Wahba's Automotive & Controls portfolio - Embedded C, CAN FD networks, and Model-Based Design for electric vehicles including Cadillac Lyriq control systems.">
     <meta name="author" content="George Wahba">
     <meta name="keywords" content="Automotive Controls, CAN FD, Embedded C, Model-Based Design, HIL, Simulink, EcoCAR, Cadillac Lyriq">
@@ -106,7 +106,50 @@
         @media (max-width: 768px) { .item-header { flex-direction: column; } .date { margin-bottom: 0.5rem; display: block; } h2::after { display: none; } }
         @media (max-width: 480px) { .nav-links { gap: 0.4rem; } .nav-links a { font-size: 0.68rem; padding: 0.4rem 0.25rem; } .projects-grid { grid-template-columns: 1fr; } }
         @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } }
-    </style>
+
+/* ==========================================================
+   iOS / iPadOS hardening
+   ========================================================== */
+
+/* 1. Safari inflates text in landscape unless this is pinned */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+
+/* 2. Kill the grey flash on tap; focus rings still show */
+*{-webkit-tap-highlight-color:transparent}
+
+/* 3. 100vh on iOS includes the address bar, so full-height
+      elements get clipped. dvh tracks the visible viewport. */
+body{min-height:100vh;min-height:100dvh}
+
+/* 4. Stop horizontal rubber-banding revealing blank gutters */
+html,body{overscroll-behavior-x:none}
+
+/* 5. Every tap target meets the 44px minimum. Padding grows
+      inward so the visual size is unchanged. */
+.nav-links a,.nav-sub a{
+  min-height:44px;display:inline-flex;align-items:center;
+}
+
+/* 6. Respect the notch and home indicator. Only matters
+      because the viewport is now viewport-fit=cover. */
+.nav-bar{
+  padding-left:max(2rem,env(safe-area-inset-left));
+  padding-right:max(2rem,env(safe-area-inset-right));
+}
+footer{padding-bottom:max(2rem,env(safe-area-inset-bottom))}
+
+/* 7. Momentum scrolling inside any horizontal scroller */
+[style*="overflow-x"],.pipeline-container{-webkit-overflow-scrolling:touch}
+
+/* These two only had a 480px breakpoint, so iPad portrait
+   got desktop spacing. */
+@media (max-width:900px){
+  .container{padding:3rem 1.5rem 2rem}
+  .projects-grid{grid-template-columns:1fr}
+  .skills-section{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+}
+
+</style>
 </head>
 <body>
     <a href="#main-content" class="skip-to-content">Skip to main content</a>

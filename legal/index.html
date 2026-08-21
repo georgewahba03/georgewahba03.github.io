@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="George Wahba - incoming JD candidate with a computer engineering background. Interests in legal technology, access to justice, and technology regulation.">
 <meta name="author" content="George Wahba">
 <meta name="keywords" content="George Wahba, JD Candidate, Legal Technology, Access to Justice, Canadian Law, Technology Law">
@@ -249,6 +249,49 @@ footer{
   .nav-links a{font-size:.68rem;padding:.4rem .25rem}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* ==========================================================
+   iOS / iPadOS hardening
+   ========================================================== */
+
+/* 1. Safari inflates text in landscape unless this is pinned */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+
+/* 2. Kill the grey flash on tap; focus rings still show */
+*{-webkit-tap-highlight-color:transparent}
+
+/* 3. 100vh on iOS includes the address bar, so full-height
+      elements get clipped. dvh tracks the visible viewport. */
+body{min-height:100vh;min-height:100dvh}
+
+/* 4. Stop horizontal rubber-banding revealing blank gutters */
+html,body{overscroll-behavior-x:none}
+
+/* 5. Every tap target meets the 44px minimum. Padding grows
+      inward so the visual size is unchanged. */
+.nav-links a,.nav-sub a{
+  min-height:44px;display:inline-flex;align-items:center;
+}
+
+/* 6. Respect the notch and home indicator. Only matters
+      because the viewport is now viewport-fit=cover. */
+.nav-bar{
+  padding-left:max(2rem,env(safe-area-inset-left));
+  padding-right:max(2rem,env(safe-area-inset-right));
+}
+footer{padding-bottom:max(2rem,env(safe-area-inset-bottom))}
+
+/* 7. Momentum scrolling inside any horizontal scroller */
+[style*="overflow-x"],.pipeline-container{-webkit-overflow-scrolling:touch}
+
+/* Judgment margin numerals: the gutter is dead space on a
+   phone, already collapsed at 640. Widen the range so iPad
+   portrait gets the full ruled layout and phones don't. */
+@media (max-width:900px) and (min-width:641px){
+  .reasons{padding-left:3.5rem}
+  .reasons h2::before,.para::before{left:-3.5rem}
+}
+
 </style>
 </head>
 <body>
