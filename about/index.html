@@ -67,10 +67,46 @@ h1{font-size:clamp(34px,6vw,60px);font-weight:600;letter-spacing:-.035em;line-he
 
 /* ---------- Sports ---------- */
 .sport-row{display:flex;gap:.7rem;flex-wrap:wrap}
-.sport-chip{display:flex;align-items:center;gap:.6rem;background:var(--dusk-raised);border:1px solid var(--edge);border-radius:999px;padding:.6rem 1.15rem;transition:border-color .25s}
-.sport-chip:hover{border-color:var(--seafoam)}
+.chip-hint{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.08em;color:var(--muted);margin-top:.9rem}
+.sport-chip{
+  display:inline-flex;align-items:center;gap:.6rem;background:var(--dusk-raised);
+  border:1px solid var(--edge);border-radius:999px;padding:.7rem 1.25rem;
+  min-height:44px;cursor:pointer;font-family:inherit;color:inherit;
+  transition:border-color .25s,background .25s,transform .2s;
+}
+.sport-chip:hover,.sport-chip:focus-visible{border-color:var(--seafoam);background:#24404c;transform:translateY(-2px)}
+.sport-chip:focus-visible{outline:2px solid var(--seafoam);outline-offset:3px}
+.sport-chip:active{transform:translateY(0)}
 .sport-chip svg{width:19px;height:19px;color:var(--seafoam);flex-shrink:0}
 .sport-chip span{font-size:.92rem;font-weight:400}
+
+/* ---------- Lightbox ---------- */
+.lightbox[hidden]{display:none}
+.lightbox{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:1.5rem}
+.lightbox-backdrop{position:absolute;inset:0;background:rgba(8,15,19,.82);backdrop-filter:blur(4px);animation:fadeIn .25s ease both}
+.lightbox-panel{
+  position:relative;z-index:1;width:100%;max-width:680px;max-height:88vh;max-height:88dvh;overflow-y:auto;
+  background:var(--dusk-raised);border:1px solid var(--edge);border-radius:14px;
+  padding:1.75rem;animation:pop .3s cubic-bezier(.2,.8,.3,1) both;
+}
+.lightbox-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.1rem}
+.lightbox-title{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;line-height:1.2}
+.lightbox-kicker{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--seafoam);display:block;margin-bottom:.4rem}
+.lightbox-close{
+  background:none;border:1px solid var(--edge);color:var(--muted);border-radius:8px;
+  width:44px;height:44px;flex-shrink:0;cursor:pointer;font-size:1.2rem;line-height:1;
+  display:flex;align-items:center;justify-content:center;transition:color .2s,border-color .2s;
+}
+.lightbox-close:hover,.lightbox-close:focus-visible{color:var(--coral);border-color:var(--coral);outline:none}
+.lightbox-close:focus-visible{outline:2px solid var(--coral);outline-offset:2px}
+.lightbox video{width:100%;height:auto;border-radius:10px;border:1px solid var(--edge);background:var(--dusk-deep);display:block}
+.lightbox-caption{font-family:var(--font-mono);font-size:.66rem;color:var(--muted);letter-spacing:.05em;margin-top:.8rem}
+.soon{text-align:center;padding:2.5rem 1rem}
+.soon-icon{width:44px;height:44px;color:var(--coral);opacity:.75;margin:0 auto 1.2rem;display:block}
+.soon p{color:var(--chalk);font-size:1.02rem;line-height:1.65;max-width:34ch;margin:0 auto;font-weight:300}
+.soon .soon-sub{color:var(--muted);font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;margin-top:1.1rem}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pop{from{opacity:0;transform:scale(.96) translateY(10px)}to{opacity:1;transform:none}}
 .crest-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1.1rem}
 .team{background:var(--dusk-raised);border:1px solid var(--edge);border-radius:10px;padding:1.4rem;display:flex;flex-direction:column;gap:.55rem}
 .kit{display:flex;width:56px;height:56px;border-radius:8px;overflow:hidden;border:1px solid var(--edge);margin-bottom:.3rem}
@@ -78,9 +114,6 @@ h1{font-size:clamp(34px,6vw,60px);font-weight:600;letter-spacing:-.035em;line-he
 .team-name{font-size:1rem;font-weight:500;color:var(--chalk);line-height:1.3}
 .team-league{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .team-note{font-size:.86rem;color:var(--muted);line-height:1.6;margin-top:.2rem}
-.clip{margin-top:.5rem}
-.clip video{width:100%;max-width:620px;border-radius:10px;border:1px solid var(--edge);display:block;background:var(--dusk-deep)}
-.clip figcaption{font-family:var(--font-mono);font-size:.66rem;color:var(--muted);letter-spacing:.05em;margin-top:.7rem}
 
 /* ---------- Games: expanding rack (signature) ---------- */
 .rack{display:flex;gap:.6rem;height:400px}
@@ -213,7 +246,6 @@ footer{padding-bottom:max(2rem,env(safe-area-inset-bottom))}
 }
 /* Video should never exceed the viewport, and the poster
    area shouldn't collapse before metadata loads. */
-.clip video{max-width:100%;height:auto}
 @media (max-width:640px){
   .rack{gap:.5rem}
   .slot-body{padding:1.25rem}
@@ -262,21 +294,11 @@ footer{padding-bottom:max(2rem,env(safe-area-inset-bottom))}
 
     <h3 class="sub-head">What I play</h3>
     <div class="sport-row" id="sportRow"></div>
+    <p class="chip-hint">Tap a sport to see it.</p>
 
     <h3 class="sub-head">Who I follow</h3>
     <div class="crest-grid" id="crestGrid"></div>
 
-    <h3 class="sub-head">On the pitch</h3>
-    <figure class="clip">
-      <!-- CLIP: drop your video at about/assets/soccer.mp4
-           Optional: a still frame at about/assets/soccer-poster.jpg shows before playback.
-           Keep it under ~10 MB so the page stays fast — trim to the good 15–20 seconds. -->
-      <video controls preload="metadata" playsinline poster="assets/soccer-poster.jpg">
-        <source src="assets/soccer.mp4" type="video/mp4">
-        Your browser can't play this clip.
-      </video>
-      <figcaption>May 27th 2026; Welland, ON.</figcaption>
-    </figure>
   </section>
 
   <!-- ============ GAMES ============ -->
@@ -314,15 +336,40 @@ footer{padding-bottom:max(2rem,env(safe-area-inset-bottom))}
   </section>
 </div>
 
+<div class="lightbox" id="lightbox" hidden>
+  <div class="lightbox-backdrop" data-close></div>
+  <div class="lightbox-panel" role="dialog" aria-modal="true" aria-labelledby="lbTitle">
+    <div class="lightbox-head">
+      <div>
+        <span class="lightbox-kicker" id="lbKicker"></span>
+        <h2 class="lightbox-title" id="lbTitle"></h2>
+      </div>
+      <button class="lightbox-close" id="lbClose" aria-label="Close">&times;</button>
+    </div>
+    <div id="lbBody"></div>
+  </div>
+</div>
+
 <footer><p>Built by George Wahba</p></footer>
 
 <script>
 
 const SPORTS=[
-  {name:'Volleyball',icon:'<circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0 0 20M12 2a10 10 0 0 1 0 20M2.5 9h19M2.5 15h19"/>'},
-  {name:'Basketball',icon:'<circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20M5 5c4 4 4 10 0 14M19 5c-4 4-4 10 0 14"/>'},
-  {name:'Soccer',icon:'<circle cx="12" cy="12" r="10"/><path d="M12 7l4.5 3.3-1.7 5.3h-5.6L7.5 10.3z"/><path d="M12 2v5M20.5 9.5l-4 .8M18 19l-3-3M6 19l3-3M3.5 9.5l4 .8"/>'}
+  {name:'Volleyball',
+   icon:'<circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0 0 20M12 2a10 10 0 0 1 0 20M2.5 9h19M2.5 15h19"/>',
+   clip:null},
+  {name:'Basketball',
+   icon:'<circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20M5 5c4 4 4 10 0 14M19 5c-4 4-4 10 0 14"/>',
+   clip:null},
+  {name:'Soccer',
+   icon:'<circle cx="12" cy="12" r="10"/><path d="M12 7l4.5 3.3-1.7 5.3h-5.6L7.5 10.3z"/><path d="M12 2v5M20.5 9.5l-4 .8M18 19l-3-3M6 19l3-3M3.5 9.5l4 .8"/>',
+   clip:'assets/soccer.mp4',
+   poster:'assets/soccer-poster.jpg',
+   caption:'Your caption — where, when, what happened.'}
 ];
+
+// Shown when a sport has no clip yet.
+const NO_CLIP="Cameras haven't rolled yet while I'm playing. Stay tuned.";
 
 const TEAMS=[
   {name:'Egypt',league:'National team',bands:['#c8102e','#ffffff','#000000'],
@@ -380,11 +427,76 @@ document.querySelector('.tabs').addEventListener('keydown',e=>{
 });
 
 // Sports chips
-document.getElementById('sportRow').innerHTML=SPORTS.map(s=>`
-  <div class="sport-chip">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">${s.icon}</svg>
-    <span>${s.name}</span>
-  </div>`).join('');
+document.getElementById('sportRow').innerHTML=SPORTS.map((sp,i)=>`
+  <button class="sport-chip" data-i="${i}" aria-haspopup="dialog"
+          aria-label="${sp.name} — ${sp.clip?'watch the clip':'no clip yet'}">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${sp.icon}</svg>
+    <span>${sp.name}</span>
+  </button>`).join('');
+
+// ---------- Lightbox ----------
+const lb=document.getElementById('lightbox'),
+      lbTitle=document.getElementById('lbTitle'),
+      lbKicker=document.getElementById('lbKicker'),
+      lbBody=document.getElementById('lbBody');
+let lastFocus=null;
+
+function openSport(i){
+  const sp=SPORTS[i];
+  lastFocus=document.activeElement;
+  lbTitle.textContent=sp.name;
+  if(sp.clip){
+    lbKicker.textContent='Clip';
+    lbBody.innerHTML=`
+      <video controls autoplay muted playsinline preload="metadata"${sp.poster?` poster="${sp.poster}"`:''}>
+        <source src="${sp.clip}" type="video/mp4">
+        Your browser can't play this clip.
+      </video>
+      ${sp.caption?`<p class="lightbox-caption">${sp.caption}</p>`:''}`;
+  }else{
+    lbKicker.textContent='No footage yet';
+    lbBody.innerHTML=`
+      <div class="soon">
+        <svg class="soon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M2 8.5A2.5 2.5 0 0 1 4.5 6h8A2.5 2.5 0 0 1 15 8.5v7A2.5 2.5 0 0 1 12.5 18h-8A2.5 2.5 0 0 1 2 15.5z"/>
+          <path d="M15 11l6-3.5v9L15 13z"/>
+          <line x1="3" y1="21" x2="21" y2="3"/>
+        </svg>
+        <p>${NO_CLIP}</p>
+        <p class="soon-sub">${sp.name}</p>
+      </div>`;
+  }
+  lb.hidden=false;
+  document.body.style.overflow='hidden';
+  document.getElementById('lbClose').focus();
+}
+
+function closeSport(){
+  const v=lbBody.querySelector('video');
+  if(v){v.pause();}
+  lbBody.innerHTML='';
+  lb.hidden=true;
+  document.body.style.overflow='';
+  if(lastFocus)lastFocus.focus();
+}
+
+document.querySelectorAll('.sport-chip').forEach(c=>{
+  c.addEventListener('click',()=>openSport(+c.dataset.i));
+});
+document.getElementById('lbClose').addEventListener('click',closeSport);
+lb.querySelector('[data-close]').addEventListener('click',closeSport);
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&!lb.hidden)closeSport();
+});
+// keep focus inside the dialog while it's open
+lb.addEventListener('keydown',e=>{
+  if(e.key!=='Tab')return;
+  const f=[...lb.querySelectorAll('button,video,[href],[tabindex]:not([tabindex="-1"])')].filter(el=>el.offsetParent!==null);
+  if(!f.length)return;
+  const first=f[0],last=f[f.length-1];
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+});
 
 // Teams
 document.getElementById('crestGrid').innerHTML=TEAMS.map(t=>`
